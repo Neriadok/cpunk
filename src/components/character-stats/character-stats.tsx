@@ -6,6 +6,7 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { getRandomStats } from '../../lib/character';
+import { getBonus } from '../../lib/lifepath';
 
 
 function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
@@ -21,28 +22,32 @@ function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
         </Box>
         <Grid container sx={{ textAlign: 'center' }} spacing={1}>
             {stats.map((stat) => (<Grid item xs={4} onClick={() => chooseStat(stat)}>
-                <Typography variant="body2" component="div" color='text.secondary'>{stat}</Typography>
+                <Typography variant="body2" component="div" color='text.secondary'>{stat}{getStatBonus(stat)}</Typography>
                 <Button fullWidth={true} variant='outlined' color={targetStat === stat ? 'warning' : 'inherit'}>{character.stats[stat]}</Button>
             </Grid>))}
             <Grid item xs={3}>
                 <Typography variant="body2" component="div" color='text.secondary'>{t('character.extrastats.run')}</Typography>
-                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor(character.stats.MOV * 3)}</Button>
+                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor((character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3)}</Button>
             </Grid>
             <Grid item xs={3}>
                 <Typography variant="body2" component="div" color='text.secondary'>{t('character.extrastats.jump')}</Typography>
-                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor(character.stats.MOV * 3 / 4)}</Button>
+                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor((character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3 / 4)}</Button>
             </Grid>
             <Grid item xs={3}>
                 <Typography variant="body2" component="div" color='text.secondary'>{t('character.extrastats.lift')}</Typography>
-                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor(character.stats.TCO * 10)}</Button>
+                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.floor((character.stats.TCO + getBonus(character, 'TCO', 'stats')) * 10)}</Button>
             </Grid>
             <Grid item xs={3}>
                 <Typography variant="body2" component="div" color='text.secondary'>{t('character.extrastats.health')}</Typography>
-                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.ceil(character.stats.TCO / 2)}</Button>
+                <Button fullWidth={true} variant='outlined' color='inherit'>{Math.ceil((character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2)}</Button>
             </Grid>
         </Grid>
     </Box>
     );
+    function getStatBonus(stat: Stat){
+        const bonus = getBonus(character, stat, 'stats');
+        return bonus ? ` (${bonus})` : ''
+    }
 
     function chooseStat(stat: Stat) {
         if (readonly) return;
