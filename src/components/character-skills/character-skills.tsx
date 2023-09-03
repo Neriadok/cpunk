@@ -1,46 +1,42 @@
-import { Box, Button, Card, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Slider, Stack, Typography } from '@mui/material';
 import { CharacterSkillsProps } from './character-skills.interface';
-import { useState } from 'react';
-import { Stat, stats } from '../../interfaces/stats.interface';
+import { Stat } from '../../interfaces/stats.interface';
 import { t } from 'i18next';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faRedo } from '@fortawesome/free-solid-svg-icons';
-import { getRandomStats } from '../../lib/character';
+import { Skill, skillFamilies } from '../../interfaces/skills.interface';
+import { getElectionSkillPoints, isRoleSkill, sumOfSkills } from '../../lib/skills';
+import { getBonifiedSkills, getBonus } from '../../lib/lifepath';
 
 
-function CharacterSkills({ subject, character, readonly }: CharacterSkillsProps) {
-    const [targetStat, setTargetStat] = useState<Stat | undefined>();
+function CharacterSkills({ subject, character }: CharacterSkillsProps) {
+    const electionSkills = skillFamilies.filter(({ stat, skill }) => stat !== 'special' && !isRoleSkill(character.role, skill));
+    const roleSkillPoints = sumOfSkills(character, electionSkills.map(({ skill }) => skill));
+    const maxSkillPoints = getElectionSkillPoints(character)
+    const color = roleSkillPoints === maxSkillPoints ? 'primary' : 'error';
 
-    return (<Card>
-        <Box display='flex'>
-            <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('character.stats')}</Typography>
-            {readonly ? '' :
-                <IconButton size='small' color="inherit" onClick={() => resetStats()}>
-                    <FontAwesomeIcon icon={faRedo} />
-                </IconButton>}
-        </Box>
-    </Card>
+    return (<Box>
+        <Stack direction='row' sx={{ display: 'flex' }}>
+            <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('character.electionskills')}</Typography>
+            <Typography variant="h5" component="div" color={color}>{roleSkillPoints}/{maxSkillPoints}</Typography>
+        </Stack>
+        <Stack>
+            {electionSkills.map(({ stat, skill }) => getSkill(stat, skill))}
+        </Stack>
+    </Box>
     );
 
-    function chooseStat(stat: Stat) {
-        if (readonly) return;
-        if (targetStat) {
-            setTargetStat(undefined);
-            const aux = character.stats[targetStat];
-            character.stats[targetStat] = character.stats[stat];
-            character.stats[stat] = aux;
-            subject.next({ ...character });
-        } else {
-            setTargetStat(stat);
-        }
+    function getSkill(stat: Stat | 'special', skill: Skill) {
+        return <Stack spacing={1} key={skill} direction='row' sx={{ display: 'flex', alignItems: 'center' }}>
+            <Typography width='120px' variant="body2" color={character.skills[skill] ? 'inherit' : 'text.secondary'}>({stat}) {t('character.skill.' + skill)}</Typography>
+            <Box sx={{ flex: 1, pr: 1 }}>
+                <Slider valueLabelDisplay="auto" color={character.skills[skill] ? 'primary' : 'secondary'} defaultValue={character.skills[skill]} step={1} marks min={getBonus(character, skill, 'skills')} max={10} onChange={(e) => setSkill(e, skill)} />
+            </Box>
+        </Stack>
     }
 
-    function resetStats() {
-        if (readonly) return;
-        setTargetStat(undefined);
-        subject.next({ ...character, stats: getRandomStats() });
+    function setSkill(e: any, skill: Skill) {
+        character.skills[skill] = Math.max(e.target?.value, getBonus(character, skill, 'skills'))
+        subject.next({ ...character })
     }
-
 }
 
 export default CharacterSkills;

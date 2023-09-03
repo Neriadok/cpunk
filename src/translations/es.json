@@ -53,6 +53,7 @@
             "health": "Salud"
         },
         "roleskills": "Habilidades básicas",
+        "electionskills": "Otras habilidades",
         "skill": {
             "authority": "Autoridad",
             "charisma": "Liderazgo carismático",

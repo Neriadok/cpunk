@@ -5,7 +5,7 @@ import {stats} from "../interfaces/stats.interface";
 import {LifePath, LifePathEvent} from "../interfaces/lifepath.interface";
 import {randomBool, randomNum} from "../lib/utils";
 import {getRandomEvent} from "./lifepath";
-import { getAverageRoleSkills, getRoleSkills, getSpecialSkillMoney } from './skills';
+import { getSkillsBonified, getAverageRoleSkills, getRoleSkills, getSpecialSkillMoney } from './skills';
 
 export function getRandomCharacter(): Character {
   const age = getRandomAge();
@@ -20,35 +20,9 @@ export function getRandomCharacter(): Character {
     stats: getRandomStats(),
     money: 0,
     skills,
-    state: {
-      shock0: 0,
-      shock1: 0,
-      shock2: 0,
-      shock3: 0,
-      shock4: 0,
-      shock5: 0,
-      shock6: 0,
-      shock7: 0,
-      shock8: 0,
-      shock9: 0,
-    },
-    experience: {
-      rep: 0,
-      pp: 0,
-      humanity: 0,
-    },
-    armor: {
-      head: 0,
-      body: 0,
-      armR: 0,
-      armL: 0,
-      legR: 0,
-      legL: 0,
-    },
-    equipment: [],
     ...getRandomLifePath(age, gender)
   };
-  return {...baseCharacter, money: getSpecialSkillMoney(baseCharacter)}
+  return {...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter)}
 }
 
 export function getRandomAge(): number {

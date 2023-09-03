@@ -1,6 +1,6 @@
 import {Skill, maxRoleSkillPoints, skillFamilies} from "../interfaces/skills.interface";
 import {Character} from "../interfaces/character.interface";
-import {getBonus} from "../lib/lifepath";
+import {getBonifiedSkills, getBonus} from "../lib/lifepath";
 import { Role } from "../interfaces/role.interface";
 
 export function isRoleSkill(role: Role, skill: Skill) {
@@ -13,6 +13,14 @@ export function getElectionSkillPoints({stats}: Character) {
 
 export function sumOfRoleSkills(character: Character): number {
   return sumOfSkills(character, character.role.skills);
+}
+
+export function getSkillsBonified(character: Character){
+  return  getBonifiedSkills(character).reduce((skills, skill) => ({...skills, [skill]: getSkillMinValue(character, skill as Skill)}), character.skills);
+}
+
+export function getSkillMinValue(character: Character, skill: Skill): number{
+  return Math.max(character.skills[skill] || 0, getBonus(character, skill, 'skills') || 0);
 }
 
 export function sumOfSkills(character: Character, skills: Skill[] = []): number {

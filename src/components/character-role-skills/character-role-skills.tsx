@@ -4,6 +4,7 @@ import { Stat } from '../../interfaces/stats.interface';
 import { t } from 'i18next';
 import { getSpecialSkillMoney, isRoleSkill, sumOfRoleSkills } from '../../lib/skills';
 import { Skill, maxRoleSkillPoints, skillFamilies } from '../../interfaces/skills.interface';
+import { getBonus } from '../../lib/lifepath';
 
 
 function CharacterRoleSkills({ subject, character, readonly }: CharacterRoleSkillsProps) {
@@ -26,7 +27,7 @@ function CharacterRoleSkills({ subject, character, readonly }: CharacterRoleSkil
         return <Stack spacing={1} key={skill} direction='row' sx={{ display: 'flex', alignItems: 'center'}}>
         <Typography width='120px' variant="body2" color='text.secondary'>({stat}) {t('character.skill.' + skill)}</Typography>
         <Box sx={{ flex: 1, pr: 1 }}>
-            <Slider color='secondary' defaultValue={character.skills[skill]} step={1} marks min={0} max={10} onChange={(e) => setRoleSkill(e, skill)}/>
+            <Slider valueLabelDisplay="auto" color='secondary' defaultValue={character.skills[skill]} step={1} marks min={getBonus(character, skill, 'skills')} max={10} onChange={(e) => setRoleSkill(e, skill)}/>
         </Box>
     </Stack>
     }
@@ -35,7 +36,7 @@ function CharacterRoleSkills({ subject, character, readonly }: CharacterRoleSkil
         return <Stack spacing={1} key={skill} direction='row' sx={{ display: 'flex', alignItems: 'center' }}>
         <Typography width='120px' variant="body2" color='inherit'>({getSpecialSkillMoney(character)}$) {t('character.skill.' + skill)}</Typography>
         <Box sx={{ flex: 1, pr: 1 }}>
-            <Slider color='primary' defaultValue={character.skills[skill]} step={1} marks min={0} max={10}  onChange={(e) => setRoleSkill(e, skill)}/>
+            <Slider valueLabelDisplay="auto" color='primary' defaultValue={character.skills[skill]} step={1} marks min={getBonus(character, skill, 'skills')} max={10}  onChange={(e) => setRoleSkill(e, skill)}/>
         </Box>
     </Stack>
     }
