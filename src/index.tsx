@@ -11,6 +11,8 @@ import { restoreSession } from './lib/login';
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+require('./lib/firebase');
+require('./lib/i18next');
 restoreSession();
 root.render(
   <React.StrictMode>

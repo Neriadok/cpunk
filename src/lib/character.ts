@@ -8,8 +8,9 @@ import {getRandomEvent} from "./lifepath";
 
 export function getRandomCharacter(): Character {
   const age = getRandomAge();
+  const gender = randomBool();
   return {
-    name: faker.person.fullName(),
+    name: faker.person.firstName(gender ? 'male' : 'female'),
     age,
     workedMonths: Math.round(Math.random() * 3) + 1,
     role: getRandomRole(),
@@ -42,7 +43,7 @@ export function getRandomCharacter(): Character {
       legL: 0,
     },
     equipment: [],
-    ...getRandomLifePath(age)
+    ...getRandomLifePath(age, gender)
   }
 }
 
@@ -60,9 +61,9 @@ export function getRandomStats(): { [stat: string]: number } {
   }, {});
 }
 
-export function getRandomLifePath(age: number): LifePath {
+export function getRandomLifePath(age: number, gender: boolean): LifePath {
   return {
-    gender: randomBool(),
+    gender,
     ethnic: randomNum(10),
     family: {
       familyClass: randomNum(10),

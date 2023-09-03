@@ -1,14 +1,14 @@
 import {Skill} from "./skills.interface";
 
 export interface Role {
-  key: string;
+  key: 'rocknrolla' | 'merc' | 'netrunners' | 'techies' | 'medias' | 'cops' | 'corpos' | 'fixers' | 'nomads';
   skills: Skill[],
   money: number[]
 }
 
 export const roles: Role[] = [
   {
-    key: 'rockerboys',
+    key: 'rocknrolla',
     skills: [
       'charisma',
       'awareness',
@@ -31,7 +31,7 @@ export const roles: Role[] = [
     ]
   },
   {
-    key: 'solos',
+    key: 'merc',
     skills: [
       'combat-sense',
       'awareness',
@@ -145,7 +145,7 @@ export const roles: Role[] = [
     ]
   },
   {
-    key: 'corporates',
+    key: 'corpos',
     skills: [
       'resources',
       'awareness',

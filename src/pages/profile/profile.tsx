@@ -1,6 +1,6 @@
 import './profile.css';
 import { Card, Container, Stack, CardContent, Typography, Button, CardActions, Box } from '@mui/material';
-import { userSubject } from '../../state/session';
+import { userSubject } from '../../lib/session';
 import { useState } from 'react';
 import { skip } from 'rxjs';
 import { logOut } from '../../lib/login';

@@ -1,5 +1,5 @@
 import { GoogleAuthProvider, indexedDBLocalPersistence, setPersistence, signInWithPopup, signOut, User } from "firebase/auth";
-import { auth, userSubject } from "../state/session";
+import { auth, userSubject } from "./session";
 
 export async function authWithGoogle(): Promise<User | null> {
     await setPersistence(auth, indexedDBLocalPersistence); // Remove for sensitive Data applications
