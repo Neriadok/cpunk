@@ -96,13 +96,13 @@ export function toFinalModifier(modifier: Modifier): Modifier {
   return {kind: modifier.kind, property, amount};
 }
 
-export function getBonus(character: Character, property: Skill | Stat | string, kind?: 'skills' | 'stats'): number {
+export function getBonus(character: Partial<Character>, property: Skill | Stat | string, kind?: 'skills' | 'stats'): number {
   const modifiers = getModifiers(character, property, kind);
   return modifiers.reduce((sum, {amount}) => sum + (amount || 0), 0);
 }
 
-export function getModifiers({events}: Character, property: Skill | Stat | string, kind?: 'skills' | 'stats'): Modifier[] {
-  return events.reduce(intoModifiers, [])
+export function getModifiers({events}: Partial<Character>, property: Skill | Stat | string, kind?: 'skills' | 'stats'): Modifier[] {
+  return (events ||[]).reduce(intoModifiers, [])
     .filter((modifier: Modifier) => isModifying(property, modifier, kind));
 }
 

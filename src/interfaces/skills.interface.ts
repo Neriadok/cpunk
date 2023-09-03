@@ -1,5 +1,8 @@
 import {Stat} from "./stats.interface";
 
+export const maxRoleSkillPoints: number = 40;
+
+
 export type Skill = 'authority' |
   'charisma' |
   'combat-sense' |

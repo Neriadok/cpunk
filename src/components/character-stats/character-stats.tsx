@@ -1,14 +1,5 @@
-import { Box, Button, Card, CardHeader, Grid, IconButton, Stack, Typography } from '@mui/material';
+import { Box, Button, Card, Grid, IconButton, Typography } from '@mui/material';
 import { CharacterStatsProps } from './character-stats.interface';
-import cops from '../../images/roles/cops.png';
-import corpos from '../../images/roles/corpos.png';
-import fixers from '../../images/roles/fixers.png';
-import medias from '../../images/roles/medias.png';
-import merc from '../../images/roles/merc.png';
-import netrunners from '../../images/roles/netrunners.png';
-import nomads from '../../images/roles/nomads.png';
-import rocknrolla from '../../images/roles/rocknrolla.png';
-import techies from '../../images/roles/techies.png';
 import { useState } from 'react';
 import { Stat, stats } from '../../interfaces/stats.interface';
 import { t } from 'i18next';
@@ -20,7 +11,7 @@ import { getRandomStats } from '../../lib/character';
 function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
     const [targetStat, setTargetStat] = useState<Stat | undefined>();
 
-    return (<Card>
+    return (<Box>
         <Box display='flex'>
             <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('character.stats')}</Typography>
             {readonly ? '' :
@@ -50,7 +41,7 @@ function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
                 <Button fullWidth={true} variant='outlined' color='inherit'>{Math.ceil(character.stats.TCO / 2)}</Button>
             </Grid>
         </Grid>
-    </Card>
+    </Box>
     );
 
     function chooseStat(stat: Stat) {

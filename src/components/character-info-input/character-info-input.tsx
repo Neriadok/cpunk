@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 import { Role, roles } from '../../interfaces/role.interface';
 import { getRandomEvents } from '../../lib/character';
+import { getAverageRoleSkills } from '../../lib/skills';
 
 
 function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
@@ -80,7 +81,8 @@ function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
 
     function changeRole(e: any) {
         const role = roles.find(({ key }) => key === e.target?.value) || character.role
-        subject.next({ ...character, role })
+        const skills = getAverageRoleSkills(role);
+        subject.next({ ...character, role, skills })
     }
 
     function setAge(e: any) {

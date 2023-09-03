@@ -1,14 +1,10 @@
-import {Skill, skillFamilies} from "../interfaces/skills.interface";
+import {Skill, maxRoleSkillPoints, skillFamilies} from "../interfaces/skills.interface";
 import {Character} from "../interfaces/character.interface";
 import {getBonus} from "../lib/lifepath";
+import { Role } from "../interfaces/role.interface";
 
-export function skills(...args: any[]): any {
-  // TODO
-  return args.join();
-}
-
-export function isRoleSkill({role}: Character, skill: Skill) {
-  return role.skills.includes(skill)
+export function isRoleSkill(role: Role, skill: Skill) {
+  return role?.skills.includes(skill);
 }
 
 export function getElectionSkillPoints({stats}: Character) {
@@ -35,13 +31,22 @@ export function getSpecialSkill(skills: Skill[]): Skill | undefined {
   return (skills || []).find(isSpecialSkill);
 }
 
-export function getPayroll(character: Character): number {
-  const skill = getSpecialSkill(character.role.skills);
-  const moneyRange = skill && Math.max(0, character.skills[skill] - 5);
-  return moneyRange ? character.role.money[moneyRange] : 0;
+export function getPayroll(character: Partial<Character>): number {
+  const skill = getSpecialSkill(character.role?.skills ||[]);
+  const moneyRange = skill && Math.max(0, (((character.skills||{})[skill] || 0) - 5)) || 0;
+  return character.role?.money[moneyRange] || 0;
 }
 
-export function getSpecialSkillMoney(character: Character): number {
+export function getSpecialSkillMoney(character: Partial<Character>): number {
   if(!character.role) return 0;
-  return getPayroll(character) * character.workedMonths + getBonus(character, 'money');
+  return getPayroll(character) * (character?.workedMonths || 0) + getBonus(character, 'money');
+}
+
+export function getRoleSkills(role: Role){
+  return skillFamilies.filter(({ skill }) => isRoleSkill(role, skill));
+}
+
+export function getAverageRoleSkills(role: Role): {[property: string]: number} {
+  const roleSkills = getRoleSkills(role)
+  return roleSkills.reduce((result, {skill}) => ({...result, [skill]: Math.floor(maxRoleSkillPoints / roleSkills.length)}), {})
 }
