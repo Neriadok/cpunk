@@ -1,5 +1,5 @@
 import { authWithGoogle } from "../../lib/login";
-import { Box, Fab } from '@mui/material';
+import { Avatar, Box, Fab } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import Router from '../../pages/router';
 import { useState } from 'react';
@@ -15,17 +15,30 @@ function App() {
 
     return (
         <Box>
-            <Fab size="small" color="primary" sx={{position:'sticky', m: 1}} variant="extended" id="home"  onClick={() => navigate("/")}><FontAwesomeIcon icon={faHome} /></Fab>
-            {
-                user ? <Fab size="small" color="primary" sx={{position:'sticky', m: 1, left: '100%'}} variant="extended"  id="profile" onClick={() => navigate("/profile")}>{user?.displayName || 'Anonymous'}<FontAwesomeIcon style={{marginLeft: '5px'}} icon={faUser} /></Fab>
-                    : <Fab size="small" color="primary" sx={{position:'sticky', m: 1, left: '100%'}} variant="extended"  id="access" onClick={() => access()}><FontAwesomeIcon icon={faUser} /></Fab>
-            }
+            <Fab size="small" color="secondary" sx={{position:'sticky', m: 1}} variant="extended" id="home"  onClick={() => navigate("/")}><FontAwesomeIcon icon={faHome} /></Fab>
+            <Fab size="small" color="secondary" sx={{position:'sticky', m: 1, left: '100%'}} variant="extended"  id="profile" onClick={() => clickProfile()}>
+                {(user?.displayName)}
+                {getIcon()}
+            </Fab>
             <Router></Router>
         </Box>
     );
 
     async function access() {
         await authWithGoogle();
+    }
+
+    function getIcon(){
+        return user?.photoURL ? <Avatar sx={{height: 34, width: 34, mr: -1, ml: 1}} alt={user?.displayName ||""} id="profile" src={user.photoURL}/>
+        : <FontAwesomeIcon icon={faUser} />
+    }
+
+    function clickProfile(){
+        if (user){
+            navigate("/profile");
+        } else {
+            access();
+        }
     }
 }
 

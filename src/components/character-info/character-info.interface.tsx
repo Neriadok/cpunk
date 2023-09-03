@@ -1,5 +1,5 @@
 import { Character } from "../../interfaces/character.interface";
 
-export interface CharacterCardProps {
+export interface CharacterInfoProps {
     character: Character;
 };

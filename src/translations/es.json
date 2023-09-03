@@ -41,5 +41,14 @@
         "corpos": "Corpo",
         "fixers": "Fixer",
         "nomads": "Nomada"
+    },
+    "character": {
+        "stats": "Atributos",
+        "extrastats": {
+            "run": "Carrera",
+            "jump": "Salto",
+            "lift": "Levantar",
+            "health": "Salud"
+        }
     }
 }

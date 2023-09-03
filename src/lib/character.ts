@@ -10,7 +10,7 @@ export function getRandomCharacter(): Character {
   const age = getRandomAge();
   const gender = randomBool();
   return {
-    name: faker.person.firstName(gender ? 'male' : 'female'),
+    name: faker.person.fullName({sex: gender ? 'male' : 'female'}),
     age,
     workedMonths: Math.round(Math.random() * 3) + 1,
     role: getRandomRole(),
