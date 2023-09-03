@@ -31,7 +31,7 @@ function CharacterCard({ character }: CharacterCardProps) {
         <Stack direction='row' sx={{ display: 'flex' }}>
             <img className='roleimage' height={100} width={100} src={image[character.role.key]} alt={t('role.' + character.role.key)} />
             <CardContent sx={{ flex: 1 }}>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h5" component="div" color='primary'>
                     {character.name}
                 </Typography>
                 <Grid container>
