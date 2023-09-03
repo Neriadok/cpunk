@@ -44,6 +44,8 @@
     },
     "character": {
         "stats": "Atributos",
+        "age": "Edad",
+        "role": "Profesión",
         "extrastats": {
             "run": "Carrera",
             "jump": "Salto",

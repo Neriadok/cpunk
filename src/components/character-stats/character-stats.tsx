@@ -19,17 +19,6 @@ import { getRandomStats } from '../../lib/character';
 
 function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
     const [targetStat, setTargetStat] = useState<Stat | undefined>();
-    const image = {
-        cops,
-        corpos,
-        fixers,
-        medias,
-        merc,
-        netrunners,
-        nomads,
-        rocknrolla,
-        techies
-    }
 
     return (<Card>
         <Box display='flex'>

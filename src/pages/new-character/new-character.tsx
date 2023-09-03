@@ -7,6 +7,7 @@ import { Character } from '../../interfaces/character.interface';
 import { t } from 'i18next';
 import CharacterStats from '../../components/character-stats/character-stats';
 import React from 'react';
+import CharacterInfoInput from '../../components/character-info-input/character-info-input';
 
 function NewCharacter() {
     const [character, setCharacter] = useState(getRandomCharacter());
@@ -23,9 +24,10 @@ function NewCharacter() {
     return (
         <Container>
             <Paper sx={{ p: 1 }}>
-                <CharacterInfo character={character}></CharacterInfo>
+                <CharacterInfoInput  character={character} subject={subject}></CharacterInfoInput>
                 <Divider sx={{mt:1, mb: 1}} />
                 <CharacterStats character={character} subject={subject}></CharacterStats>
+                <Divider sx={{mt:1, mb: 1}} />
             </Paper>
         </Container>
     );
