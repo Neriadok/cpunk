@@ -15,8 +15,8 @@ function App() {
 
     return (
         <Box>
-            <Fab size="small" color="secondary" sx={{position:'sticky', m: 1}} variant="extended" id="home"  onClick={() => navigate("/")}><FontAwesomeIcon icon={faHome} /></Fab>
-            <Fab size="small" color="secondary" sx={{position:'sticky', m: 1, left: '100%'}} variant="extended"  id="profile" onClick={() => clickProfile()}>
+            <Fab size="small" color="secondary" sx={{position:'sticky', top: 10, m: 1}} variant="extended" id="home"  onClick={() => navigate("/")}><FontAwesomeIcon icon={faHome} /></Fab>
+            <Fab size="small" color="secondary" sx={{position:'sticky', top: 10, m: 1, left: '100%'}} variant="extended"  id="profile" onClick={() => clickProfile()}>
                 {(user?.displayName)}
                 {getIcon()}
             </Fab>
