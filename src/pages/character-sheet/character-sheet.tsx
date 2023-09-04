@@ -26,65 +26,75 @@ function CharacterSheet() {
     return (
         !character ? <LinearProgress color='warning' /> :
             <Container sx={{ pb: 2 }}>
-                <Stack spacing={2}>
-                    <Card>
-                        <Accordion>
-                            <AccordionSummary
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Stack sx={{width: '100%'}}>
-                                    <CharacterInfo character={character}></CharacterInfo>
-                                    <Box sx={{ position: 'relative', top: 3, textAlign: 'center' }}>
-                                        <FontAwesomeIcon size='xs' icon={faChevronDown}></FontAwesomeIcon>
-                                    </Box>
-                                </Stack>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Stack spacing={2}>
-                                    <CharacterStory character={character} readonly={true}></CharacterStory>
-                                    <Box sx={{ textAlign: 'right' }}>
-                                        <Button endIcon={<FontAwesomeIcon icon={faTrashAlt} />} variant='outlined' color='error' onClick={() => setDeletePopup(true)}>
-                                            {t('core.delete')}
-                                        </Button>
-                                    </Box>
-                                </Stack>
-                            </AccordionDetails>
-                        </Accordion>
-                    </Card>
-                    <Card sx={{ p: 2 }}>
-                        <Stack spacing={2}>
-                            <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('sheet.state')}</Typography>
-                            <FormControl fullWidth>
-                                <TextField
-                                    label={t('sheet.money')}
-                                    type='number'
-                                    InputProps={{
-                                        endAdornment: <InputAdornment position="start">
-                                            <FontAwesomeIcon icon={faBitcoinSign}></FontAwesomeIcon>
-                                        </InputAdornment>,
-                                    }}
-                                    defaultValue={character.money}
-                                    onChange={(e) => { setMoney(parseInt(e.target.value)); setChanges(true); }}
-                                />
-                            </FormControl>
-                            <FormControl fullWidth>
-                                <TextField
-                                    multiline
-                                    type='textarea'
-                                    rows={7}
-                                    defaultValue={character.notes}
-                                    label={t('sheet.notes')}
-                                    onChange={(e) => { setNotes(e.target.value); setChanges(true); }}
-                                />
-                            </FormControl>
-                            <Box sx={{ textAlign: 'right' }}>
-                                <Button endIcon={<FontAwesomeIcon icon={faSave} />} variant='outlined' color="primary" disabled={!changes} onClick={async () => { await saveCharacter({ ...character, money, notes }); setChanges(false) }}>
-                                    {t('core.save')}
-                                </Button>
-                            </Box>
-                        </Stack>
-                    </Card>
+                <Stack spacing={1}>
+                    <Accordion>
+                        <AccordionSummary
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Stack sx={{ width: '100%' }}>
+                                <CharacterInfo character={character}></CharacterInfo>
+                                <Box sx={{ position: 'relative', top: 3, textAlign: 'center' }}>
+                                    <FontAwesomeIcon size='xs' icon={faChevronDown}></FontAwesomeIcon>
+                                </Box>
+                            </Stack>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Stack spacing={2}>
+                                <CharacterStory character={character} readonly={true}></CharacterStory>
+                                <Box sx={{ textAlign: 'right' }}>
+                                    <Button endIcon={<FontAwesomeIcon icon={faTrashAlt} />} variant='outlined' color='error' onClick={() => setDeletePopup(true)}>
+                                        {t('core.delete')}
+                                    </Button>
+                                </Box>
+                            </Stack>
+                        </AccordionDetails>
+                    </Accordion>
+                    <Accordion>
+                        <AccordionSummary
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Stack sx={{ width: '100%' }} direction='row'>
+                                <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('sheet.state')}</Typography>
+                                <Box sx={{ position: 'relative', top: 3, textAlign: 'center' }}>
+                                    <FontAwesomeIcon size='xs' icon={faChevronDown}></FontAwesomeIcon>
+                                </Box>
+                            </Stack>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <Stack spacing={2}>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        label={t('sheet.money')}
+                                        type='number'
+                                        InputProps={{
+                                            endAdornment: <InputAdornment position="start">
+                                                <FontAwesomeIcon icon={faBitcoinSign}></FontAwesomeIcon>
+                                            </InputAdornment>,
+                                        }}
+                                        defaultValue={character.money}
+                                        onChange={(e) => { setMoney(parseInt(e.target.value)); setChanges(true); }}
+                                    />
+                                </FormControl>
+                                <FormControl fullWidth>
+                                    <TextField
+                                        multiline
+                                        type='textarea'
+                                        rows={7}
+                                        defaultValue={character.notes}
+                                        label={t('sheet.notes')}
+                                        onChange={(e) => { setNotes(e.target.value); setChanges(true); }}
+                                    />
+                                </FormControl>
+                                <Box sx={{ textAlign: 'right' }}>
+                                    <Button endIcon={<FontAwesomeIcon icon={faSave} />} variant='outlined' color="primary" disabled={!changes} onClick={async () => { await saveCharacter({ ...character, money, notes }); setChanges(false) }}>
+                                        {t('core.save')}
+                                    </Button>
+                                </Box>
+                            </Stack>
+                        </AccordionDetails>
+                    </Accordion>
                     <Card sx={{ p: 2 }}>
                         <CharacterStats character={character} readonly={true}></CharacterStats>
                         <Stack sx={{ mt: 2 }} direction='row' spacing={1}>
