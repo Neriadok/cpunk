@@ -7,6 +7,10 @@ export function isRoleSkill(role: Role, skill: Skill) {
   return role?.skills.includes(skill);
 }
 
+export function getElectionSkills({role}: Character) {
+  return  skillFamilies.filter(({ stat, skill }) => stat !== 'special' && !isRoleSkill(role, skill));
+}
+
 export function getElectionSkillPoints({stats}: Character) {
   return stats.REF + stats.INT;
 }

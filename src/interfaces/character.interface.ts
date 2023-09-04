@@ -1,8 +1,8 @@
 import {Role} from "./role.interface";
 import {LifePath} from "./lifepath.interface";
-import {Item} from "./item.interface";
 
 export interface Character extends LifePath{
+  uid: string;
   name: string;
   role: Role;
   age: number;

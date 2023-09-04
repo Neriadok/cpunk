@@ -7,11 +7,13 @@ import { userSubject } from '../../lib/session';
 import { skip } from 'rxjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
+import { User } from "@firebase/auth";
+import { loadCharacters } from "../../lib/db";
 
 function App() {
     const navigate = useNavigate();
     const [user, setUser] = useState(userSubject.value);
-    userSubject.pipe(skip(1)).subscribe((v) => setUser(v));
+    userSubject.pipe(skip(1)).subscribe((u) => loadUser(u));
 
     return (
         <Box>
@@ -26,6 +28,11 @@ function App() {
 
     async function access() {
         await authWithGoogle();
+    }
+
+    async function loadUser(u: User | null){
+        await loadCharacters();
+        setUser(u);
     }
 
     function getIcon(){

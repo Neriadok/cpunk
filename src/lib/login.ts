@@ -17,6 +17,7 @@ export async function authWithGoogle(): Promise<User | null> {
 
 export async function restoreSession() {
     await setPersistence(auth, indexedDBLocalPersistence); // Remove for sensitive Data applications
+    userSubject.next(auth.currentUser);
     return userSubject.getValue();
 }
 

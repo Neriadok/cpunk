@@ -5,7 +5,8 @@ import {stats} from "../interfaces/stats.interface";
 import {LifePath, LifePathEvent} from "../interfaces/lifepath.interface";
 import {randomBool, randomNum} from "../lib/utils";
 import {getRandomEvent} from "./lifepath";
-import { getSkillsBonified, getAverageRoleSkills, getRoleSkills, getSpecialSkillMoney } from './skills';
+import { getSkillsBonified, getAverageRoleSkills, getSpecialSkillMoney } from './skills';
+import { v4 } from 'uuid';
 
 export const baseAge = 18;
 export const ageRange = 11;
@@ -16,6 +17,7 @@ export function getRandomCharacter(): Character {
   const role = getRandomRole();
   const skills =  getAverageRoleSkills(role);
   const baseCharacter: Character = {
+    uid: v4(),
     name: faker.person.fullName({sex: gender ? 'male' : 'female'}),
     age,
     role,
