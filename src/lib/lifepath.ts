@@ -23,10 +23,10 @@ export function getRandomEvent(): LifePathEvent {
 
 export function getRandomLoveEvent(): LifePathEvent {
   const event = Math.random() * 10;
-  const facts = event < 4 ? ['character-wizard-event-love-happy']
-    : event < 5 ? ['character-wizard-event-love-tragedy-' + getRandomFrom(tragicLove), 'character-wizard-event-love-feelings-' + getRandomFrom(feelings) ]
-    : event < 7 ? ['character-wizard-event-love-problematic-' + getRandomFrom(problematicLove)]
-    : ['character-wizard-event-love-affairs'];
+  const facts = event < 4 ? ['life-path.event-love-happy']
+    : event < 5 ? ['life-path.event-love-tragedy-' + getRandomFrom(tragicLove), 'life-path.event-love-feelings-' + getRandomFrom(feelings) ]
+    : event < 7 ? ['life-path.event-love-problematic-' + getRandomFrom(problematicLove)]
+    : ['life-path.event-love-affairs'];
   return {type: 'love', facts };
 }
 
@@ -38,11 +38,11 @@ export function getRandomEnemyEvent(): LifePathEvent {
   return {
     type: 'relation-enemy',
     facts: [
-      'character-wizard-event-relation-enemy-is-' + getRandomFrom(relationEnemy),
-      'character-wizard-event-relation-enemy-what-to-expect-' + getRandomFrom(relationEnemyWhatToExpect),
-      'character-wizard-event-relation-enemy-hate-' + getRandomFrom(relationEnemyFeelings),
-      'character-wizard-event-relation-enemy-cause-' + getRandomFrom(relationEnemyCause),
-      'character-wizard-event-relation-enemy-what-to-do-' + getRandomFrom(relationEnemyWhatToDo)
+      'life-path.event-relation-enemy-is-' + getRandomFrom(relationEnemy),
+      'life-path.event-relation-enemy-what-to-expect-' + getRandomFrom(relationEnemyWhatToExpect),
+      'life-path.event-relation-enemy-hate-' + getRandomFrom(relationEnemyFeelings),
+      'life-path.event-relation-enemy-cause-' + getRandomFrom(relationEnemyCause),
+      'life-path.event-relation-enemy-what-to-do-' + getRandomFrom(relationEnemyWhatToDo)
     ]
   };
 }
@@ -51,7 +51,7 @@ export function getRandomFriendEvent(): LifePathEvent {
   return {
     type: 'relation-friend',
     facts: [
-      'character-wizard-event-relation-friend-is-' + getRandomFrom(relationFriend),
+      'life-path.event-relation-friend-is-' + getRandomFrom(relationFriend),
     ]
   };
 }
@@ -85,7 +85,7 @@ export function intoLuckEvents(luckEvents: LuckEvent[], event: LuckEvent): LuckE
 }
 
 export function intoLifePathLuckEvent(lifePathEvent: LifePathEvent, event: LuckEvent, prefix: 'luck-good' | 'luck-bad'): LifePathEvent {
-  const facts = lifePathEvent.facts.concat([`character-wizard-event-${prefix}-${event.label}`]);
+  const facts = lifePathEvent.facts.concat([`life-path.event-${prefix}-${event.label}`]);
   const modifiers = lifePathEvent.modifiers?.concat((event.modifiers || []).map(toFinalModifier));
   return {...lifePathEvent, facts, modifiers}
 }

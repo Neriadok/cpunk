@@ -46,6 +46,7 @@
         "stats": "Atributos",
         "age": "Edad",
         "role": "Profesión",
+        "story": "Historia de tu vida",
         "extrastats": {
             "run": "Carrera",
             "jump": "Salto",
@@ -149,7 +150,7 @@
             "weaponsmith": "Armería"
         }
     },
-    "character-wizard": {
+    "life-path": {
         "name-label": "Nombre",
         "name-placeholder": "Fulanito de Mengano",
         "age-label": "Edad",

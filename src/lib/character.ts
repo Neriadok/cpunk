@@ -7,6 +7,9 @@ import {randomBool, randomNum} from "../lib/utils";
 import {getRandomEvent} from "./lifepath";
 import { getSkillsBonified, getAverageRoleSkills, getRoleSkills, getSpecialSkillMoney } from './skills';
 
+export const baseAge = 18;
+export const ageRange = 11;
+
 export function getRandomCharacter(): Character {
   const age = getRandomAge();
   const gender = randomBool();
@@ -26,7 +29,7 @@ export function getRandomCharacter(): Character {
 }
 
 export function getRandomAge(): number {
-  return Math.floor(Math.random() * 11 + 18);
+  return Math.floor(Math.random() * ageRange + baseAge);
 }
 
 export function getRandomRole(): Role {
@@ -63,7 +66,7 @@ export function getRandomLifePath(age: number, gender: boolean): LifePath {
 
 export function getRandomEvents(age: number): LifePathEvent[] {
   const events: LifePathEvent[] = []
-  for (let i = 16; i < age; i++) {
+  for (let i = baseAge - 2; i < age; i++) {
     events.push(getRandomEvent())
   }
   return events;

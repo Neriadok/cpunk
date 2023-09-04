@@ -10,6 +10,7 @@ import React from 'react';
 import CharacterInfoInput from '../../components/character-info-input/character-info-input';
 import CharacterSkills from '../../components/character-skills/character-skills';
 import CharacterRoleSkills from '../../components/character-role-skills/character-role-skills';
+import CharacterStory from '../../components/character-story/character-story';
 
 function NewCharacter() {
     const [character, setCharacter] = useState(getRandomCharacter());
@@ -28,6 +29,8 @@ function NewCharacter() {
         <Container>
             <Paper sx={{ p: 1 }}>
                 <CharacterInfoInput  character={character} subject={subject}></CharacterInfoInput>
+                <Divider sx={{mt:1, mb: 1}} />
+                <CharacterStory character={character} subject={subject}></CharacterStory>
                 <Divider sx={{mt:1, mb: 1}} />
                 <CharacterStats character={character} subject={subject}></CharacterStats>
                 <Divider sx={{mt:1, mb: 1}} />
