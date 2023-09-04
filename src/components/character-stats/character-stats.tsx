@@ -56,7 +56,7 @@ function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
             const aux = character.stats[targetStat];
             character.stats[targetStat] = character.stats[stat];
             character.stats[stat] = aux;
-            subject.next({ ...character });
+            subject?.next({ ...character });
         } else {
             setTargetStat(stat);
         }
@@ -65,7 +65,7 @@ function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
     function resetStats() {
         if (readonly) return;
         setTargetStat(undefined);
-        subject.next({ ...character, stats: getRandomStats() });
+        subject?.next({ ...character, stats: getRandomStats() });
     }
 
 }

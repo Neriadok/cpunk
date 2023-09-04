@@ -96,7 +96,9 @@ export type Skill = 'authority' |
   'instrument' |
   'weaponsmith';
 
-export const skillFamilies: { stat: Stat | 'special', skill: Skill }[] = [
+export interface SkillFamily { stat: Stat | 'special', skill: Skill };
+
+export const skillFamilies: SkillFamily[] = [
   {stat: 'special', skill: 'authority'},
   {stat: 'special', skill: 'charisma'},
   {stat: 'special', skill: 'combat-sense'},

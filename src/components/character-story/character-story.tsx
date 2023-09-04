@@ -33,7 +33,7 @@ function CharacterStory({ subject, character, readonly }: CharacterStoryProps) {
     function resetStory() {
         if (readonly) return;
         const baseCharacter = { ...character, skills: getAverageRoleSkills(character.role), ...getRandomLifePath(character.age, character.gender) };
-        subject.next({ ...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter) });
+        subject?.next({ ...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter) });
     }
 
 }

@@ -11,6 +11,18 @@ export function getElectionSkills({role}: Character) {
   return  skillFamilies.filter(({ stat, skill }) => stat !== 'special' && !isRoleSkill(role, skill));
 }
 
+export function getActionSkills() {
+  return  skillFamilies.filter(({ stat }) => stat !== 'special');
+}
+
+export function getSkillValue(character: Character, skill: string): number {
+  const stat = skillFamilies.find((s) => s.skill === skill)?.stat;
+  const statValue = stat ? character.stats[stat] : 0;
+  const bonusValue = stat && stat !== 'special' ? getBonus(character, stat, 'stats') : 0;
+  const skillValue = character.skills[skill] || 0 ;
+  return skillValue + statValue + bonusValue;
+}
+
 export function getElectionSkillPoints({stats}: Character) {
   return stats.REF + stats.INT;
 }

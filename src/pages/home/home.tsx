@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import logo from '../../images/logo.png';
 import './home.css';
-import { Box, Card, Container, IconButton, Stack } from '@mui/material';
+import { Box, Card, Container, Fab, IconButton, Stack } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
@@ -25,12 +25,14 @@ function Home() {
             <img src={logo} className="logo" alt="logo" />
             <Box>
                 <Stack spacing={1}>
-                    {characters.map((character) => <Card sx={{p:1}}> <CharacterInfo character={character}></CharacterInfo></Card>)}
-                    <IconButton size='large' color='primary' onClick={() => navigate('/new-character')}>
-                        <FontAwesomeIcon fontSize="inherit" icon={faCirclePlus} />
-                    </IconButton>
+                    {characters.map((character) => <Card sx={{ p: 1 }} onClick={() => navigate('character/' + character.uid)}>
+                        <CharacterInfo character={character}></CharacterInfo>
+                    </Card>)}
                 </Stack>
             </Box>
+            <Fab color='primary' sx={{position: 'sticky', bottom: '10px', m: 2, left: 'calc(50% - 25px)'}}  onClick={() => navigate('/new-character')}>
+                <FontAwesomeIcon size='2xl' icon={faCirclePlus} />
+            </Fab>
         </Container>
     );
 }

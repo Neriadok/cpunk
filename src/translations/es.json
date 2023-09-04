@@ -42,6 +42,11 @@
         "fixers": "Fixer",
         "nomads": "Nomada"
     },
+    "sheet": {
+        "skill": "Habilidad",
+        "money": "Dinero",
+        "value": "Valor"
+    },
     "character": {
         "stats": "Atributos",
         "age": "Edad",

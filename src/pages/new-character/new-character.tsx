@@ -41,8 +41,8 @@ function NewCharacter() {
                 <Divider sx={{mt:1, mb: 1}} />
                 <CharacterSkills character={character} subject={subject}></CharacterSkills>
             </Paper>
-            <Fab color='primary' sx={{position: 'sticky', bottom: '10px', left: 'calc(50% - 25px)'}} disabled={!isValidCharacter()} onClick={() => save()}>
-                <FontAwesomeIcon icon={faSave}/>
+            <Fab color='primary' sx={{position: 'sticky', bottom: '10px', m: 2, left: 'calc(50% - 25px)'}} disabled={!isValidCharacter()} onClick={() => save()}>
+                <FontAwesomeIcon size="2xl" icon={faSave}/>
             </Fab>
         </Container>
     );
@@ -58,7 +58,7 @@ function NewCharacter() {
         if(!isValidCharacter()) return;
         console.log(character);
         await saveCharacter(character);
-        navigate('/');
+        navigate('/character/' + character.uid);
     }
 }
 
