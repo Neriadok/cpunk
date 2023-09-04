@@ -86,9 +86,9 @@ export const roles: Role[] = [
       'teaching',
       'education',
       'electronics',
-      'gyro-tech',
-      'av-tech',
-      'aero-tech'
+      'pharmaceuticals',
+      'first-aid',
+      'mathematics'
     ],
     money: [
       1000,

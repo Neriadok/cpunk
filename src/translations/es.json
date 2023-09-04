@@ -18,7 +18,8 @@
         "exit": "Salir",
         "home": "Inicio",
         "email": "Email",
-        "years": "Años"
+        "years": "Años",
+        "confirmaction": "Esta acción no puede deshacerse ¿Desea continuar?"
     },
     "server": {
         "error400": "No puedo procesar la petición. Revisa los valores y prueba de nuevo.",
@@ -45,10 +46,12 @@
     "sheet": {
         "skill": "Habilidad",
         "money": "Dinero",
-        "value": "Valor"
+        "value": "Valor",
+        "notes": "Notas"
     },
     "character": {
         "stats": "Atributos",
+        "name": "Nombre",
         "age": "Edad",
         "role": "Profesión",
         "story": "Historia de tu vida",

@@ -13,6 +13,11 @@ export async function saveCharacter(character: Character) {
     await saveCharacters(characters);
 }
 
+export async function removeCharacter(character: Character) {
+    const characters = charactersSubject.value.filter(({uid}) => character.uid !== uid);
+    await saveCharacters(characters);
+}
+
 export async function saveCharacters(characters: Character[]) {
     if (userSubject.value) {
         await set(ref(db, 'users/' + userSubject.value.uid), JSON.stringify(characters));
