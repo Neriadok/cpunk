@@ -17,13 +17,13 @@ function CharacterStory({ subject, character, readonly }: CharacterStoryProps) {
                 </IconButton>}
         </Box>
         <Stack>
-            {character.events.map(({ type, facts }: LifePathEvent, index: number) => <Stack>
+            {character.events.map(({ type, facts }: LifePathEvent, index: number) => <Stack key={`event${index}`}>
                 <Divider/>
                 <Typography flex="1" variant="body1" component="div" color='inherit'>
                     {t(`life-path.event-age`, {age: index + baseAge - 2}) + ' ' +t(`life-path.event-${type}-label`)}
                     </Typography>
                 <Stack>
-                    {facts.map((fact) => <Typography flex="1" variant="body2" component="div" color='text.secondary'>{t(fact)}</Typography>)}
+                    {facts.map((fact,j) => <Typography key={`event${index}-fact${j}`} flex="1" variant="body2" component="div" color='text.secondary'>{t(fact)}</Typography>)}
                 </Stack>
             </Stack>)}
         </Stack>

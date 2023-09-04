@@ -5,8 +5,8 @@ import CharacterStory from '../../components/character-story/character-story';
 import { getActionSkills, getSkillValue, getSpecialSkillMoney } from '../../lib/skills';
 import { Skill, SkillFamily } from '../../interfaces/skills.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBitcoinSign, faChevronDown, faDiceD20, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { charactersSubject, removeCharacter, } from '../../lib/db';
+import { faBitcoinSign, faChevronDown, faDiceD20, faSave, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { charactersSubject, removeCharacter, saveCharacter, } from '../../lib/db';
 import { useNavigate, useParams } from 'react-router-dom';
 import CharacterInfo from '../../components/character-info/character-info';
 import { t } from 'i18next';
@@ -19,6 +19,9 @@ function CharacterSheet() {
     const [activeSkill, setActiveSkill] = useState<Skill>(skills[0].skill);
     const [actionPoints, setActionPoints] = useState<number | undefined>(undefined);
     const [deletePopup, setDeletePopup] = useState<boolean>(false);
+    const [notes, setNotes] = useState<string>(character?.notes || '');
+    const [money, setMoney] = useState<number>(character?.money || 0);
+    const [changes, setChanges] = useState<boolean>(false);
 
     return (
         !character ? <LinearProgress color='warning' /> :
@@ -30,7 +33,7 @@ function CharacterSheet() {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Stack>
+                                <Stack sx={{width: '100%'}}>
                                     <CharacterInfo character={character}></CharacterInfo>
                                     <Box sx={{ position: 'relative', top: 3, textAlign: 'center' }}>
                                         <FontAwesomeIcon size='xs' icon={faChevronDown}></FontAwesomeIcon>
@@ -39,29 +42,48 @@ function CharacterSheet() {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <Stack spacing={2}>
-                                    <FormControl fullWidth>
-                                        <TextField
-                                            label={t('sheet.money')}
-                                            InputProps={{
-                                                endAdornment: <InputAdornment position="start">
-                                                    <FontAwesomeIcon icon={faBitcoinSign}></FontAwesomeIcon>
-                                                </InputAdornment>,
-                                            }}
-                                            defaultValue={getSpecialSkillMoney(character)}
-                                        />
-                                    </FormControl>
-                                    <FormControl fullWidth>
-                                        <TextField
-                                            multiline
-                                            rows={4}
-                                            label={t('sheet.notes')}
-                                        />
-                                    </FormControl>
                                     <CharacterStory character={character} readonly={true}></CharacterStory>
-                                    <IconButton size='small' color='inherit' onClick={() => setDeletePopup(true)}><FontAwesomeIcon icon={faTrashAlt} /></IconButton>
+                                    <Box sx={{ textAlign: 'right' }}>
+                                        <Button endIcon={<FontAwesomeIcon icon={faTrashAlt} />} variant='outlined' color='error' onClick={() => setDeletePopup(true)}>
+                                            {t('core.delete')}
+                                        </Button>
+                                    </Box>
                                 </Stack>
                             </AccordionDetails>
                         </Accordion>
+                    </Card>
+                    <Card sx={{ p: 2 }}>
+                        <Stack spacing={2}>
+                            <Typography flex="1" variant="h5" component="div" color='text.secondary'>{t('sheet.state')}</Typography>
+                            <FormControl fullWidth>
+                                <TextField
+                                    label={t('sheet.money')}
+                                    type='number'
+                                    InputProps={{
+                                        endAdornment: <InputAdornment position="start">
+                                            <FontAwesomeIcon icon={faBitcoinSign}></FontAwesomeIcon>
+                                        </InputAdornment>,
+                                    }}
+                                    defaultValue={character.money}
+                                    onChange={(e) => { setMoney(parseInt(e.target.value)); setChanges(true); }}
+                                />
+                            </FormControl>
+                            <FormControl fullWidth>
+                                <TextField
+                                    multiline
+                                    type='textarea'
+                                    rows={7}
+                                    defaultValue={character.notes}
+                                    label={t('sheet.notes')}
+                                    onChange={(e) => { setNotes(e.target.value); setChanges(true); }}
+                                />
+                            </FormControl>
+                            <Box sx={{ textAlign: 'right' }}>
+                                <Button endIcon={<FontAwesomeIcon icon={faSave} />} variant='outlined' color="primary" disabled={!changes} onClick={async () => { await saveCharacter({ ...character, money, notes }); setChanges(false) }}>
+                                    {t('core.save')}
+                                </Button>
+                            </Box>
+                        </Stack>
                     </Card>
                     <Card sx={{ p: 2 }}>
                         <CharacterStats character={character} readonly={true}></CharacterStats>
@@ -73,7 +95,7 @@ function CharacterSheet() {
                                     value={activeSkill}
                                     label="skill"
                                     onChange={(e: any) => changeSkill(e)}>
-                                    {skills.map(({ skill }) => (<MenuItem value={skill}>{t('character.skill.' + skill)} ({character.skills[skill] || 0})</MenuItem>))}
+                                    {skills.map(({ skill }) => (<MenuItem key={skill} value={skill}>{t('character.skill.' + skill)} ({character.skills[skill] || 0})</MenuItem>))}
                                 </Select>
                             </FormControl>
                             <FormControl>

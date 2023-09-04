@@ -21,7 +21,7 @@ function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
                 </IconButton>}
         </Box>
         <Grid container sx={{ textAlign: 'center' }} spacing={1}>
-            {stats.map((stat) => (<Grid item xs={4} onClick={() => chooseStat(stat)}>
+            {stats.map((stat) => (<Grid key={stat} item xs={4} onClick={() => chooseStat(stat)}>
                 <Typography variant="body2" component="div" color='text.secondary'>{stat}{getStatBonus(stat)}</Typography>
                 <Button fullWidth={true} variant='outlined' color={targetStat === stat ? 'warning' : 'inherit'}>{character.stats[stat]}</Button>
             </Grid>))}

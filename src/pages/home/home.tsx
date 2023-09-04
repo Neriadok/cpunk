@@ -25,7 +25,7 @@ function Home() {
             <img src={logo} className="logo" alt="logo" />
             <Box>
                 <Stack spacing={1}>
-                    {characters.map((character) => <Card sx={{ p: 1 }} onClick={() => navigate('character/' + character.uid)}>
+                    {characters.map((character) => <Card key={character.uid} sx={{ p: 1 }} onClick={() => navigate('character/' + character.uid)}>
                         <CharacterInfo character={character}></CharacterInfo>
                     </Card>)}
                 </Stack>

@@ -19,6 +19,7 @@ export function getRandomCharacter(): Character {
   const baseCharacter: Character = {
     uid: v4(),
     name: faker.person.fullName({sex: gender ? 'male' : 'female'}),
+    notes: '',
     age,
     role,
     workedMonths: Math.round(Math.random() * 3) + 1,

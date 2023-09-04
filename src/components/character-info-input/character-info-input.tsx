@@ -57,7 +57,7 @@ function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
                     label="Role"
                     onChange={(e: any) => changeRole(e)}
                 >
-                    {roles.map((role) => (<MenuItem value={role.key}>{t('role.' + role.key)}</MenuItem>))}
+                    {roles.map(({key}) => (<MenuItem key={key} value={key}>{t('role.' + key)}</MenuItem>))}
                 </Select>
             </FormControl>
             <FormControl fullWidth>
@@ -69,7 +69,7 @@ function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
                     label="Role"
                     onChange={(e: any) => setAge(e)}
                 >
-                    {ages.map((age) => (<MenuItem value={age}>{age} {t('core.years')}</MenuItem>))}
+                    {ages.map((age) => (<MenuItem key={age} value={age}>{age} {t('core.years')}</MenuItem>))}
                 </Select>
             </FormControl>
             <Stack direction='row' display="flex" justifyContent='space-around'>

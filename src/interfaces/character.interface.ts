@@ -4,6 +4,7 @@ import {LifePath} from "./lifepath.interface";
 export interface Character extends LifePath{
   uid: string;
   name: string;
+  notes: string;
   role: Role;
   age: number;
   workedMonths: number;
