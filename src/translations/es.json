@@ -48,7 +48,8 @@
         "money": "Dinero",
         "value": "Valor",
         "state": "Estado",
-        "notes": "Notas"
+        "notes": "Notas",
+        "bodystate": "Salud y Armadura"
     },
     "character": {
         "stats": "Atributos",

@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
-import {Character} from "../interfaces/character.interface";
-import {Role, roles} from "../interfaces/role.interface";
-import {stats} from "../interfaces/stats.interface";
-import {LifePath, LifePathEvent} from "../interfaces/lifepath.interface";
-import {randomBool, randomNum} from "../lib/utils";
-import {getRandomEvent} from "./lifepath";
+import { Character } from "../interfaces/character.interface";
+import { Role, roles } from "../interfaces/role.interface";
+import { stats } from "../interfaces/stats.interface";
+import { LifePath, LifePathEvent } from "../interfaces/lifepath.interface";
+import { randomBool, randomNum } from "../lib/utils";
+import { getRandomEvent } from "./lifepath";
 import { getSkillsBonified, getAverageRoleSkills, getSpecialSkillMoney } from './skills';
 import { v4 } from 'uuid';
 
@@ -15,20 +15,43 @@ export function getRandomCharacter(): Character {
   const age = getRandomAge();
   const gender = randomBool();
   const role = getRandomRole();
-  const skills =  getAverageRoleSkills(role);
+  const skills = getAverageRoleSkills(role);
+  const stats = getRandomStats();
   const baseCharacter: Character = {
     uid: v4(),
-    name: faker.person.fullName({sex: gender ? 'male' : 'female'}),
+    name: faker.person.fullName({ sex: gender ? 'male' : 'female' }),
     notes: '',
     age,
     role,
     workedMonths: Math.round(Math.random() * 3) + 1,
-    stats: getRandomStats(),
+    stats,
     money: 0,
     skills,
+    ...getDefaultBodystate(stats),
     ...getRandomLifePath(age, gender)
   };
-  return {...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter)}
+  return { ...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter) }
+}
+
+export function getDefaultBodystate(stats: { [stat: string]: number }) {
+  return {
+    health: {
+      head: stats.TCO,
+      trunk: stats.TCO,
+      armR: stats.TCO,
+      armL: stats.TCO,
+      legR: stats.TCO,
+      legL: stats.TCO,
+    },
+    armor: {
+      head: 0,
+      trunk: 0,
+      armR: 0,
+      armL: 0,
+      legR: 0,
+      legL: 0,
+    },
+  }
 }
 
 export function getRandomAge(): number {
@@ -41,7 +64,7 @@ export function getRandomRole(): Role {
 
 export function getRandomStats(): { [stat: string]: number } {
   return stats.reduce((randomStats, stat) => {
-    return {...randomStats, [stat]: randomNum(11, 2)};
+    return { ...randomStats, [stat]: randomNum(11, 2) };
   }, {});
 }
 
