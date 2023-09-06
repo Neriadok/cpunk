@@ -11,6 +11,9 @@ export interface Character extends LifePath{
   money: number;
   health?: BodyState;
   armor?: BodyState;
+  shock?: number;
+  bleed?: number;
+  poison?: number;
   stats: {[property: string]: number};
   skills: {[property: string]: number};
   [property: string]: any;

@@ -51,6 +51,9 @@ export function getDefaultBodystate(stats: { [stat: string]: number }) {
       legR: 0,
       legL: 0,
     },
+    shock: 0,
+    bleed: 0,
+    poison: 0
   }
 }
 
