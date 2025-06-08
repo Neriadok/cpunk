@@ -41,6 +41,7 @@ import { t } from 'i18next';
 import { Character } from '../../interfaces/character.interface';
 import { getRandomCharacter } from '../../lib/character';
 import CharacterState from '../../components/character-state/character-state';
+import { theme } from '../../env/theme';
 
 function CharacterSheet() {
   const navigate = useNavigate();
@@ -137,8 +138,16 @@ function CharacterSheet() {
                 label="skill"
                 onChange={(e: any) => changeSkill(e)}
               >
-                {skills.map(({ skill }) => (
-                  <MenuItem key={skill} value={skill}>
+                {skills.sort(alphabetically).map(({ skill }) => (
+                  <MenuItem
+                    key={skill}
+                    sx={{
+                      color: character.skills[skill]
+                        ? theme.palette.primary.main
+                        : 'text.secondary',
+                    }}
+                    value={skill}
+                  >
                     {t('character.skill.' + skill)} (
                     {character.skills[skill] || 0})
                   </MenuItem>
@@ -218,6 +227,12 @@ function CharacterSheet() {
   function changeSkill(e: any) {
     setActiveSkill(e.target?.value);
     setActionPoints(undefined);
+  }
+
+  function alphabetically(a: SkillFamily, b: SkillFamily) {
+    return t('character.skill.' + a.skill) > t('character.skill.' + b.skill)
+      ? 1
+      : -1;
   }
 }
 
