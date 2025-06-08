@@ -1,4 +1,4 @@
-import { faker } from '@faker-js/faker';
+import Chance from 'chance';
 import { Character } from "../interfaces/character.interface";
 import { Role, roles } from "../interfaces/role.interface";
 import { stats } from "../interfaces/stats.interface";
@@ -8,6 +8,7 @@ import { getRandomEvent } from "./lifepath";
 import { getSkillsBonified, getAverageRoleSkills, getSpecialSkillMoney } from './skills';
 import { v4 } from 'uuid';
 
+const chance = new Chance();
 export const baseAge = 18;
 export const ageRange = 11;
 
@@ -19,7 +20,7 @@ export function getRandomCharacter(): Character {
   const stats = getRandomStats();
   const baseCharacter: Character = {
     uid: v4(),
-    name: faker.person.fullName({ sex: gender ? 'male' : 'female' }),
+    name: chance.name({ gender: gender ? 'male' : 'female' }),
     notes: '',
     age,
     role,

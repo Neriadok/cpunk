@@ -8,11 +8,12 @@ import { BrowserRouter } from 'react-router-dom';
 import App from './components/app/app';
 import { restoreSession } from './lib/login';
 
+import './lib/firebase';
+import './lib/i18next';
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-require('./lib/firebase');
-require('./lib/i18next');
 restoreSession();
 root.render(
   <React.StrictMode>
