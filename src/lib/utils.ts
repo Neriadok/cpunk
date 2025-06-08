@@ -5,7 +5,12 @@ export function delayFunction(fn: () => any, timeout: number): Promise<any> {
 }
 
 export function isEmptyValue(value: any): boolean {
-  return value === undefined || value === null || value === '' || typeof value === 'number' && isNaN(value);
+  return (
+    value === undefined ||
+    value === null ||
+    value === '' ||
+    (typeof value === 'number' && isNaN(value))
+  );
 }
 
 export function randomBool(): boolean {
@@ -13,10 +18,10 @@ export function randomBool(): boolean {
 }
 
 export function randomNum(max: number, min: number = 0): number {
-  return  Math.floor(Math.random() * (max - min)) + min;
+  return Math.floor(Math.random() * (max - min)) + min;
 }
 
 export function getRandomFrom(arr: any[]) {
-  const index = Math.floor(Math.random() * arr.length)
+  const index = Math.floor(Math.random() * arr.length);
   return arr[index];
 }

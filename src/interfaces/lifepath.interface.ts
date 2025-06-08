@@ -31,17 +31,23 @@ export interface LifePathMotivations {
 export interface LifePathEvent {
   type: LifePathEventType;
   facts: string[];
-  modifiers?: Modifier[]
+  modifiers?: Modifier[];
 }
 
 export interface Modifier {
-  property: string | string[],
-  kind?: 'stats' | 'skills',
-  amount: number,
-  random?: boolean
+  property: string | string[];
+  kind?: 'stats' | 'skills';
+  amount: number;
+  random?: boolean;
 }
 
-export type LifePathEventType = 'none' | 'luck-good' | 'luck-bad' | 'love' | 'relation-friend' | 'relation-enemy';
+export type LifePathEventType =
+  | 'none'
+  | 'luck-good'
+  | 'luck-bad'
+  | 'love'
+  | 'relation-friend'
+  | 'relation-enemy';
 
 export const ethnics = [
   'anglo-american',
@@ -53,7 +59,7 @@ export const ethnics = [
   'hispanic-american',
   'black-american',
   'central-south-american',
-  'european'
+  'european',
 ];
 
 export const familyClasses = [
@@ -66,7 +72,7 @@ export const familyClasses = [
   'crime-lord',
   'combat-zone-poor',
   'urban-homeless',
-  'arcology-family'
+  'arcology-family',
 ];
 
 export const childhoods = [
@@ -79,7 +85,7 @@ export const childhoods = [
   'village',
   'arcology',
   'seas',
-  'isolated'
+  'isolated',
 ];
 
 export const faimilyTragedies = [
@@ -93,7 +99,7 @@ export const faimilyTragedies = [
   'conspiration',
   'dispersed',
   'family-war',
-  'family-debt'
+  'family-debt',
 ];
 
 export const parentalTragedies = [
@@ -107,7 +113,7 @@ export const parentalTragedies = [
   'left-for-save',
   'street-raised',
   'left-you',
-  'sold-you'
+  'sold-you',
 ];
 
 export const personalities = [
@@ -120,7 +126,7 @@ export const personalities = [
   'silly',
   'sneaky',
   'intellectual',
-  'friendly'
+  'friendly',
 ];
 
 export const lovedPeople = [
@@ -133,7 +139,7 @@ export const lovedPeople = [
   'mentor',
   'famous',
   'hero',
-  'none'
+  'none',
 ];
 
 export const lovedStuffs = [
@@ -146,7 +152,7 @@ export const lovedStuffs = [
   'instrument',
   'jewelry',
   'toy',
-  'letter'
+  'letter',
 ];
 
 export const mainMotivations = [
@@ -159,7 +165,7 @@ export const mainMotivations = [
   'love',
   'power',
   'fun',
-  'friendship'
+  'friendship',
 ];
 
 export const societyThoughts = [
@@ -172,97 +178,92 @@ export const societyThoughts = [
   'people-r-obstacles',
   'trust-no-one',
   'kill-em-all',
-  'save-em-all'
+  'save-em-all',
 ];
 
 export const problematicLove = [
-  "friends-family-hate-you",
-  "friends-family-want-you-dead",
-  "friends-family-hate-lover",
-  "rival",
-  "separated",
-  "fight",
-  "professional-rivals",
-  "jealous",
-  "affair",
-  "environments"
+  'friends-family-hate-you',
+  'friends-family-want-you-dead',
+  'friends-family-hate-lover',
+  'rival',
+  'separated',
+  'fight',
+  'professional-rivals',
+  'jealous',
+  'affair',
+  'environments',
 ];
 
 export const tragicLove = [
-  "died",
-  "disapeared",
-  "unmatch",
-  "revenge",
-  "kidnaped",
-  "crazy",
-  "suicide",
-  "died-fighting",
-  "affair-rival",
-  "jail-exile"
+  'died',
+  'disapeared',
+  'unmatch',
+  'revenge',
+  'kidnaped',
+  'crazy',
+  'suicide',
+  'died-fighting',
+  'affair-rival',
+  'jail-exile',
 ];
 
 export const feelings = [
-  "lover-love",
-  "you-love",
-  "still-in-love",
-  "you-hate",
-  "lover-hate",
-  "hate",
-  "friends",
-  "end",
-  "lover-hate-you-love",
-  "lover-love-you-hate"
-]
+  'lover-love',
+  'you-love',
+  'still-in-love',
+  'you-hate',
+  'lover-hate',
+  'hate',
+  'friends',
+  'end',
+  'lover-hate-you-love',
+  'lover-love-you-hate',
+];
 
 export const relationEnemy = [
-  "ex-friend",
-  "ex-lover",
-  "relative",
-  "childhood-enemy",
-  "person-working-for-you",
-  "person-you-work-for",
-  "partner-or-co-worker",
-  "booster-gang-member",
-  "corporate-exec",
-  "government-official"
-]
+  'ex-friend',
+  'ex-lover',
+  'relative',
+  'childhood-enemy',
+  'person-working-for-you',
+  'person-you-work-for',
+  'partner-or-co-worker',
+  'booster-gang-member',
+  'corporate-exec',
+  'government-official',
+];
 
 export const relationEnemyWhatToExpect = [
-  "himself",
-  "few-friends",
-  "gang",
+  'himself',
+  'few-friends',
+  'gang',
   'small-corp',
   'large-Corp',
-  'government-agency'
-]
+  'government-agency',
+];
 
-export const relationEnemyFeelings = [
-  "you",
-  "both",
-  "enemy"
-]
+export const relationEnemyFeelings = ['you', 'both', 'enemy'];
 
 export const relationEnemyCause = [
-  "caused-status-lost",
-  "caused-loved-person-lost",
-  "caused-humiliation",
-  "personal-flaw",
-  "caused-disability",
-  "betrayed",
-  "turned-down-others-offer",
-  "dislike",
-  "romantic-rival",
-  "foiled-others-plan"
-]
+  'caused-status-lost',
+  'caused-loved-person-lost',
+  'caused-humiliation',
+  'personal-flaw',
+  'caused-disability',
+  'betrayed',
+  'turned-down-others-offer',
+  'dislike',
+  'romantic-rival',
+  'foiled-others-plan',
+];
 
 export const relationEnemyWhatToDo = [
   'rage-against',
   'avoid',
   'backstab',
   'ignore',
-  'insult'
-]
-
+  'insult',
+];
 
 export const relationFriend = [
   'like-big-brosis',
@@ -274,143 +275,196 @@ export const relationFriend = [
   'parent',
   'relative',
   'childhood',
-  'common-interest'
-]
+  'common-interest',
+];
 
 export const badLuck: LuckEvent[] = [
-  {label: "debt", modifiers: [{property: 'money', amount: -1000, random: true}]},
-  {label: "prison"},
   {
-    label: "illness",
-    modifiers: [{property: 'REF', amount: -1}],
-    extraFact: [{label: "illness-illness"}, {label: "illness-addiction"}]
+    label: 'debt',
+    modifiers: [{ property: 'money', amount: -1000, random: true }],
+  },
+  { label: 'prison' },
+  {
+    label: 'illness',
+    modifiers: [{ property: 'REF', amount: -1 }],
+    extraFact: [{ label: 'illness-illness' }, { label: 'illness-addiction' }],
   },
   {
-    label: "betray",
-    extraFact: [{label: "betray-blackmail"}, {label: "betray-reveal"}, {label: "betray-love"}, {label: "betray-job"}]
-  },
-  {
-    label: "accident",
+    label: 'betray',
     extraFact: [
-      {label: 'accident-disfigurement', modifiers: [{property: 'ATR', amount: -5, random: true, kind: 'stats'}]},
-      {label: 'accident-memory-lost'},
-      {label: 'accident-hospitalization'},
-      {label: 'accident-nightmares'}
-    ]
+      { label: 'betray-blackmail' },
+      { label: 'betray-reveal' },
+      { label: 'betray-love' },
+      { label: 'betray-job' },
+    ],
   },
   {
-    label: "loved-one-killed",
-    extraFact: [{label: "loved-one-killed-accident"}, {label: "loved-one-killed-unknown"}, {label: "loved-one-killed-known"}]
-  },
-  {
-    label: "fake-accusation",
+    label: 'accident',
     extraFact: [
-      {label: "fake-accusation-steal"},
-      {label: "fake-accusation-coward"},
-      {label: "fake-accusation-murder"},
-      {label: "fake-accusation-violation"},
-      {label: "fake-accusation-betray"}
-    ]
-  },
-  {
-    label: "law-wanted",
-    extraFact: [
-      {label: "law-wanted-local"},
-      {label: "law-wanted-city"},
-      {label: "law-wanted-national"},
-      {label: "law-wanted-international"}
-    ]
-  },
-  {
-    label: "corporate-wanted",
-    extraFact: [
-      {label: "corporate-wanted-local"},
-      {label: "corporate-wanted-city"},
-      {label: "corporate-wanted-national"},
-      {label: "corporate-wanted-international"}
-    ]
-  },
-  {
-    label: "incapacitation",
-    extraFact: [
-      {label: "corporate-wanted-nervous", modifiers: [{property: 'REF', amount: -1, kind: 'stats'}]},
-      {label: "corporate-wanted-anxiety", modifiers: [{property: 'FRI', amount: -1, kind: 'stats'}]},
       {
-        label: "corporate-wanted-psycho",
-        modifiers: [{property: 'FRI', amount: -1, kind: 'stats'}, {property: 'REF', amount: -1, kind: 'stats'}]
-      }
-    ]
-  }
-]
+        label: 'accident-disfigurement',
+        modifiers: [
+          { property: 'ATR', amount: -5, random: true, kind: 'stats' },
+        ],
+      },
+      { label: 'accident-memory-lost' },
+      { label: 'accident-hospitalization' },
+      { label: 'accident-nightmares' },
+    ],
+  },
+  {
+    label: 'loved-one-killed',
+    extraFact: [
+      { label: 'loved-one-killed-accident' },
+      { label: 'loved-one-killed-unknown' },
+      { label: 'loved-one-killed-known' },
+    ],
+  },
+  {
+    label: 'fake-accusation',
+    extraFact: [
+      { label: 'fake-accusation-steal' },
+      { label: 'fake-accusation-coward' },
+      { label: 'fake-accusation-murder' },
+      { label: 'fake-accusation-violation' },
+      { label: 'fake-accusation-betray' },
+    ],
+  },
+  {
+    label: 'law-wanted',
+    extraFact: [
+      { label: 'law-wanted-local' },
+      { label: 'law-wanted-city' },
+      { label: 'law-wanted-national' },
+      { label: 'law-wanted-international' },
+    ],
+  },
+  {
+    label: 'corporate-wanted',
+    extraFact: [
+      { label: 'corporate-wanted-local' },
+      { label: 'corporate-wanted-city' },
+      { label: 'corporate-wanted-national' },
+      { label: 'corporate-wanted-international' },
+    ],
+  },
+  {
+    label: 'incapacitation',
+    extraFact: [
+      {
+        label: 'corporate-wanted-nervous',
+        modifiers: [{ property: 'REF', amount: -1, kind: 'stats' }],
+      },
+      {
+        label: 'corporate-wanted-anxiety',
+        modifiers: [{ property: 'FRI', amount: -1, kind: 'stats' }],
+      },
+      {
+        label: 'corporate-wanted-psycho',
+        modifiers: [
+          { property: 'FRI', amount: -1, kind: 'stats' },
+          { property: 'REF', amount: -1, kind: 'stats' },
+        ],
+      },
+    ],
+  },
+];
 
 export const goodLuck: LuckEvent[] = [
   {
-    label: "contact",
+    label: 'contact',
     extraFact: [
-      {label: "contact-cop"},
-      {label: "contact-attorney"},
-      {label: "contact-major-office"}
-    ]
+      { label: 'contact-cop' },
+      { label: 'contact-attorney' },
+      { label: 'contact-major-office' },
+    ],
   },
-  {label: "money", modifiers: [{property: 'money', amount: 1000, random: true}]},
-  {label: "success", modifiers: [{property: 'money', amount: 2000, random: true}]},
   {
-    label: "master",
+    label: 'money',
+    modifiers: [{ property: 'money', amount: 1000, random: true }],
+  },
+  {
+    label: 'success',
+    modifiers: [{ property: 'money', amount: 2000, random: true }],
+  },
+  {
+    label: 'master',
     modifiers: [
       {
         property: ['brawling', 'martial-art'],
         amount: 1,
-        kind: "skills"
+        kind: 'skills',
       },
-    ]
+    ],
   },
   {
-    label: "teacher",
-    modifiers: [{
-      property: [
-        'accounting',
-        'anthropology',
-        'awareness',
-        'biology',
-        'botany',
-        'chemistry',
-        'composition',
-        'diagnose',
-        'education',
-        'expert',
-        'gamble',
-        'geology',
-        'evade',
-        'history',
-        'language',
-        'library-search',
-        'mathematics',
-        'physics',
-        'programming',
-        'track',
-        'stock-market',
-        'system-knowledge',
-        'teaching',
-        'survival',
-        'zoology'
-      ],
-      amount: 1,
-      kind: "skills"
-    }]
+    label: 'teacher',
+    modifiers: [
+      {
+        property: [
+          'accounting',
+          'anthropology',
+          'awareness',
+          'biology',
+          'botany',
+          'chemistry',
+          'composition',
+          'diagnose',
+          'education',
+          'expert',
+          'gamble',
+          'geology',
+          'evade',
+          'history',
+          'language',
+          'library-search',
+          'mathematics',
+          'physics',
+          'programming',
+          'track',
+          'stock-market',
+          'system-knowledge',
+          'teaching',
+          'survival',
+          'zoology',
+        ],
+        amount: 1,
+        kind: 'skills',
+      },
+    ],
   },
-  {label: "corporate-favour"},
-  {label: "nomads-favours", modifiers: [{property: 'streetwise', amount: 2, kind: "skills"}]},
-  {label: "cops-favours", modifiers: [{property: 'streetwise', amount: 2, kind: "skills"}]},
-  {label: "local-gang-favours", modifiers: [{property: 'streetwise', amount: 2, kind: "skills"}]},
+  { label: 'corporate-favour' },
   {
-    label: "veteran",
-    modifiers: [{
-      property: ['fencing', 'melee', 'archery', 'heavy-weapons', 'headgun', 'rifle', 'submachinegun'],
-      amount: 1,
-      kind: "skills"
-    }]
-  }
-]
+    label: 'nomads-favours',
+    modifiers: [{ property: 'streetwise', amount: 2, kind: 'skills' }],
+  },
+  {
+    label: 'cops-favours',
+    modifiers: [{ property: 'streetwise', amount: 2, kind: 'skills' }],
+  },
+  {
+    label: 'local-gang-favours',
+    modifiers: [{ property: 'streetwise', amount: 2, kind: 'skills' }],
+  },
+  {
+    label: 'veteran',
+    modifiers: [
+      {
+        property: [
+          'fencing',
+          'melee',
+          'archery',
+          'heavy-weapons',
+          'headgun',
+          'rifle',
+          'submachinegun',
+        ],
+        amount: 1,
+        kind: 'skills',
+      },
+    ],
+  },
+];
 
 export interface LuckEvent {
   label: string;

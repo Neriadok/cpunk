@@ -1,4 +1,3 @@
-
 .logo {
   margin-top: 30px;
   height: 40vmin;
@@ -28,7 +27,7 @@
   }
   87% {
     top: 10px;
-    opacity: .5;
+    opacity: 0.5;
   }
   89% {
     top: -10px;
@@ -36,7 +35,7 @@
   }
   90% {
     top: 0;
-    opacity: .5;
+    opacity: 0.5;
   }
   92% {
     left: 0;
@@ -44,7 +43,7 @@
   }
   95% {
     left: -10px;
-    opacity: .5;
+    opacity: 0.5;
   }
   97% {
     left: 10px;
@@ -52,7 +51,7 @@
   }
   99% {
     left: -10px;
-    opacity: .5;
+    opacity: 0.5;
   }
   100% {
     left: 0;

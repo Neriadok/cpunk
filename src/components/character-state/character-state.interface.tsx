@@ -1,5 +1,5 @@
-import { Character } from "../../interfaces/character.interface";
+import { Character } from '../../interfaces/character.interface';
 
 export interface CharacterStateProps {
-    character: Character;
-};
+  character: Character;
+}

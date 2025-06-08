@@ -1,6 +1,12 @@
-export function toggleArrayValue(array: Array<any>, value: any, property?: string): Array<any> {
-  const index = array.findIndex((arrayValue) => isSame(arrayValue, value, property));
-  if (index > -1){
+export function toggleArrayValue(
+  array: Array<any>,
+  value: any,
+  property?: string
+): Array<any> {
+  const index = array.findIndex((arrayValue) =>
+    isSame(arrayValue, value, property)
+  );
+  if (index > -1) {
     array.splice(index, 1);
     return [...array];
   } else {
@@ -9,7 +15,10 @@ export function toggleArrayValue(array: Array<any>, value: any, property?: strin
 }
 
 export function isSame(itemA: any, itemB: any, property?: string) {
-  return itemA === itemB || property && itemA && itemB && itemA[property] === itemB[property];
+  return (
+    itemA === itemB ||
+    (property && itemA && itemB && itemA[property] === itemB[property])
+  );
 }
 
 export function randomly(): number {
@@ -21,7 +30,8 @@ export function deleteDuplicates(array: Array<any>) {
 }
 
 export function isFirstValue(item: any, index: number, array: any[]) {
-  const itemIndex = item.key ? array.findIndex((arrayItem) => isSame(item, arrayItem, 'key'))
+  const itemIndex = item.key
+    ? array.findIndex((arrayItem) => isSame(item, arrayItem, 'key'))
     : array.indexOf(item);
   return itemIndex === index;
 }

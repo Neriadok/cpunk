@@ -1,9 +1,18 @@
-import {Skill} from "./skills.interface";
+import { Skill } from './skills.interface';
 
 export interface Role {
-  key: 'rocknrolla' | 'merc' | 'netrunners' | 'techies' | 'medias' | 'cops' | 'corpos' | 'fixers' | 'nomads';
-  skills: Skill[],
-  money: number[]
+  key:
+    | 'rocknrolla'
+    | 'merc'
+    | 'netrunners'
+    | 'techies'
+    | 'medias'
+    | 'cops'
+    | 'corpos'
+    | 'fixers'
+    | 'nomads';
+  skills: Skill[];
+  money: number[];
 }
 
 export const roles: Role[] = [
@@ -19,16 +28,9 @@ export const roles: Role[] = [
       'instrument',
       'streetwise',
       'persuasion',
-      'seduction'
+      'seduction',
     ],
-    money: [
-      1000,
-      1500,
-      2000,
-      5000,
-      8000,
-      12000
-    ]
+    money: [1000, 1500, 2000, 5000, 8000, 12000],
   },
   {
     key: 'merc',
@@ -42,16 +44,9 @@ export const roles: Role[] = [
       'rifle',
       'athletics',
       'submachinegun',
-      'stealth'
+      'stealth',
     ],
-    money: [
-      2000,
-      3000,
-      4500,
-      7000,
-      9000,
-      12000
-    ]
+    money: [2000, 3000, 4500, 7000, 9000, 12000],
   },
   {
     key: 'netrunners',
@@ -65,16 +60,9 @@ export const roles: Role[] = [
       'cyberdeck-design',
       'composition',
       'electronics',
-      'programming'
+      'programming',
     ],
-    money: [
-      1000,
-      2000,
-      3000,
-      5000,
-      7000,
-      10000
-    ]
+    money: [1000, 2000, 3000, 5000, 7000, 10000],
   },
   {
     key: 'techies',
@@ -88,16 +76,9 @@ export const roles: Role[] = [
       'electronics',
       'pharmaceuticals',
       'first-aid',
-      'mathematics'
+      'mathematics',
     ],
-    money: [
-      1000,
-      2000,
-      3000,
-      4000,
-      5000,
-      8000
-    ]
+    money: [1000, 2000, 3000, 4000, 5000, 8000],
   },
   {
     key: 'medias',
@@ -110,16 +91,9 @@ export const roles: Role[] = [
       'human-perception',
       'social',
       'streetwise',
-      'photo-film'
+      'photo-film',
     ],
-    money: [
-      1000,
-      1200,
-      3000,
-      5000,
-      7000,
-      10000
-    ]
+    money: [1000, 1200, 3000, 5000, 7000, 10000],
   },
   {
     key: 'cops',
@@ -133,16 +107,9 @@ export const roles: Role[] = [
       'brawling',
       'melee',
       'interrogation',
-      'streetwise'
+      'streetwise',
     ],
-    money: [
-      1000,
-      1200,
-      3000,
-      5000,
-      7000,
-      9000
-    ]
+    money: [1000, 1200, 3000, 5000, 7000, 9000],
   },
   {
     key: 'corpos',
@@ -156,16 +123,9 @@ export const roles: Role[] = [
       'persuasion',
       'stock-market',
       'wardrobe',
-      'grooming'
+      'grooming',
     ],
-    money: [
-      1500,
-      3000,
-      5000,
-      7000,
-      9000,
-      12000
-    ]
+    money: [1500, 3000, 5000, 7000, 9000, 12000],
   },
   {
     key: 'fixers',
@@ -179,16 +139,9 @@ export const roles: Role[] = [
       'pick-lock',
       'pick-pocket',
       'intimidate',
-      'persuasion'
+      'persuasion',
     ],
-    money: [
-      1500,
-      3000,
-      5000,
-      7000,
-      8000,
-      10000
-    ]
+    money: [1500, 3000, 5000, 7000, 8000, 10000],
   },
   {
     key: 'nomads',
@@ -202,15 +155,8 @@ export const roles: Role[] = [
       'basic-tech',
       'survival',
       'brawling',
-      'athletics'
+      'athletics',
     ],
-    money: [
-      1000,
-      1500,
-      2000,
-      3000,
-      4000,
-      5000
-    ]
+    money: [1000, 1500, 2000, 3000, 4000, 5000],
   },
-]
+];

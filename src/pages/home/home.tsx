@@ -12,29 +12,49 @@ import { Character } from '../../interfaces/character.interface';
 import CharacterInfo from '../../components/character-info/character-info';
 
 function Home() {
-    const navigate = useNavigate();
-    const [characters, setCharacters] = useState<Character[]>([]);
-    const unsuscribe: Subject<any> = new Subject();
+  const navigate = useNavigate();
+  const [characters, setCharacters] = useState<Character[]>([]);
+  const unsuscribe: Subject<any> = new Subject();
 
-    React.useEffect(() => {
-        charactersSubject.pipe(takeUntil(unsuscribe)).subscribe((c) => setCharacters(c));
-        return () => { unsuscribe.next(true); unsuscribe.complete(); }
-    }, [])
-    return (
-        <Container style={{ textAlign: 'center' }}>
-            <img src={logo} className="logo" alt="logo" />
-            <Box>
-                <Stack spacing={1}>
-                    {characters.map((character) => <Card key={character.uid} sx={{ p: 1 }} onClick={() => navigate('character/' + character.uid)}>
-                        <CharacterInfo character={character}></CharacterInfo>
-                    </Card>)}
-                </Stack>
-            </Box>
-            <Fab color='primary' sx={{position: 'sticky', bottom: '10px', m: 2, left: 'calc(50% - 25px)'}}  onClick={() => navigate('/new-character')}>
-                <FontAwesomeIcon size='2xl' icon={faCirclePlus} />
-            </Fab>
-        </Container>
-    );
+  React.useEffect(() => {
+    charactersSubject
+      .pipe(takeUntil(unsuscribe))
+      .subscribe((c) => setCharacters(c));
+    return () => {
+      unsuscribe.next(true);
+      unsuscribe.complete();
+    };
+  }, []);
+  return (
+    <Container style={{ textAlign: 'center' }}>
+      <img src={logo} className="logo" alt="logo" />
+      <Box>
+        <Stack spacing={1}>
+          {characters.map((character) => (
+            <Card
+              key={character.uid}
+              sx={{ p: 1 }}
+              onClick={() => navigate('character/' + character.uid)}
+            >
+              <CharacterInfo character={character}></CharacterInfo>
+            </Card>
+          ))}
+        </Stack>
+      </Box>
+      <Fab
+        color="primary"
+        sx={{
+          position: 'sticky',
+          bottom: '10px',
+          m: 2,
+          left: 'calc(50% - 25px)',
+        }}
+        onClick={() => navigate('/new-character')}
+      >
+        <FontAwesomeIcon size="2xl" icon={faCirclePlus} />
+      </Fab>
+    </Container>
+  );
 }
 
 export default Home;

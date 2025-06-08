@@ -5,14 +5,14 @@ import NewCharacter from './new-character/new-character';
 import CharacterSheet from './character-sheet/character-sheet';
 
 function Router() {
-    return (
-        <Routes >
-            <Route path="" element={<Home />} />
-            <Route path="profile" element={<Profile />} />
-            <Route path="new-character" element={<NewCharacter />} />
-            <Route path="character/:uid" element={<CharacterSheet />} />
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="" element={<Home />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="new-character" element={<NewCharacter />} />
+      <Route path="character/:uid" element={<CharacterSheet />} />
+    </Routes>
+  );
 }
 
 export default Router;

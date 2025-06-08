@@ -1,11 +1,15 @@
 import Chance from 'chance';
-import { Character } from "../interfaces/character.interface";
-import { Role, roles } from "../interfaces/role.interface";
-import { stats } from "../interfaces/stats.interface";
-import { LifePath, LifePathEvent } from "../interfaces/lifepath.interface";
-import { randomBool, randomNum } from "../lib/utils";
-import { getRandomEvent } from "./lifepath";
-import { getSkillsBonified, getAverageRoleSkills, getSpecialSkillMoney } from './skills';
+import { Character } from '../interfaces/character.interface';
+import { Role, roles } from '../interfaces/role.interface';
+import { stats } from '../interfaces/stats.interface';
+import { LifePath, LifePathEvent } from '../interfaces/lifepath.interface';
+import { randomBool, randomNum } from '../lib/utils';
+import { getRandomEvent } from './lifepath';
+import {
+  getSkillsBonified,
+  getAverageRoleSkills,
+  getSpecialSkillMoney,
+} from './skills';
 import { v4 } from 'uuid';
 
 const chance = new Chance();
@@ -29,9 +33,13 @@ export function getRandomCharacter(): Character {
     money: 0,
     skills,
     ...getDefaultBodystate(stats),
-    ...getRandomLifePath(age, gender)
+    ...getRandomLifePath(age, gender),
   };
-  return { ...baseCharacter, skills: getSkillsBonified(baseCharacter), money: getSpecialSkillMoney(baseCharacter) }
+  return {
+    ...baseCharacter,
+    skills: getSkillsBonified(baseCharacter),
+    money: getSpecialSkillMoney(baseCharacter),
+  };
 }
 
 export function getDefaultBodystate(stats: { [stat: string]: number }) {
@@ -54,8 +62,8 @@ export function getDefaultBodystate(stats: { [stat: string]: number }) {
     },
     shock: 0,
     bleed: 0,
-    poison: 0
-  }
+    poison: 0,
+  };
 }
 
 export function getRandomAge(): number {
@@ -81,23 +89,23 @@ export function getRandomLifePath(age: number, gender: boolean): LifePath {
       parentalTragedy: randomBool() ? randomNum(11, 1) : 0,
       familyTragedy: randomBool() ? randomNum(11, 1) : 0,
       childhood: randomNum(10),
-      brothers: []
+      brothers: [],
     },
     motivations: {
       personality: randomNum(10),
       mainMotivation: randomNum(10),
       lovedPerson: randomNum(10),
       lovedStuff: randomNum(10),
-      societyThought: randomNum(10)
+      societyThought: randomNum(10),
     },
-    events: getRandomEvents(age)
-  }
+    events: getRandomEvents(age),
+  };
 }
 
 export function getRandomEvents(age: number): LifePathEvent[] {
-  const events: LifePathEvent[] = []
+  const events: LifePathEvent[] = [];
   for (let i = baseAge - 2; i < age; i++) {
-    events.push(getRandomEvent())
+    events.push(getRandomEvent());
   }
   return events;
 }

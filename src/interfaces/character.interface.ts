@@ -1,7 +1,7 @@
-import {Role} from "./role.interface";
-import {LifePath} from "./lifepath.interface";
+import { Role } from './role.interface';
+import { LifePath } from './lifepath.interface';
 
-export interface Character extends LifePath{
+export interface Character extends LifePath {
   uid: string;
   name: string;
   notes: string;
@@ -14,8 +14,8 @@ export interface Character extends LifePath{
   shock?: number;
   bleed?: number;
   poison?: number;
-  stats: {[property: string]: number};
-  skills: {[property: string]: number};
+  stats: { [property: string]: number };
+  skills: { [property: string]: number };
   [property: string]: any;
 }
 

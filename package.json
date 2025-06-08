@@ -8,11 +8,12 @@
     "deploy:force": "npm run build && firebase deploy",
     "start": "vite",
     "build": "vite build",
-    "test": "npm run test:lint && npm run test:unit",
-    "test:lint": "eslint . --ext .ts,.tsx",
+    "test": "npm run format && npm run test:unit",
+    "format": "eslint && prettier --check .",
+    "format:fix": "eslint --fix && prettier --write .",
     "test:unit": "vitest run",
-    "test:integration": "vitest ",
-    "firebase": "firebase"
+    "firebase": "firebase",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -40,6 +41,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.48.0",
     "firebase-tools": "^13.7.0",
+    "prettier": "^3.5.3",
     "ts-node": "^10.9.1",
     "typescript": "^4.7.4",
     "vite": "^5.2.0",
