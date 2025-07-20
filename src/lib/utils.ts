@@ -21,7 +21,7 @@ export function randomNum(max: number, min: number = 0): number {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
-export function getRandomFrom(arr: any[]) {
+export function getRandomFrom<T>(arr: T[]): T {
   const index = Math.floor(Math.random() * arr.length);
   return arr[index];
 }

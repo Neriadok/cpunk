@@ -16,9 +16,6 @@ export type AnyStat =
   | State
   | 'actions'
   | 'precision'
-  | 'concussion'
-  | 'bleeding'
-  | 'shock'
   | 'armor'
   | 'CPU'
   | 'movement';
@@ -35,13 +32,13 @@ export const stats: Stat[] = [
   'EMP',
 ];
 
+export const states: State[] = ['bleed', 'shock', 'poison'];
+
 export const anyStats: AnyStat[] = [
   ...stats,
+  ...states,
   'actions',
   'precision',
-  'concussion',
-  'bleeding',
-  'shock',
   'armor',
   'CPU',
   'movement',
