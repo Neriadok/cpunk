@@ -1,5 +1,6 @@
 import { Character } from '../../../interfaces/character.interface';
 
-export interface CharacterStatusProps {
+export interface CharacterStateAlterationsProps {
   character: Character;
+  onChange: (character: Character) => void;
 }

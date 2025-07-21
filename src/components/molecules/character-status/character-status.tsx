@@ -5,42 +5,39 @@ import {
   Grid,
   IconButton,
   InputAdornment,
-  Slider,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import { CharacterStateProps } from './character-state.interface';
 import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { BodyState } from '../../../interfaces/character.interface';
 import { saveCharacter } from '../../../lib/db';
 import {
   faBitcoinSign,
-  faBoltLightning,
   faCircleMinus,
   faCirclePlus,
-  faDroplet,
   faHeart,
   faRedo,
   faSave,
   faShield,
-  faSkullCrossbones,
 } from '@fortawesome/free-solid-svg-icons';
 import { bodyStateImage } from '../../../interfaces/images.interfaces';
 import { getDefaultBodystate } from '../../../lib/character-generator';
+import { CharacterStatusProps } from './character-status.interface';
+import CharacterStateAlterations from '../character-state-alterations/character-state-alterations';
+import { BodyState, Character } from '../../../interfaces/character.interface';
 
-function CharacterState({ character }: CharacterStateProps) {
-  const [notes, setNotes] = useState<string>(character?.notes || '');
-  const [money, setMoney] = useState<number>(character?.money || 0);
-  const [shock, setShock] = useState<number>(character?.shock || 0);
-  const [poison, setPoison] = useState<number>(character?.poison || 0);
-  const [bleed, setBleed] = useState<number>(character?.bleed || 0);
+function CharacterState({ character }: CharacterStatusProps) {
+  const [characterStatus, setCharacterStatus] = useState<Character>(character);
+  const [notes, setNotes] = useState<string>(characterStatus?.notes || '');
+  const [money, setMoney] = useState<number>(characterStatus?.money || 0);
   const [health, setHealth] = useState<BodyState | undefined>(
-    character?.health
+    characterStatus?.health
   );
-  const [armor, setArmor] = useState<BodyState | undefined>(character?.armor);
+  const [armor, setArmor] = useState<BodyState | undefined>(
+    characterStatus?.armor
+  );
   const [changes, setChanges] = useState<boolean>(false);
 
   return (
@@ -56,7 +53,7 @@ function CharacterState({ character }: CharacterStateProps) {
               </InputAdornment>
             ),
           }}
-          defaultValue={character.money}
+          defaultValue={characterStatus.money}
           onChange={(e) => {
             setMoney(parseInt(e.target.value));
             setChanges(true);
@@ -68,7 +65,7 @@ function CharacterState({ character }: CharacterStateProps) {
           multiline
           type="textarea"
           rows={7}
-          defaultValue={character.notes}
+          defaultValue={characterStatus.notes}
           label={t('sheet.notes')}
           onChange={(e) => {
             setNotes(e.target.value);
@@ -475,98 +472,10 @@ function CharacterState({ character }: CharacterStateProps) {
           </Stack>
         </Grid>
       </Grid>
-      <Stack>
-        <Stack
-          spacing={1}
-          direction="row"
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          <IconButton
-            color={
-              shock + bleed + poison >= character.stats.TCO
-                ? 'warning'
-                : 'primary'
-            }
-          >
-            <FontAwesomeIcon icon={faBoltLightning} />
-          </IconButton>
-          <Box sx={{ flex: 1, pr: 1 }}>
-            <Slider
-              valueLabelDisplay="auto"
-              color="primary"
-              defaultValue={shock}
-              step={1}
-              marks
-              min={0}
-              max={character.stats.TCO}
-              onChange={(e: any) => {
-                setShock(e.target?.value || 0);
-                setChanges(true);
-              }}
-            />
-          </Box>
-        </Stack>
-        <Stack
-          spacing={1}
-          direction="row"
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          <IconButton
-            color={
-              shock + bleed + poison >= character.stats.TCO
-                ? 'warning'
-                : 'primary'
-            }
-          >
-            <FontAwesomeIcon icon={faSkullCrossbones} />
-          </IconButton>
-          <Box sx={{ flex: 1, pr: 1 }}>
-            <Slider
-              valueLabelDisplay="auto"
-              color="primary"
-              defaultValue={poison}
-              step={1}
-              marks
-              min={0}
-              max={character.stats.TCO}
-              onChange={(e: any) => {
-                setPoison(e.target?.value || 0);
-                setChanges(true);
-              }}
-            />
-          </Box>
-        </Stack>
-        <Stack
-          spacing={1}
-          direction="row"
-          sx={{ display: 'flex', alignItems: 'center' }}
-        >
-          <IconButton
-            color={
-              shock + bleed + poison >= character.stats.TCO
-                ? 'warning'
-                : 'primary'
-            }
-          >
-            <FontAwesomeIcon icon={faDroplet} />
-          </IconButton>
-          <Box sx={{ flex: 1, pr: 1 }}>
-            <Slider
-              valueLabelDisplay="auto"
-              color="primary"
-              defaultValue={bleed}
-              step={1}
-              marks
-              min={0}
-              max={character.stats.TCO}
-              onChange={(e: any) => {
-                setBleed(e.target?.value || 0);
-                setChanges(true);
-              }}
-            />
-          </Box>
-        </Stack>
-      </Stack>
+      <CharacterStateAlterations
+        character={character}
+        onChange={(c) => setNewStatus(c)}
+      />
       <Box sx={{ textAlign: 'right' }}>
         <Button
           endIcon={<FontAwesomeIcon icon={faSave} />}
@@ -600,12 +509,12 @@ function CharacterState({ character }: CharacterStateProps) {
   }
 
   async function resetBodyState() {
-    const next = getDefaultBodystate(character.stats);
-    setHealth(next.health);
-    setArmor(next.armor);
-    setPoison(next.poison);
-    setShock(next.shock);
-    setBleed(next.bleed);
+    const next = getDefaultBodystate(characterStatus.stats);
+    setNewStatus({ ...characterStatus, ...next });
+  }
+
+  async function setNewStatus(newStatus: Partial<Character>) {
+    setCharacterStatus({ ...characterStatus, ...newStatus });
     setChanges(true);
   }
 

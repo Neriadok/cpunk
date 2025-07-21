@@ -21,7 +21,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import CharacterInfo from '../../components/molecules/character-info/character-info';
 import { t } from 'i18next';
 import { Character } from '../../interfaces/character.interface';
-import CharacterState from '../../components/molecules/character-state/character-state';
+import CharacterState from '../../components/molecules/character-status/character-status';
 import ActionTrigger from '../../components/molecules/action-trigger/action-trigger';
 import { getRandomCharacter } from '../../lib/character-generator';
 

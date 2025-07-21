@@ -36,26 +36,24 @@ export function getSkillValue(character: Character, skill: string): number {
 
 export function getRunValue(character: Character): number {
   return Math.floor(
-              (character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3
-            );
+    (character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3
+  );
 }
 
-export function getJumpValue(character: Character): number{
-return Math.floor(
-              ((character.stats.MOV + getBonus(character, 'MOV', 'stats')) *
-                3) /
-                4
-            )
+export function getJumpValue(character: Character): number {
+  return Math.floor(
+    ((character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3) / 4
+  );
 }
 
-export function getHealth(character: Character): number{
-    return Math.ceil(
-              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2
-            )
+export function getHealth(character: Character): number {
+  return Math.ceil(
+    (character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2
+  );
 }
 
-export function getLift(character: Character): number{
-   return Math.floor(
-              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) * 10
-            )
+export function getLift(character: Character): number {
+  return Math.floor(
+    (character.stats.TCO + getBonus(character, 'TCO', 'stats')) * 10
+  );
 }

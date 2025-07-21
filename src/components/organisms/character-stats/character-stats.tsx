@@ -6,7 +6,13 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { getRandomStats } from '../../../lib/character-generator';
-import { getBonus, getHealth, getJumpValue, getLift, getRunValue } from '../../../lib/bonifications';
+import {
+  getBonus,
+  getHealth,
+  getJumpValue,
+  getLift,
+  getRunValue,
+} from '../../../lib/bonifications';
 
 function CharacterStats({
   subject,
@@ -36,7 +42,7 @@ function CharacterStats({
       </Box>
       <Grid container sx={{ textAlign: 'center' }} spacing={1}>
         {stats.map((stat) => (
-          <Grid key={stat}  size={4} onClick={() => chooseStat(stat)}>
+          <Grid key={stat} size={4} onClick={() => chooseStat(stat)}>
             <Typography variant="body2" component="div" color="text.secondary">
               {stat}
               {getStatBonus(stat)}
