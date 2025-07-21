@@ -6,7 +6,7 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
 import { getRandomStats } from '../../../lib/character-generator';
-import { getBonus } from '../../../lib/bonifications';
+import { getBonus, getHealth, getJumpValue, getLift, getRunValue } from '../../../lib/bonifications';
 
 function CharacterStats({
   subject,
@@ -55,9 +55,7 @@ function CharacterStats({
             {t('character.extrastats.run')}
           </Typography>
           <Button fullWidth={true} variant="outlined" color="inherit">
-            {Math.floor(
-              (character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3
-            )}
+            {getRunValue(character)}
           </Button>
         </Grid>
         <Grid size={3}>
@@ -65,11 +63,7 @@ function CharacterStats({
             {t('character.extrastats.jump')}
           </Typography>
           <Button fullWidth={true} variant="outlined" color="inherit">
-            {Math.floor(
-              ((character.stats.MOV + getBonus(character, 'MOV', 'stats')) *
-                3) /
-                4
-            )}
+            {getJumpValue(character)}
           </Button>
         </Grid>
         <Grid size={3}>
@@ -77,9 +71,7 @@ function CharacterStats({
             {t('character.extrastats.lift')}
           </Typography>
           <Button fullWidth={true} variant="outlined" color="inherit">
-            {Math.floor(
-              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) * 10
-            )}
+            {getLift(character)}
           </Button>
         </Grid>
         <Grid size={3}>
@@ -87,9 +79,7 @@ function CharacterStats({
             {t('character.extrastats.health')}
           </Typography>
           <Button fullWidth={true} variant="outlined" color="inherit">
-            {Math.ceil(
-              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2
-            )}
+            {getHealth(character)}
           </Button>
         </Grid>
       </Grid>

@@ -48,8 +48,14 @@ return Math.floor(
             )
 }
 
-export function getHealth(character: Character){
+export function getHealth(character: Character): number{
     return Math.ceil(
               (character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2
+            )
+}
+
+export function getLift(character: Character): number{
+   return Math.floor(
+              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) * 10
             )
 }
