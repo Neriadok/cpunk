@@ -14,11 +14,12 @@ import {
 } from '@mui/material';
 import { t } from 'i18next';
 import { theme } from '../../../env/theme';
-import { getActionSkills, getSkillValue } from '../../../lib/skills';
+import { getActionSkills } from '../../../lib/skills';
 import CharacterStats from '../../organisms/character-stats/character-stats';
 import { Skill, SkillFamily } from '../../../interfaces/skills.interface';
 import { useState } from 'react';
 import { ActionTriggerProps } from './action-trigger.interface';
+import { getSkillValue } from '../../../lib/bonifications';
 
 function ActionTrigger({ character }: ActionTriggerProps) {
   const skills: SkillFamily[] = character

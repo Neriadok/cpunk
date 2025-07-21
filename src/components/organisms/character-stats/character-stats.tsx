@@ -5,8 +5,8 @@ import { Stat, stats } from '../../../interfaces/stats.interface';
 import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
-import { getBonus } from '../../../lib/lifepath';
 import { getRandomStats } from '../../../lib/character-generator';
+import { getBonus } from '../../../lib/bonifications';
 
 function CharacterStats({
   subject,

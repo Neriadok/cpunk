@@ -12,7 +12,7 @@ import {
   maxRoleSkillPoints,
   skillFamilies,
 } from '../../../interfaces/skills.interface';
-import { getBonus } from '../../../lib/lifepath';
+import { getBonus } from '../../../lib/bonifications';
 
 function CharacterRoleSkills({
   subject,

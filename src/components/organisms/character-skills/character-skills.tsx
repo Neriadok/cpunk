@@ -8,7 +8,7 @@ import {
   isRoleSkill,
   sumOfSkills,
 } from '../../../lib/skills';
-import { getBonus } from '../../../lib/lifepath';
+import { getBonus } from '../../../lib/bonifications';
 
 function CharacterSkills({ subject, character }: CharacterSkillsProps) {
   const electionSkills = skillFamilies.filter(
