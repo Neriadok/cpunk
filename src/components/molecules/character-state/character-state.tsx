@@ -15,7 +15,6 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { BodyState } from '../../../interfaces/character.interface';
-import { getDefaultBodystate } from '../../../lib/character-generator';
 import { saveCharacter } from '../../../lib/db';
 import {
   faBitcoinSign,
@@ -30,6 +29,7 @@ import {
   faSkullCrossbones,
 } from '@fortawesome/free-solid-svg-icons';
 import { bodyStateImage } from '../../../interfaces/images.interfaces';
+import { getDefaultBodystate } from '../../../lib/character-generator';
 
 function CharacterState({ character }: CharacterStateProps) {
   const [notes, setNotes] = useState<string>(character?.notes || '');
@@ -102,7 +102,7 @@ function CharacterState({ character }: CharacterStateProps) {
         }}
         spacing={1}
       >
-        <Grid item xs={12}>
+        <Grid size={12}>
           <Stack
             sx={{
               justifyContent: 'center',
@@ -164,7 +164,7 @@ function CharacterState({ character }: CharacterStateProps) {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item xs={4}>
+        <Grid size={4}>
           <Stack
             sx={{
               justifyContent: 'center',
@@ -226,7 +226,7 @@ function CharacterState({ character }: CharacterStateProps) {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item xs={4}>
+        <Grid size={4}>
           <Stack
             sx={{
               justifyContent: 'center',
@@ -288,7 +288,7 @@ function CharacterState({ character }: CharacterStateProps) {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item xs={4}>
+        <Grid size={4}>
           <Stack
             sx={{
               justifyContent: 'center',
@@ -350,7 +350,7 @@ function CharacterState({ character }: CharacterStateProps) {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={6}>
           <Stack
             sx={{
               justifyContent: 'center',
@@ -412,7 +412,7 @@ function CharacterState({ character }: CharacterStateProps) {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item xs={6}>
+        <Grid size={6}>
           <Stack
             sx={{
               justifyContent: 'center',

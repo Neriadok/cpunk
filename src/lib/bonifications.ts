@@ -33,3 +33,23 @@ export function getSkillValue(character: Character, skill: string): number {
   const skillValue = character.skills[skill] || 0;
   return skillValue + statValue + bonusValue;
 }
+
+export function getRunValue(character: Character): number {
+  return Math.floor(
+              (character.stats.MOV + getBonus(character, 'MOV', 'stats')) * 3
+            );
+}
+
+export function getJumpValue(character: Character): number{
+return Math.floor(
+              ((character.stats.MOV + getBonus(character, 'MOV', 'stats')) *
+                3) /
+                4
+            )
+}
+
+export function getHealth(character: Character){
+    return Math.ceil(
+              (character.stats.TCO + getBonus(character, 'TCO', 'stats')) / 2
+            )
+}

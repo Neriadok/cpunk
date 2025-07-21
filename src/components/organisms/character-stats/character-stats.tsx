@@ -36,7 +36,7 @@ function CharacterStats({
       </Box>
       <Grid container sx={{ textAlign: 'center' }} spacing={1}>
         {stats.map((stat) => (
-          <Grid key={stat} item xs={4} onClick={() => chooseStat(stat)}>
+          <Grid key={stat}  size={4} onClick={() => chooseStat(stat)}>
             <Typography variant="body2" component="div" color="text.secondary">
               {stat}
               {getStatBonus(stat)}
@@ -50,7 +50,7 @@ function CharacterStats({
             </Button>
           </Grid>
         ))}
-        <Grid item xs={3}>
+        <Grid size={3}>
           <Typography variant="body2" component="div" color="text.secondary">
             {t('character.extrastats.run')}
           </Typography>
@@ -60,7 +60,7 @@ function CharacterStats({
             )}
           </Button>
         </Grid>
-        <Grid item xs={3}>
+        <Grid size={3}>
           <Typography variant="body2" component="div" color="text.secondary">
             {t('character.extrastats.jump')}
           </Typography>
@@ -72,7 +72,7 @@ function CharacterStats({
             )}
           </Button>
         </Grid>
-        <Grid item xs={3}>
+        <Grid size={3}>
           <Typography variant="body2" component="div" color="text.secondary">
             {t('character.extrastats.lift')}
           </Typography>
@@ -82,7 +82,7 @@ function CharacterStats({
             )}
           </Button>
         </Grid>
-        <Grid item xs={3}>
+        <Grid size={3}>
           <Typography variant="body2" component="div" color="text.secondary">
             {t('character.extrastats.health')}
           </Typography>
