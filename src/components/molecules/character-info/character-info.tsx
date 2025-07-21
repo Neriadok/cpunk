@@ -1,30 +1,12 @@
 import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { CharacterInfoProps } from './character-info.interface';
 import { t } from 'i18next';
-import cops from '../../images/roles/cops.png';
-import corpos from '../../images/roles/corpos.png';
-import fixers from '../../images/roles/fixers.png';
-import medias from '../../images/roles/medias.png';
-import merc from '../../images/roles/merc.png';
-import netrunners from '../../images/roles/netrunners.png';
-import nomads from '../../images/roles/nomads.png';
-import rocknrolla from '../../images/roles/rocknrolla.png';
-import techies from '../../images/roles/techies.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
+import { roleImages } from '../../../interfaces/images.interfaces';
 
 function CharacterInfo({ character }: CharacterInfoProps) {
-  const image = {
-    cops,
-    corpos,
-    fixers,
-    medias,
-    merc,
-    netrunners,
-    nomads,
-    rocknrolla,
-    techies,
-  };
+  const image = roleImages;
 
   return (
     <Stack direction="row" sx={{ display: 'flex', alignItems: 'center' }}>

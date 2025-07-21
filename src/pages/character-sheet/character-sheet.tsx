@@ -20,8 +20,8 @@ import {
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import CharacterStats from '../../components/character-stats/character-stats';
-import CharacterStory from '../../components/character-story/character-story';
+import CharacterStats from '../../components/organisms/character-stats/character-stats';
+import CharacterStory from '../../components/organisms/character-story/character-story';
 import { getActionSkills, getSkillValue } from '../../lib/skills';
 import { Skill, SkillFamily } from '../../interfaces/skills.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -32,11 +32,11 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { charactersSubject, removeCharacter } from '../../lib/db';
 import { useNavigate, useParams } from 'react-router-dom';
-import CharacterInfo from '../../components/character-info/character-info';
+import CharacterInfo from '../../components/molecules/character-info/character-info';
 import { t } from 'i18next';
 import { Character } from '../../interfaces/character.interface';
 import { getRandomCharacter } from '../../lib/character';
-import CharacterState from '../../components/character-state/character-state';
+import CharacterState from '../../components/molecules/character-state/character-state';
 import { theme } from '../../env/theme';
 
 function CharacterSheet() {

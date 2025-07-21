@@ -14,10 +14,9 @@ import { CharacterStateProps } from './character-state.interface';
 import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
-import { BodyState } from '../../interfaces/character.interface';
-import { getDefaultBodystate } from '../../lib/character';
-import bodystate from '../../images/bodystate.jpg';
-import { saveCharacter } from '../../lib/db';
+import { BodyState } from '../../../interfaces/character.interface';
+import { getDefaultBodystate } from '../../../lib/character';
+import { saveCharacter } from '../../../lib/db';
 import {
   faBitcoinSign,
   faBoltLightning,
@@ -30,6 +29,7 @@ import {
   faShield,
   faSkullCrossbones,
 } from '@fortawesome/free-solid-svg-icons';
+import { bodyStateImage } from '../../../interfaces/images.interfaces';
 
 function CharacterState({ character }: CharacterStateProps) {
   const [notes, setNotes] = useState<string>(character?.notes || '');
@@ -95,7 +95,7 @@ function CharacterState({ character }: CharacterStateProps) {
       <Grid
         container
         sx={{
-          backgroundImage: `url(${bodystate})`,
+          backgroundImage: `url(${bodyStateImage})`,
           backgroundPosition: 'center',
           backgroundSize: 'cover',
           textAlign: 'center',

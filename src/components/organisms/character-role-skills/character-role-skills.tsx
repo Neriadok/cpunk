@@ -1,20 +1,23 @@
 import { Box, Slider, Stack, Typography } from '@mui/material';
 import { CharacterSkillsProps as CharacterRoleSkillsProps } from './character-role-skills.interface';
-import { Stat } from '../../interfaces/stats.interface';
+import { Stat } from '../../../interfaces/stats.interface';
 import { t } from 'i18next';
 import {
   getSpecialSkillMoney,
   isRoleSkill,
   sumOfRoleSkills,
-} from '../../lib/skills';
+} from '../../../lib/skills';
 import {
   Skill,
   maxRoleSkillPoints,
   skillFamilies,
-} from '../../interfaces/skills.interface';
-import { getBonus } from '../../lib/lifepath';
+} from '../../../interfaces/skills.interface';
+import { getBonus } from '../../../lib/lifepath';
 
-function CharacterRoleSkills({ subject, character }: CharacterRoleSkillsProps) {
+function CharacterRoleSkills({
+  subject,
+  character,
+}: CharacterRoleSkillsProps): React.ReactElement {
   const roleSkills = skillFamilies.filter(({ skill }) =>
     isRoleSkill(character.role, skill)
   );

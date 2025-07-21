@@ -11,33 +11,15 @@ import {
 } from '@mui/material';
 import { CharacterInfoInputProps } from './character-info-input.interface';
 import { t } from 'i18next';
-import cops from '../../images/roles/cops.png';
-import corpos from '../../images/roles/corpos.png';
-import fixers from '../../images/roles/fixers.png';
-import medias from '../../images/roles/medias.png';
-import merc from '../../images/roles/merc.png';
-import netrunners from '../../images/roles/netrunners.png';
-import nomads from '../../images/roles/nomads.png';
-import rocknrolla from '../../images/roles/rocknrolla.png';
-import techies from '../../images/roles/techies.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
-import { roles } from '../../interfaces/role.interface';
-import { getRandomEvents } from '../../lib/character';
-import { getAverageRoleSkills } from '../../lib/skills';
+import { roles } from '../../../interfaces/role.interface';
+import { getRandomEvents } from '../../../lib/character';
+import { getAverageRoleSkills } from '../../../lib/skills';
+import { roleImages } from '../../../interfaces/images.interfaces';
 
 function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
-  const image = {
-    cops,
-    corpos,
-    fixers,
-    medias,
-    merc,
-    netrunners,
-    nomads,
-    rocknrolla,
-    techies,
-  };
+  const image = roleImages;
   const ages = [];
   while (ages.length < 12) {
     ages.push(18 + ages.length);

@@ -5,7 +5,7 @@ import reportWebVitals from './reportWebVitals';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './env/theme';
 import { BrowserRouter } from 'react-router-dom';
-import App from './components/app/app';
+import App from './components/organisms/app/app';
 import { restoreSession } from './lib/login';
 
 import './lib/firebase';

@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
-import { Character } from '../../interfaces/character.interface';
+import { Character } from '../../../interfaces/character.interface';
 
-export interface CharacterSkillsProps {
+export interface CharacterInfoInputProps {
   subject: BehaviorSubject<Character>;
   character: Character;
   readonly?: boolean;

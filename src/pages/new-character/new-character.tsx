@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { getRandomCharacter } from '../../lib/character';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Character } from '../../interfaces/character.interface';
-import CharacterStats from '../../components/character-stats/character-stats';
+import CharacterStats from '../../components/organisms/character-stats/character-stats';
 import React from 'react';
-import CharacterInfoInput from '../../components/character-info-input/character-info-input';
-import CharacterSkills from '../../components/character-skills/character-skills';
-import CharacterRoleSkills from '../../components/character-role-skills/character-role-skills';
-import CharacterStory from '../../components/character-story/character-story';
+import CharacterInfoInput from '../../components/organisms/character-info-input/character-info-input';
+import CharacterSkills from '../../components/organisms/character-skills/character-skills';
+import CharacterRoleSkills from '../../components/organisms/character-role-skills/character-role-skills';
+import CharacterStory from '../../components/organisms/character-story/character-story';
 import {
   getElectionSkillPoints,
   getElectionSkills,

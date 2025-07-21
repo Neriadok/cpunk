@@ -1,14 +1,18 @@
 import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import { CharacterStatsProps } from './character-stats.interface';
 import { useState } from 'react';
-import { Stat, stats } from '../../interfaces/stats.interface';
+import { Stat, stats } from '../../../interfaces/stats.interface';
 import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
-import { getRandomStats } from '../../lib/character';
-import { getBonus } from '../../lib/lifepath';
+import { getRandomStats } from '../../../lib/character';
+import { getBonus } from '../../../lib/lifepath';
 
-function CharacterStats({ subject, character, readonly }: CharacterStatsProps) {
+function CharacterStats({
+  subject,
+  character,
+  readonly,
+}: CharacterStatsProps): JSX.Element {
   const [targetStat, setTargetStat] = useState<Stat | undefined>();
 
   return (

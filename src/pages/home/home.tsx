@@ -9,7 +9,7 @@ import React from 'react';
 import { Subject, takeUntil } from 'rxjs';
 import { charactersSubject } from '../../lib/db';
 import { Character } from '../../interfaces/character.interface';
-import CharacterInfo from '../../components/character-info/character-info';
+import CharacterInfo from '../../components/molecules/character-info/character-info';
 
 function Home() {
   const navigate = useNavigate();

@@ -3,13 +3,13 @@ import { CharacterStoryProps } from './character-story.interface';
 import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRedo } from '@fortawesome/free-solid-svg-icons';
-import { baseAge, getRandomLifePath } from '../../lib/character';
+import { baseAge, getRandomLifePath } from '../../../lib/character';
 import {
   getAverageRoleSkills,
   getSkillsBonified,
   getSpecialSkillMoney,
-} from '../../lib/skills';
-import { LifePathEvent } from '../../interfaces/lifepath.interface';
+} from '../../../lib/skills';
+import { LifePathEvent } from '../../../interfaces/lifepath.interface';
 
 function CharacterStory({ subject, character, readonly }: CharacterStoryProps) {
   return (

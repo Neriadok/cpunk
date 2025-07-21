@@ -1,14 +1,14 @@
 import { Box, Slider, Stack, Typography } from '@mui/material';
 import { CharacterSkillsProps } from './character-skills.interface';
-import { Stat } from '../../interfaces/stats.interface';
+import { Stat } from '../../../interfaces/stats.interface';
 import { t } from 'i18next';
-import { Skill, skillFamilies } from '../../interfaces/skills.interface';
+import { Skill, skillFamilies } from '../../../interfaces/skills.interface';
 import {
   getElectionSkillPoints,
   isRoleSkill,
   sumOfSkills,
-} from '../../lib/skills';
-import { getBonus } from '../../lib/lifepath';
+} from '../../../lib/skills';
+import { getBonus } from '../../../lib/lifepath';
 
 function CharacterSkills({ subject, character }: CharacterSkillsProps) {
   const electionSkills = skillFamilies.filter(

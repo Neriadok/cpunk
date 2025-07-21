@@ -1,14 +1,14 @@
-import { authWithGoogle } from '../../lib/login';
+import { authWithGoogle } from '../../../lib/login';
 import { Avatar, Box, Fab } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import Router from '../../pages/router';
+import Router from '../../../pages/router';
 import { useState } from 'react';
-import { userSubject } from '../../lib/session';
+import { userSubject } from '../../../lib/session';
 import { skip } from 'rxjs';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faUser } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@firebase/auth';
-import { loadCharacters } from '../../lib/db';
+import { loadCharacters } from '../../../lib/db';
 
 function App() {
   const navigate = useNavigate();
