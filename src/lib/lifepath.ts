@@ -147,13 +147,6 @@ export function getBonus(
   return modifiers.reduce((sum, { amount }) => sum + (amount || 0), 0);
 }
 
-export function getAllModifiers(
-  { events }: Partial<Character>,
-  kind?: 'skills' | 'stats'
-): Modifier[] {
-  return (events || []).reduce(intoModifiers, []);
-}
-
 export function getBonifiedSkills({ events }: Partial<Character>): string[] {
   return (events || [])
     .reduce(intoModifiers, [])

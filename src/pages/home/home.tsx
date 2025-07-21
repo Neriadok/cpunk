@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import logo from '../../images/logo.png';
 import './home.css';
-import { Box, Card, Container, Fab, IconButton, Stack } from '@mui/material';
+import { Box, Card, Container, Fab, Stack } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCirclePlus, faGun } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';

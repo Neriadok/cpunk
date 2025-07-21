@@ -1,19 +1,13 @@
 import {
   Avatar,
   Box,
-  Card,
-  CardContent,
-  CardMedia,
   FormControl,
-  Grid,
   IconButton,
-  Input,
   InputLabel,
   MenuItem,
   Select,
   Stack,
   TextField,
-  Typography,
 } from '@mui/material';
 import { CharacterInfoInputProps } from './character-info-input.interface';
 import { t } from 'i18next';
@@ -28,7 +22,7 @@ import rocknrolla from '../../images/roles/rocknrolla.png';
 import techies from '../../images/roles/techies.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
-import { Role, roles } from '../../interfaces/role.interface';
+import { roles } from '../../interfaces/role.interface';
 import { getRandomEvents } from '../../lib/character';
 import { getAverageRoleSkills } from '../../lib/skills';
 

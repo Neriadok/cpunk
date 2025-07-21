@@ -1,13 +1,4 @@
-import {
-  Avatar,
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Grid,
-  Stack,
-  Typography,
-} from '@mui/material';
+import { Avatar, Box, Stack, Typography } from '@mui/material';
 import { CharacterInfoProps } from './character-info.interface';
 import { t } from 'i18next';
 import cops from '../../images/roles/cops.png';

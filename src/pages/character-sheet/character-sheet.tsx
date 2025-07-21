@@ -22,11 +22,7 @@ import {
 import { useState } from 'react';
 import CharacterStats from '../../components/character-stats/character-stats';
 import CharacterStory from '../../components/character-story/character-story';
-import {
-  getActionSkills,
-  getSkillValue,
-  getSpecialSkillMoney,
-} from '../../lib/skills';
+import { getActionSkills, getSkillValue } from '../../lib/skills';
 import { Skill, SkillFamily } from '../../interfaces/skills.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {

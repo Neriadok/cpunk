@@ -10,15 +10,14 @@ import { auth, userSubject } from './session';
 
 export async function authWithGoogle(): Promise<User | null> {
   await setPersistence(auth, indexedDBLocalPersistence); // Remove for sensitive Data applications
-  let oauth,
-    credential = null;
+  let credential = null;
   try {
     credential = await signInWithPopup(auth, new GoogleAuthProvider());
-    oauth = GoogleAuthProvider.credentialFromResult(credential);
+    GoogleAuthProvider.credentialFromResult(credential);
     userSubject.next(auth.currentUser);
   } catch (error: any) {
     console.warn(error);
-    oauth = GoogleAuthProvider.credentialFromError(error);
+    GoogleAuthProvider.credentialFromError(error);
   }
   return userSubject.getValue();
 }

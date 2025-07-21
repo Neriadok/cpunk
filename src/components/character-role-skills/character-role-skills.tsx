@@ -14,11 +14,7 @@ import {
 } from '../../interfaces/skills.interface';
 import { getBonus } from '../../lib/lifepath';
 
-function CharacterRoleSkills({
-  subject,
-  character,
-  readonly,
-}: CharacterRoleSkillsProps) {
+function CharacterRoleSkills({ subject, character }: CharacterRoleSkillsProps) {
   const roleSkills = skillFamilies.filter(({ skill }) =>
     isRoleSkill(character.role, skill)
   );

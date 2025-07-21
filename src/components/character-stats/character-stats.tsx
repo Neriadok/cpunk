@@ -1,4 +1,4 @@
-import { Box, Button, Card, Grid, IconButton, Typography } from '@mui/material';
+import { Box, Button, Grid, IconButton, Typography } from '@mui/material';
 import { CharacterStatsProps } from './character-stats.interface';
 import { useState } from 'react';
 import { Stat, stats } from '../../interfaces/stats.interface';

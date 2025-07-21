@@ -1,4 +1,4 @@
-import { dices, Dice, LowValue, MidValue } from '../interfaces/game.interface';
+import { dices, LowValue, MidValue } from '../interfaces/game.interface';
 import {
   Complement,
   Firearms,
