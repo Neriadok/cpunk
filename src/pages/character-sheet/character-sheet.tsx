@@ -4,32 +4,18 @@ import {
   AccordionSummary,
   Box,
   Button,
-  Card,
   Container,
   Dialog,
   DialogActions,
   DialogTitle,
-  Fab,
-  FormControl,
-  InputLabel,
   LinearProgress,
-  MenuItem,
-  Select,
   Stack,
-  TextField,
   Typography,
 } from '@mui/material';
 import { useState } from 'react';
-import CharacterStats from '../../components/organisms/character-stats/character-stats';
 import CharacterStory from '../../components/organisms/character-story/character-story';
-import { getActionSkills, getSkillValue } from '../../lib/skills';
-import { Skill, SkillFamily } from '../../interfaces/skills.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faChevronDown,
-  faDiceD20,
-  faTrashAlt,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { charactersSubject, removeCharacter } from '../../lib/db';
 import { useNavigate, useParams } from 'react-router-dom';
 import CharacterInfo from '../../components/molecules/character-info/character-info';
@@ -37,7 +23,7 @@ import { t } from 'i18next';
 import { Character } from '../../interfaces/character.interface';
 import { getRandomCharacter } from '../../lib/character';
 import CharacterState from '../../components/molecules/character-state/character-state';
-import { theme } from '../../env/theme';
+import ActionTrigger from '../../components/molecules/action-trigger/action-trigger';
 
 function CharacterSheet() {
   const navigate = useNavigate();
@@ -45,16 +31,6 @@ function CharacterSheet() {
   const character: Character =
     charactersSubject.value.find(({ uid }) => uid === params.uid) ||
     getRandomCharacter();
-  const skills: SkillFamily[] = character
-    ? getActionSkills().sort(
-        (a, b) =>
-          getSkillValue(character, b.skill) - getSkillValue(character, a.skill)
-      )
-    : [];
-  const [activeSkill, setActiveSkill] = useState<Skill>(skills[0].skill);
-  const [actionPoints, setActionPoints] = useState<number | undefined>(
-    undefined
-  );
   const [deletePopup, setDeletePopup] = useState<boolean>(false);
 
   if (character.uid != params.uid) {
@@ -120,68 +96,7 @@ function CharacterSheet() {
             <CharacterState character={character}></CharacterState>
           </AccordionDetails>
         </Accordion>
-        <Card sx={{ p: 2 }}>
-          <CharacterStats
-            character={character}
-            readonly={true}
-          ></CharacterStats>
-          <Stack sx={{ mt: 2 }} direction="row" spacing={1}>
-            <FormControl fullWidth>
-              <InputLabel id="skill-label">{t('sheet.skill')}</InputLabel>
-              <Select
-                labelId="skill-label"
-                value={activeSkill}
-                label="skill"
-                onChange={(e: any) => changeSkill(e)}
-              >
-                {skills.sort(alphabetically).map(({ skill }) => (
-                  <MenuItem
-                    key={skill}
-                    sx={{
-                      color: character.skills[skill]
-                        ? theme.palette.primary.main
-                        : 'text.secondary',
-                    }}
-                    value={skill}
-                  >
-                    {t('character.skill.' + skill)} (
-                    {character.skills[skill] || 0})
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-            <FormControl>
-              <TextField
-                aria-readonly
-                label={t('sheet.value')}
-                value={getSkillValue(character, activeSkill)}
-              />
-            </FormControl>
-          </Stack>
-          <Box sx={{ mt: 2, textAlign: 'center' }}>
-            <Fab
-              variant="extended"
-              onClick={() => rollDice()}
-              color={
-                actionPoints === 1
-                  ? 'error'
-                  : character.skills[activeSkill]
-                    ? 'primary'
-                    : 'secondary'
-              }
-              disabled={!activeSkill}
-            >
-              <FontAwesomeIcon size="2xl" icon={faDiceD20} />
-              {actionPoints ? (
-                <Typography variant="h5" sx={{ ml: 2 }}>
-                  {actionPoints}
-                </Typography>
-              ) : (
-                ''
-              )}
-            </Fab>
-          </Box>
-        </Card>
+        <ActionTrigger character={character}></ActionTrigger>
       </Stack>
       <Dialog
         open={!!deletePopup}
@@ -208,27 +123,9 @@ function CharacterSheet() {
     </Container>
   );
 
-  function rollDice() {
-    const dice = Math.floor(Math.random() * 10) + 1;
-    setActionPoints(
-      dice > 1 ? getSkillValue(character, activeSkill) + dice : dice
-    );
-  }
-
   function deleteCharacter() {
     removeCharacter(character);
     navigate('/');
-  }
-
-  function changeSkill(e: any) {
-    setActiveSkill(e.target?.value);
-    setActionPoints(undefined);
-  }
-
-  function alphabetically(a: SkillFamily, b: SkillFamily) {
-    return t('character.skill.' + a.skill) > t('character.skill.' + b.skill)
-      ? 1
-      : -1;
   }
 }
 
