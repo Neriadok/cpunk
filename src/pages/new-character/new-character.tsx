@@ -1,6 +1,5 @@
 import { Container, Divider, Fab, Paper } from '@mui/material';
 import { useState } from 'react';
-import { getRandomCharacter } from '../../lib/character';
 import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Character } from '../../interfaces/character.interface';
 import CharacterStats from '../../components/organisms/character-stats/character-stats';
@@ -20,6 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSave } from '@fortawesome/free-solid-svg-icons';
 import { saveCharacter } from '../../lib/db';
 import { useNavigate } from 'react-router-dom';
+import { getRandomCharacter } from '../../lib/character-generator';
 
 function NewCharacter() {
   const navigate = useNavigate();

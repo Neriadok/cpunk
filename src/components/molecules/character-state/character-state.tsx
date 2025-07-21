@@ -15,7 +15,7 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { BodyState } from '../../../interfaces/character.interface';
-import { getDefaultBodystate } from '../../../lib/character';
+import { getDefaultBodystate } from '../../../lib/character-generator';
 import { saveCharacter } from '../../../lib/db';
 import {
   faBitcoinSign,

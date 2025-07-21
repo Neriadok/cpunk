@@ -14,9 +14,9 @@ import { t } from 'i18next';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMars, faVenus } from '@fortawesome/free-solid-svg-icons';
 import { roles } from '../../../interfaces/role.interface';
-import { getRandomEvents } from '../../../lib/character';
 import { getAverageRoleSkills } from '../../../lib/skills';
 import { roleImages } from '../../../interfaces/images.interfaces';
+import { getRandomEvents } from '../../../lib/character-generator';
 
 function CharacterInfoInput({ character, subject }: CharacterInfoInputProps) {
   const image = roleImages;
