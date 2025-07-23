@@ -7,6 +7,7 @@ export type Shop = 'firearms' | 'melee-weapons' | 'complements' | 'ammunition';
  * Base interface containing common properties for all items.
  */
 interface ItemBase {
+  shop: Shop;
   price: number;
   name: string;
   description: string;
@@ -38,11 +39,12 @@ export interface Complement extends ItemBase {
   activable: boolean;
   extraPrice: number;
   extraEffects: string;
+  numberOfUses: number | null;
 }
 
-export interface Magazine extends Weapon {
+export interface Ammunition extends Weapon {
   shop: 'ammunition';
   capacity: number;
 }
 
-export type Item = Firearms | Weapon | Complement | Magazine;
+export type Item = Firearms | Weapon | Complement | Ammunition;

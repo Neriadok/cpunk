@@ -2,6 +2,8 @@
   "core": {
     "new": "Nuevo",
     "add": "Añadir",
+    "no": "No",
+    "yes": "Yes",
     "cancel": "Cancelar",
     "accept": "Aceptar",
     "access": "Acceder",
@@ -42,6 +44,28 @@
     "corpos": "Corpo",
     "fixers": "Fixer",
     "nomads": "Nomada"
+  },
+  "shop": {
+    "firearms": "Armas de fuego",
+    "melee-weapons": "Armas blancas",
+    "complements": "Complementos",
+    "ammunition": "Munición"
+  },
+  "item": {
+    "precision": "Precisión",
+    "burst": "Ráfaga",
+    "damage": "Daño",
+    "piercing": "Perforación",
+    "randomDamage": "Daño Aleatorio",
+    "bleed": "Sangrado",
+    "shock": "Shock",
+    "poison": "Veneno",
+    "capacity": "Capacidad",
+    "stat": "Atributo",
+    "bonus": "Bonificación",
+    "activable": "Activable",
+    "extraEffects": "Info",
+    "numberOfUses": "Usos"
   },
   "sheet": {
     "skill": "Habilidad",

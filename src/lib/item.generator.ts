@@ -3,7 +3,7 @@ import {
   Complement,
   Firearms,
   Item,
-  Magazine,
+  Ammunition,
   MeleeWeapon,
 } from '../interfaces/item.interface';
 import { anyStats } from '../interfaces/stats.interface';
@@ -23,13 +23,13 @@ export function getRandomItem(): Item {
     getRandomMeleeWeapon,
     getRandomComplement,
     getRandomAmmunition,
-  ][Math.round(Math.random() * 5)]();
+  ][Math.floor(Math.random() * 5)]();
 }
 
-function getRandomFirearm(): Firearms {
+export function getRandomFirearm(): Firearms {
   const item: Omit<Firearms, 'price'> = {
     shop: 'firearms',
-    name: chance.sentence({ words: 2 }),
+    name: '',
     description: '',
     precision: randomNum(10) * 5,
     burst: chance.bool() ? getRandomFrom(dices) : null,
@@ -37,10 +37,10 @@ function getRandomFirearm(): Firearms {
   return { ...item, price: calculateFirearmPrice(item) };
 }
 
-function getRandomMeleeWeapon(): MeleeWeapon {
+export function getRandomMeleeWeapon(): MeleeWeapon {
   const meleeWeapon: Omit<MeleeWeapon, 'price'> = {
     shop: 'melee-weapons',
-    name: chance.sentence({ words: 2 }),
+    name: '',
     description: '',
     piercing: randomNum(3) as LowValue,
     damage: randomNum(5) as MidValue,
@@ -52,24 +52,26 @@ function getRandomMeleeWeapon(): MeleeWeapon {
   return { ...meleeWeapon, price: calculateMeleeWeaponPrice(meleeWeapon) };
 }
 
-function getRandomComplement(): Complement {
+export function getRandomComplement(): Complement {
+  const activable = chance.bool();
   const item: Omit<Complement, 'price'> = {
     shop: 'complements',
-    name: chance.sentence({ words: 2 }),
-    description: chance.paragraph({ sentences: 1 }),
+    name: '',
+    description: '',
     stat: getRandomFrom(anyStats),
     bonus: randomNum(5) as LowValue,
-    activable: chance.bool(),
+    activable,
     extraPrice: 0,
     extraEffects: '',
+    numberOfUses: activable ? randomNum(20) : 0,
   };
   return { ...item, price: calculateComplementPrice(item) };
 }
 
-function getRandomAmmunition(): Magazine {
-  const item: Omit<Magazine, 'price'> = {
+export function getRandomAmmunition(): Ammunition {
+  const item: Omit<Ammunition, 'price'> = {
     shop: 'ammunition',
-    name: chance.sentence({ words: 2 }),
+    name: '',
     description: '',
     piercing: randomNum(3) as LowValue,
     bleed: randomNum(3) as LowValue,
