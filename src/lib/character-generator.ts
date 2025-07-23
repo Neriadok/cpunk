@@ -11,6 +11,7 @@ import {
   getSpecialSkillMoney,
 } from './skills';
 import { v4 } from 'uuid';
+import { getHealth } from './bonifications';
 
 const chance = new Chance();
 export const baseAge = 18;
@@ -32,25 +33,26 @@ export function getRandomCharacter(): Character {
     stats,
     money: 0,
     skills,
-    ...getDefaultBodystate(stats),
     ...getRandomLifePath(age, gender),
   };
   return {
     ...baseCharacter,
+    ...getDefaultBodystate(baseCharacter),
     skills: getSkillsBonified(baseCharacter),
     money: getSpecialSkillMoney(baseCharacter),
   };
 }
 
-export function getDefaultBodystate(stats: { [stat: string]: number }) {
+export function getDefaultBodystate(character: Character) {
+  const health = getHealth(character);
   return {
     health: {
-      head: stats.TCO,
-      trunk: stats.TCO,
-      armR: stats.TCO,
-      armL: stats.TCO,
-      legR: stats.TCO,
-      legL: stats.TCO,
+      head: health,
+      trunk: health,
+      armR: health,
+      armL: health,
+      legR: health,
+      legL: health,
     },
     armor: {
       head: 0,

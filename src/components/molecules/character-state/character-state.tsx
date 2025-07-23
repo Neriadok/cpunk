@@ -1,5 +1,5 @@
 import { Box, IconButton, Slider, Stack } from '@mui/material';
-import { CharacterStateAlterationsProps } from './character-state-alterations.interface';
+import { CharacterStateProps } from './character-state.interface';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import {
@@ -9,10 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { State } from '../../../interfaces/game.interface';
 
-function CharacterStateAlterations({
-  character,
-  onChange,
-}: CharacterStateAlterationsProps) {
+function CharacterState({ character, onChange }: CharacterStateProps) {
   const [shock, setShock] = useState<number>(character?.shock || 0);
   const [poison, setPoison] = useState<number>(character?.poison || 0);
   const [bleed, setBleed] = useState<number>(character?.bleed || 0);
@@ -100,4 +97,4 @@ function CharacterStateAlterations({
   }
 }
 
-export default CharacterStateAlterations;
+export default CharacterState;

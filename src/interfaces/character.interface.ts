@@ -9,8 +9,8 @@ export interface Character extends LifePath {
   age: number;
   workedMonths: number;
   money: number;
-  health?: BodyState;
-  armor?: BodyState;
+  health?: BodyParts;
+  armor?: BodyParts;
   shock?: number;
   bleed?: number;
   poison?: number;
@@ -19,7 +19,7 @@ export interface Character extends LifePath {
   [property: string]: any;
 }
 
-export interface BodyState {
+export interface BodyParts {
   head: number;
   trunk: number;
   armR: number;
