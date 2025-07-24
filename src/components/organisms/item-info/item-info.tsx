@@ -13,13 +13,17 @@ import {
   Ammunition,
   Complement,
   Firearms,
+  Item,
   MeleeWeapon,
 } from '../../../interfaces/item.interface';
 import ItemMeleeWeaponInfo from '../../molecules/item-melee-weapon-info/item-melee-weapon-info';
 import ItemComplementInfo from '../../molecules/item-complement-info/item-complement-info';
-import ItemAmmunitionInfo from '../../molecules/item-ammunition-info/item-melee-weapon-info';
+import ItemAmmunitionInfo from '../../molecules/item-ammunition-info/item-ammunition-info';
+import { useState } from 'react';
+import { calculateItemPrice } from '../../../lib/item.price';
 
-function ItemInfo({ item }: ItemInfoProps) {
+function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
+  const [itemValue, setItemValue] = useState<Item>(item);
   return (
     <Stack>
       <Stack direction={'row'} sx={{ display: 'flex' }}>
@@ -36,7 +40,7 @@ function ItemInfo({ item }: ItemInfoProps) {
             width: '100%',
           }}
         >
-          {item.name}
+          {itemValue.name}
         </Typography>
         <Typography
           gutterBottom
@@ -50,7 +54,7 @@ function ItemInfo({ item }: ItemInfoProps) {
             fontWeight: 'bold',
           }}
         >
-          {item.price}{' '}
+          {itemValue.price}{' '}
           <FontAwesomeIcon
             style={{ display: 'inline-block', marginLeft: '5px' }}
             icon={faBitcoinSign}
@@ -66,17 +70,29 @@ function ItemInfo({ item }: ItemInfoProps) {
           <FontAwesomeIcon size="lg" icon={getShopIcon()} />
         </Avatar>
         <Card sx={{ flex: 1, display: 'block', p: 2 }}>
-          {item.shop === 'firearms' && (
-            <ItemFirearmInfo item={item as Firearms} />
+          {itemValue.shop === 'firearms' && (
+            <ItemFirearmInfo
+              item={itemValue as Firearms}
+              onChange={editable ? (i) => changeInputValue(i) : undefined}
+            />
           )}
-          {item.shop === 'melee-weapons' && (
-            <ItemMeleeWeaponInfo item={item as MeleeWeapon} />
+          {itemValue.shop === 'melee-weapons' && (
+            <ItemMeleeWeaponInfo
+              item={itemValue as MeleeWeapon}
+              onChange={editable ? (i) => changeInputValue(i) : undefined}
+            />
           )}
-          {item.shop === 'complements' && (
-            <ItemComplementInfo item={item as Complement} />
+          {itemValue.shop === 'complements' && (
+            <ItemComplementInfo
+              item={itemValue as Complement}
+              onChange={editable ? (i) => changeInputValue(i) : undefined}
+            />
           )}
-          {item.shop === 'ammunition' && (
-            <ItemAmmunitionInfo item={item as Ammunition} />
+          {itemValue.shop === 'ammunition' && (
+            <ItemAmmunitionInfo
+              item={itemValue as Ammunition}
+              onChange={editable ? (i) => changeInputValue(i) : undefined}
+            />
           )}
         </Card>
       </Stack>
@@ -99,6 +115,14 @@ function ItemInfo({ item }: ItemInfoProps) {
       complements: 'primary.main',
       ammunition: 'warning.main',
     }[item.shop];
+  }
+
+  function changeInputValue(nextValue: Item) {
+    const price = calculateItemPrice(nextValue);
+    setItemValue({ ...nextValue, price });
+    if (onChange) {
+      onChange(nextValue);
+    }
   }
 }
 

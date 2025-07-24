@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-
 import ItemInfo from './item-info';
 import {
   getRandomItem,
@@ -30,6 +29,16 @@ export const MeleeWeapon: Story = {
     },
   },
 };
+export const MeleeWeaponEditable: Story = {
+  args: {
+    item: {
+      ...getRandomMeleeWeapon(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+    },
+    editable: true,
+  },
+};
 export const Firearms: Story = {
   args: {
     item: {
@@ -37,6 +46,16 @@ export const Firearms: Story = {
       name: chance.sentence({ words: 3 }),
       description: chance.paragraph({ sentences: 3 }),
     },
+  },
+};
+export const FirearmsEditable: Story = {
+  args: {
+    item: {
+      ...getRandomFirearm(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+    },
+    editable: true,
   },
 };
 export const Ammunition: Story = {
@@ -48,6 +67,16 @@ export const Ammunition: Story = {
     },
   },
 };
+export const AmmunitionEditable: Story = {
+  args: {
+    item: {
+      ...getRandomAmmunition(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+    },
+    editable: true,
+  },
+};
 export const Complement: Story = {
   args: {
     item: {
@@ -56,5 +85,16 @@ export const Complement: Story = {
       description: chance.paragraph({ sentences: 3 }),
       extraEffects: chance.paragraph({ sentences: 3 }),
     },
+  },
+};
+export const ComplementEditable: Story = {
+  args: {
+    item: {
+      ...getRandomComplement(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+      extraEffects: chance.paragraph({ sentences: 3 }),
+    },
+    editable: true,
   },
 };

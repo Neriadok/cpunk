@@ -1,31 +1,15 @@
-import { Grid, Typography } from '@mui/material';
-import { t } from 'i18next';
+import { Grid } from '@mui/material';
 import { ItemFirearmInfoProps } from './item-firearm-info.interface';
+import ItemProperty from '../item-property/item-property';
 
-function ItemFirearmInfo({ item }: ItemFirearmInfoProps) {
+function ItemFirearmInfo({ item, onChange }: ItemFirearmInfoProps) {
   return (
     <Grid container rowSpacing={1} columnSpacing={2}>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.precision')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.precision ?? '-'}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="precision" onChange={onChange} />
       </Grid>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.burst')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.burst ? `${item.burst}` : '-'}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="burst" onChange={onChange} />
       </Grid>
     </Grid>
   );

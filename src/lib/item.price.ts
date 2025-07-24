@@ -4,8 +4,21 @@ import {
   Firearms,
   Ammunition,
   MeleeWeapon,
+  Item,
 } from '../interfaces/item.interface';
 import { states, stats } from '../interfaces/stats.interface';
+
+export function calculateItemPrice(item: Omit<Item, 'price'>) {
+  const calculateFunctions = {
+    firearms: calculateFirearmPrice,
+    'melee-weapons': calculateMeleeWeaponPrice,
+    complements: calculateComplementPrice,
+    ammunition: calculateMagazinePrice,
+  };
+  return calculateFunctions[item.shop as keyof typeof calculateFunctions]?.(
+    item as any
+  );
+}
 
 export function calculateMeleeWeaponPrice(
   item: Omit<MeleeWeapon, 'price'>

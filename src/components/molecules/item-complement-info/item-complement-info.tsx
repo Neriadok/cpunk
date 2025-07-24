@@ -1,61 +1,24 @@
-import { Grid, Typography } from '@mui/material';
-import { t } from 'i18next';
+import { Grid } from '@mui/material';
 import { ItemComplementInfoProps } from './item-complement-info.interface';
+import ItemProperty from '../item-property/item-property';
 
-function ItemComplementInfo({ item }: ItemComplementInfoProps) {
+function ItemComplementInfo({ item, onChange }: ItemComplementInfoProps) {
   return (
     <Grid container rowSpacing={1} columnSpacing={2}>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.stat')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.stat ?? '-'}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="stat" onChange={onChange} />
       </Grid>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.bonus')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.bonus ?? '-'}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="bonus" onChange={onChange} />
       </Grid>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.activable')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.activable ? t('core.yes') : t('core.no')}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="activable" onChange={onChange} />
       </Grid>
-      <Grid
-        size="auto"
-        sx={{ textAlign: 'center', display: 'flex', justifyContent: 'center' }}
-      >
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.numberOfUses')}
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.numberOfUses || 0}
-        </Typography>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="numberOfUses" onChange={onChange} />
       </Grid>
-      <Grid size={12} sx={{ textAlign: 'left' }}>
-        <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-          {t('item.extraEffects')}:
-        </Typography>
-        <Typography variant="body2" color="secondary">
-          {item.extraEffects ?? '-'}
-        </Typography>
+      <Grid size={12}>
+        <ItemProperty item={item} property="extraEffects" onChange={onChange} />
       </Grid>
     </Grid>
   );
