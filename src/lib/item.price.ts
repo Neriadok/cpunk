@@ -1,10 +1,11 @@
-import { Dice } from '../interfaces/game.interface';
+import { CyberwarePart, Dice } from '../interfaces/game.interface';
 import {
   Complement,
   Firearms,
   Ammunition,
   MeleeWeapon,
   Item,
+  Cyberware,
 } from '../interfaces/item.interface';
 import { AnyStat, states, stats } from '../interfaces/stats.interface';
 
@@ -14,20 +15,37 @@ export function calculateItemPrice(item: Omit<Item, 'price'>) {
     'melee-weapons': calculateMeleeWeaponPrice,
     complements: calculateComplementPrice,
     ammunition: calculateMagazinePrice,
+    cyberware: calculateCyberwarePrice,
   };
   return calculateFunctions[item.shop as keyof typeof calculateFunctions]?.(
     item as any
   );
 }
 
+export function calculateCyberwarePrice(
+  item: Omit<Cyberware, 'price'>
+): number {
+  const operationPrice = getOperationPrice(item.part);
+  const statMultiplier = item.stats.reduce(intoAllStatMultiplier, 1);
+  const icePrice = getIcePrice(item);
+  const ACTIVABLE_MULTIPLIER = (item.cooldown + 1) * 0.5;
+  const price = Math.ceil(
+    statMultiplier * item.bonus * (item.activable ? ACTIVABLE_MULTIPLIER : 1)
+  );
+  return price + icePrice + operationPrice + item.extraPrice;
+}
+
 export function calculateMeleeWeaponPrice(
   item: Omit<MeleeWeapon, 'price'>
 ): number {
   const MELEE_MULTIPLIER = 5;
-  return Math.ceil(
-    getDamageMultiplier(item, item.damage) *
-      getEffectMultiplier(item) *
-      MELEE_MULTIPLIER
+  const operationPrice = getOperationPrice(item.cyberware);
+  return (
+    Math.ceil(
+      getDamageMultiplier(item, item.damage) *
+        getEffectMultiplier(item) *
+        MELEE_MULTIPLIER
+    ) + operationPrice
   );
 }
 
@@ -45,9 +63,9 @@ export function calculateFirearmPrice(item: Omit<Firearms, 'price'>): number {
 export function calculateComplementPrice(
   item: Omit<Complement, 'price'>
 ): number {
-  const statMultiplier = item.stat.reduce(intoAllStatMultiplier, 1);
+  const statMultiplier = item.stats.reduce(intoAllStatMultiplier, 1);
   const ACTIVABLE_MULTIPLIER = item.numberOfUses
-    ? 0.501 - 0.5 / item.numberOfUses
+    ? 0.50001 - 0.5 / item.numberOfUses
     : 0.5;
   const price = Math.ceil(
     statMultiplier * item.bonus * (item.activable ? ACTIVABLE_MULTIPLIER : 1)
@@ -112,5 +130,32 @@ function getDiceAverageValue(dice: Dice | null): number {
         '1D12': 6,
         '1D20': 10,
       }[dice]
+    : 0;
+}
+
+function getOperationPrice(part: CyberwarePart | null): number {
+  return part
+    ? {
+        head: 8000,
+        trunk: 5000,
+        armR: 3000,
+        armL: 3000,
+        legR: 2000,
+        legL: 2000,
+        eyes: 1000,
+        fullBody: 21000,
+      }[part]
+    : 0;
+}
+
+function getIcePrice({ ice, bonus }: Omit<Cyberware, 'price'>): number {
+  return ice
+    ? {
+        instant: 0,
+        easy: 500,
+        complex: 1000,
+        hard: 2000,
+        'very-hard': 3000,
+      }[ice] * bonus
     : 0;
 }

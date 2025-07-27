@@ -3,7 +3,7 @@
     "new": "Nuevo",
     "add": "Añadir",
     "no": "No",
-    "yes": "Yes",
+    "yes": "Sí",
     "cancel": "Cancelar",
     "accept": "Aceptar",
     "access": "Acceder",
@@ -61,11 +61,26 @@
     "shock": "Shock",
     "poison": "Veneno",
     "capacity": "Capacidad",
-    "stat": "Atributo",
+    "stats": "Atributos",
     "bonus": "Bonificación",
     "activable": "Activable",
     "extraEffects": "Info",
-    "numberOfUses": "Usos"
+    "numberOfUses": "Usos",
+    "extraPrice": "Sobrecoste",
+    "part": "Implante",
+    "cyberware": "Implante",
+    "ice": "Hielo",
+    "cooldown": "Cooldown"
+  },
+  "bodyparts": {
+    "head": "Cabeza",
+    "trunk": "Torso",
+    "armR": "Brazo Derecho",
+    "armL": "Brazo Izquierdo",
+    "legR": "Pierna Derecha",
+    "legL": "Pierna Izquierda",
+    "eyes": "Ojos",
+    "fullBody": "Cuerpo entero"
   },
   "sheet": {
     "skill": "Habilidad",

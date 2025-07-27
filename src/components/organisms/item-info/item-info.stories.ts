@@ -6,6 +6,7 @@ import {
   getRandomAmmunition,
   getRandomComplement,
   getRandomFirearm,
+  getRandomCyberware,
 } from '../../../lib/item.generator';
 import { Chance } from 'chance';
 const chance = new Chance();
@@ -20,6 +21,27 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+export const Cyberware: Story = {
+  args: {
+    item: {
+      ...getRandomCyberware(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+      extraEffects: chance.paragraph({ sentences: 3 }),
+    },
+  },
+};
+export const CyberwareEditable: Story = {
+  args: {
+    item: {
+      ...getRandomCyberware(),
+      name: chance.sentence({ words: 3 }),
+      description: chance.paragraph({ sentences: 3 }),
+      extraEffects: chance.paragraph({ sentences: 3 }),
+    },
+    editable: true,
+  },
+};
 export const MeleeWeapon: Story = {
   args: {
     item: {

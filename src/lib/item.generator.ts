@@ -1,14 +1,23 @@
-import { dices, LowValue, MidValue } from '../interfaces/game.interface';
+import {
+  bodyParts,
+  cyberwareParts,
+  dices,
+  difficulties,
+  LowValue,
+  MidValue,
+} from '../interfaces/game.interface';
 import {
   Complement,
   Firearms,
   Item,
   Ammunition,
   MeleeWeapon,
+  Cyberware,
 } from '../interfaces/item.interface';
 import { anyStats } from '../interfaces/stats.interface';
 import {
   calculateComplementPrice,
+  calculateCyberwarePrice,
   calculateFirearmPrice,
   calculateMagazinePrice,
   calculateMeleeWeaponPrice,
@@ -23,6 +32,7 @@ export function getRandomItem(): Item {
     getRandomMeleeWeapon,
     getRandomComplement,
     getRandomAmmunition,
+    getRandomCyberware,
   ][Math.floor(Math.random() * 5)]();
 }
 
@@ -48,6 +58,7 @@ export function getRandomMeleeWeapon(): MeleeWeapon {
     bleed: randomNum(3) as LowValue,
     shock: randomNum(3) as LowValue,
     poison: randomNum(3) as LowValue,
+    cyberware: chance.bool() ? getRandomFrom(bodyParts) : null,
   };
   return { ...meleeWeapon, price: calculateMeleeWeaponPrice(meleeWeapon) };
 }
@@ -58,7 +69,7 @@ export function getRandomComplement(): Complement {
     shop: 'complements',
     name: '',
     description: '',
-    stat: chance.bool()
+    stats: chance.bool()
       ? [
           getRandomFrom(anyStats),
           getRandomFrom(anyStats),
@@ -74,6 +85,30 @@ export function getRandomComplement(): Complement {
   return { ...item, price: calculateComplementPrice(item) };
 }
 
+export function getRandomCyberware(): Cyberware {
+  const activable = chance.bool();
+  const item: Omit<Cyberware, 'price'> = {
+    shop: 'cyberware',
+    name: '',
+    description: '',
+    ice: getRandomFrom(difficulties),
+    stats: chance.bool()
+      ? [
+          getRandomFrom(anyStats),
+          getRandomFrom(anyStats),
+          getRandomFrom(anyStats),
+        ]
+      : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
+    bonus: randomNum(5) as LowValue,
+    activable,
+    extraPrice: 0,
+    extraEffects: '',
+    cooldown: activable ? (randomNum(3) as LowValue) : 0,
+    part: getRandomFrom(cyberwareParts),
+  };
+  return { ...item, price: calculateCyberwarePrice(item) };
+}
+
 export function getRandomAmmunition(): Ammunition {
   const item: Omit<Ammunition, 'price'> = {
     shop: 'ammunition',
@@ -85,6 +120,7 @@ export function getRandomAmmunition(): Ammunition {
     poison: randomNum(3) as LowValue,
     randomDamage: chance.bool() ? getRandomFrom(dices) : null,
     capacity: randomNum(24, 2),
+    cyberware: chance.bool() ? getRandomFrom(bodyParts) : null,
   };
   return { ...item, price: calculateMagazinePrice(item) };
 }

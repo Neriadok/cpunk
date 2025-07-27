@@ -1,7 +1,19 @@
-import { Dice, LowValue, MidValue } from './game.interface';
+import {
+  BodyPart,
+  CyberwarePart,
+  Dice,
+  Difficulty,
+  LowValue,
+  MidValue,
+} from './game.interface';
 import { AnyStat } from './stats.interface';
 
-export type Shop = 'firearms' | 'melee-weapons' | 'complements' | 'ammunition';
+export type Shop =
+  | 'firearms'
+  | 'melee-weapons'
+  | 'complements'
+  | 'ammunition'
+  | 'cyberware';
 
 /**
  * Base interface containing common properties for all items.
@@ -25,6 +37,7 @@ export interface Weapon extends ItemBase {
   bleed: LowValue;
   shock: LowValue;
   poison: LowValue;
+  cyberware: BodyPart | null;
 }
 
 export interface MeleeWeapon extends Weapon {
@@ -34,7 +47,7 @@ export interface MeleeWeapon extends Weapon {
 
 export interface Complement extends ItemBase {
   shop: 'complements';
-  stat: AnyStat[];
+  stats: AnyStat[];
   bonus: MidValue;
   activable: boolean;
   extraPrice: number;
@@ -42,9 +55,21 @@ export interface Complement extends ItemBase {
   numberOfUses: number | null;
 }
 
+export interface Cyberware extends ItemBase {
+  shop: 'cyberware';
+  ice: Difficulty;
+  part: CyberwarePart;
+  stats: AnyStat[];
+  bonus: MidValue;
+  activable: boolean;
+  cooldown: LowValue;
+  extraPrice: number;
+  extraEffects: string;
+}
+
 export interface Ammunition extends Weapon {
   shop: 'ammunition';
   capacity: number;
 }
 
-export type Item = Firearms | Weapon | Complement | Ammunition;
+export type Item = Firearms | Weapon | Complement | Ammunition | Cyberware;

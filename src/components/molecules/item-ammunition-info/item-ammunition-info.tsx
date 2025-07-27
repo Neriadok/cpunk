@@ -8,8 +8,11 @@ function ItemAmmunitionInfo({ item, onChange }: ItemAmmunitionInfoProps) {
       <Grid size={onChange ? 12 : 'auto'}>
         <ItemProperty item={item} property="capacity" onChange={onChange} />
       </Grid>
-      <Grid size={onChange ? 12 : 'auto'}>
-        <ItemProperty item={item} property="randomDamage" onChange={onChange} />
+      <Grid size={onChange ? 6 : 'auto'}>
+        <ItemProperty item={item} property="cyberware" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 6 : 'auto'}>
+        <ItemProperty item={item} property="burst" onChange={onChange} />
       </Grid>
       <Grid size={onChange ? 12 : 'auto'}>
         <ItemProperty item={item} property="piercing" onChange={onChange} />

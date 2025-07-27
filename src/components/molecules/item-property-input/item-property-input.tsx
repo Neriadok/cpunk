@@ -1,4 +1,9 @@
-import { dices } from '../../../interfaces/game.interface';
+import {
+  bodyParts,
+  cyberwareParts,
+  dices,
+  difficulties,
+} from '../../../interfaces/game.interface';
 import {
   ItemPropertyInputProps,
   ItemPropertyInputTypes,
@@ -27,6 +32,12 @@ function ItemPropertyInput({
 
   return type === 'dice' ? (
     getInputDice()
+  ) : type === 'bodypart' ? (
+    getInputBodyPart()
+  ) : type === 'cyberware' ? (
+    getInputCyberware()
+  ) : type === 'ice' ? (
+    getInputIce()
   ) : type === 'lowValue' ? (
     getInputRange(3)
   ) : type === 'midValue' ? (
@@ -48,7 +59,7 @@ function ItemPropertyInput({
     />
   ) : type === 'boolean' ? (
     getInputBoolean()
-  ) : type === 'stat' ? (
+  ) : type === 'stats' ? (
     getInputStat()
   ) : (
     <Input
@@ -68,6 +79,49 @@ function ItemPropertyInput({
         onChange={(e) => selectItem(e)}
       >
         {anyStats.map((stat) => (
+          <MenuItem value={stat}>{stat}</MenuItem>
+        ))}
+      </Select>
+    );
+  }
+
+  function getInputCyberware() {
+    return (
+      <Select
+        sx={{ width: '100%' }}
+        defaultValue={value}
+        onChange={(e) => selectItem(e)}
+      >
+        {cyberwareParts.map((part) => (
+          <MenuItem value={part}>{t('bodyparts.' + part)}</MenuItem>
+        ))}
+      </Select>
+    );
+  }
+
+  function getInputBodyPart() {
+    return (
+      <Select
+        sx={{ width: '100%' }}
+        defaultValue={value}
+        onChange={(e) => selectItem(e)}
+      >
+        <MenuItem value={null as any}>{t('core.no')}</MenuItem>
+        {bodyParts.map((part) => (
+          <MenuItem value={part}>{t('bodyparts.' + part)}</MenuItem>
+        ))}
+      </Select>
+    );
+  }
+
+  function getInputIce() {
+    return (
+      <Select
+        sx={{ width: '100%' }}
+        defaultValue={value}
+        onChange={(e) => selectItem(e)}
+      >
+        {difficulties.map((stat) => (
           <MenuItem value={stat}>{stat}</MenuItem>
         ))}
       </Select>
@@ -130,13 +184,17 @@ function ItemPropertyInput({
     const propertyTypes = {
       precision: 'highValue',
       burst: 'dice',
+      ice: 'ice',
       damage: 'midValue',
       piercing: 'lowValue',
       randomDamage: 'dice',
+      cooldown: 'lowValue',
       bleed: 'lowValue',
       shock: 'lowValue',
       poison: 'lowValue',
-      stat: 'stat',
+      stats: 'stats',
+      cyberware: 'bodypart',
+      part: 'cyberware',
       bonus: 'midValue',
       activable: 'boolean',
       extraPrice: 'number',
