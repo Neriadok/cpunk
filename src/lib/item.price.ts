@@ -6,7 +6,7 @@ import {
   MeleeWeapon,
   Item,
 } from '../interfaces/item.interface';
-import { states, stats } from '../interfaces/stats.interface';
+import { AnyStat, states, stats } from '../interfaces/stats.interface';
 
 export function calculateItemPrice(item: Omit<Item, 'price'>) {
   const calculateFunctions = {
@@ -45,13 +45,7 @@ export function calculateFirearmPrice(item: Omit<Firearms, 'price'>): number {
 export function calculateComplementPrice(
   item: Omit<Complement, 'price'>
 ): number {
-  const statMultiplier = stats.includes(item.stat as any)
-    ? 25
-    : states.includes(item.stat as any)
-      ? 10
-      : item.stat === 'actions'
-        ? 100
-        : 5;
+  const statMultiplier = item.stat.reduce(intoAllStatMultiplier, 1);
   const ACTIVABLE_MULTIPLIER = item.numberOfUses
     ? 0.501 - 0.5 / item.numberOfUses
     : 0.5;
@@ -59,6 +53,23 @@ export function calculateComplementPrice(
     statMultiplier * item.bonus * (item.activable ? ACTIVABLE_MULTIPLIER : 1)
   );
   return price + item.extraPrice;
+}
+
+export function getStatMultiplier(stat: AnyStat): number {
+  return stats.includes(stat as any)
+    ? 25
+    : states.includes(stat as any)
+      ? 10
+      : stat === 'actions'
+        ? 100
+        : 5;
+}
+
+export function intoAllStatMultiplier(
+  multiplier: number,
+  stat: string
+): number {
+  return multiplier * getStatMultiplier(stat as AnyStat);
 }
 
 export function calculateMagazinePrice(
@@ -94,12 +105,12 @@ function getDamageMultiplier(
 function getDiceAverageValue(dice: Dice | null): number {
   return dice
     ? {
-        '1D10': 5,
-        '1D12': 6,
-        '1D20': 10,
         '1D4': 2,
         '1D6': 3,
         '1D8': 4,
+        '1D10': 5,
+        '1D12': 6,
+        '1D20': 10,
       }[dice]
     : 0;
 }

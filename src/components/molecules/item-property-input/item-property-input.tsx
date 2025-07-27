@@ -10,6 +10,7 @@ import {
   Select,
   Slider,
   Stack,
+  Switch,
   Typography,
 } from '@mui/material';
 import { anyStats } from '../../../interfaces/stats.interface';
@@ -45,6 +46,8 @@ function ItemPropertyInput({
       defaultValue={value}
       onChange={(e) => setValue(e)}
     />
+  ) : type === 'boolean' ? (
+    getInputBoolean()
   ) : type === 'stat' ? (
     getInputStat()
   ) : (
@@ -61,6 +64,7 @@ function ItemPropertyInput({
       <Select
         sx={{ width: '100%' }}
         defaultValue={value}
+        multiple
         onChange={(e) => selectItem(e)}
       >
         {anyStats.map((stat) => (
@@ -68,6 +72,10 @@ function ItemPropertyInput({
         ))}
       </Select>
     );
+  }
+
+  function getInputBoolean() {
+    return <Switch checked={value} onChangeCapture={() => switchValue()} />;
   }
 
   function getInputDice() {
@@ -114,6 +122,10 @@ function ItemPropertyInput({
     onChange({ ...item, [property]: e?.target?.value });
   }
 
+  function switchValue() {
+    onChange({ ...item, [property]: !value as any });
+  }
+
   function getPropertyType(): ItemPropertyInputTypes {
     const propertyTypes = {
       precision: 'highValue',
@@ -129,8 +141,8 @@ function ItemPropertyInput({
       activable: 'boolean',
       extraPrice: 'number',
       extraEffects: 'text',
-      numberOfUses: 'number',
-      capacity: 'number',
+      numberOfUses: 'highValue',
+      capacity: 'highValue',
     };
     return propertyTypes[property as keyof typeof propertyTypes] || 'text';
   }

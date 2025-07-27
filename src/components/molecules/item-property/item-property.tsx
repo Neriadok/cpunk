@@ -34,7 +34,9 @@ function ItemProperty({ item, property, onChange }: ItemPropertyProps) {
     const value = (item as any)[property];
     return property === 'activable'
       ? t(value ? 'core.yes' : 'core.no')
-      : (value ?? '-');
+      : property === 'stat'
+        ? (value as string[]).join(', ')
+        : (value ?? '-');
   }
 }
 

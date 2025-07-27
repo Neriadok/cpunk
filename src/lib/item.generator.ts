@@ -58,7 +58,13 @@ export function getRandomComplement(): Complement {
     shop: 'complements',
     name: '',
     description: '',
-    stat: getRandomFrom(anyStats),
+    stat: chance.bool()
+      ? [
+          getRandomFrom(anyStats),
+          getRandomFrom(anyStats),
+          getRandomFrom(anyStats),
+        ]
+      : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
     bonus: randomNum(5) as LowValue,
     activable,
     extraPrice: 0,

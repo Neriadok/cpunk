@@ -34,7 +34,7 @@ export interface MeleeWeapon extends Weapon {
 
 export interface Complement extends ItemBase {
   shop: 'complements';
-  stat: AnyStat;
+  stat: AnyStat[];
   bonus: MidValue;
   activable: boolean;
   extraPrice: number;
