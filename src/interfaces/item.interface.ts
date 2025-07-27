@@ -19,6 +19,7 @@ export type Shop =
  * Base interface containing common properties for all items.
  */
 interface ItemBase {
+  uid: string;
   shop: Shop;
   price: number;
   name: string;

@@ -1,3 +1,4 @@
+import { v4 } from 'uuid';
 import {
   bodyParts,
   cyberwareParts,
@@ -26,80 +27,88 @@ import { getRandomFrom, randomNum } from './utils';
 import Chance from 'chance';
 const chance = new Chance();
 
-export function getRandomItem(): Item {
+export function getRandomItem(empty?: boolean): Item {
   return [
     getRandomFirearm,
     getRandomMeleeWeapon,
     getRandomComplement,
     getRandomAmmunition,
     getRandomCyberware,
-  ][Math.floor(Math.random() * 5)]();
+  ][Math.floor(Math.random() * 5)](empty);
 }
 
-export function getRandomFirearm(): Firearms {
+export function getRandomFirearm(empty?: boolean): Firearms {
   const item: Omit<Firearms, 'price'> = {
+    uid: v4(),
     shop: 'firearms',
     name: '',
     description: '',
-    precision: randomNum(10) * 5,
-    burst: chance.bool() ? getRandomFrom(dices) : null,
+    precision: empty ? 0 : randomNum(10) * 5,
+    burst: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
   };
   return { ...item, price: calculateFirearmPrice(item) };
 }
 
-export function getRandomMeleeWeapon(): MeleeWeapon {
+export function getRandomMeleeWeapon(empty?: boolean): MeleeWeapon {
   const meleeWeapon: Omit<MeleeWeapon, 'price'> = {
+    uid: v4(),
     shop: 'melee-weapons',
     name: '',
     description: '',
-    piercing: randomNum(3) as LowValue,
-    damage: randomNum(5) as MidValue,
-    randomDamage: chance.bool() ? getRandomFrom(dices) : null,
-    bleed: randomNum(3) as LowValue,
-    shock: randomNum(3) as LowValue,
-    poison: randomNum(3) as LowValue,
-    cyberware: chance.bool() ? getRandomFrom(bodyParts) : null,
+    piercing: empty ? 0 : (randomNum(3) as LowValue),
+    damage: empty ? 0 : (randomNum(5) as MidValue),
+    randomDamage: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
+    bleed: empty ? 0 : (randomNum(3) as LowValue),
+    shock: empty ? 0 : (randomNum(3) as LowValue),
+    poison: empty ? 0 : (randomNum(3) as LowValue),
+    cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
   };
   return { ...meleeWeapon, price: calculateMeleeWeaponPrice(meleeWeapon) };
 }
 
-export function getRandomComplement(): Complement {
+export function getRandomComplement(empty?: boolean): Complement {
   const activable = chance.bool();
   const item: Omit<Complement, 'price'> = {
+    uid: v4(),
     shop: 'complements',
     name: '',
     description: '',
-    stats: chance.bool()
-      ? [
-          getRandomFrom(anyStats),
-          getRandomFrom(anyStats),
-          getRandomFrom(anyStats),
-        ]
-      : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
+    stats: empty
+      ? []
+      : chance.bool()
+        ? [
+            getRandomFrom(anyStats),
+            getRandomFrom(anyStats),
+            getRandomFrom(anyStats),
+          ]
+        : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
     bonus: randomNum(5) as LowValue,
     activable,
     extraPrice: 0,
     extraEffects: '',
-    numberOfUses: activable ? randomNum(20) : 0,
+    numberOfUses: empty ? 0 : activable ? randomNum(20) : 0,
   };
   return { ...item, price: calculateComplementPrice(item) };
 }
 
-export function getRandomCyberware(): Cyberware {
+export function getRandomCyberware(empty?: boolean): Cyberware {
   const activable = chance.bool();
   const item: Omit<Cyberware, 'price'> = {
+    uid: v4(),
     shop: 'cyberware',
     name: '',
     description: '',
     ice: getRandomFrom(difficulties),
-    stats: chance.bool()
-      ? [
-          getRandomFrom(anyStats),
-          getRandomFrom(anyStats),
-          getRandomFrom(anyStats),
-        ]
-      : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
-    bonus: randomNum(5) as LowValue,
+    stats: empty
+      ? []
+      : chance.bool()
+        ? [
+            getRandomFrom(anyStats),
+            getRandomFrom(anyStats),
+            getRandomFrom(anyStats),
+          ]
+        : [getRandomFrom(anyStats), getRandomFrom(anyStats)],
+    bonus: empty ? 0 : (randomNum(5) as LowValue),
     activable,
     extraPrice: 0,
     extraEffects: '',
@@ -109,18 +118,19 @@ export function getRandomCyberware(): Cyberware {
   return { ...item, price: calculateCyberwarePrice(item) };
 }
 
-export function getRandomAmmunition(): Ammunition {
+export function getRandomAmmunition(empty?: boolean): Ammunition {
   const item: Omit<Ammunition, 'price'> = {
+    uid: v4(),
     shop: 'ammunition',
     name: '',
     description: '',
-    piercing: randomNum(3) as LowValue,
-    bleed: randomNum(3) as LowValue,
-    shock: randomNum(3) as LowValue,
-    poison: randomNum(3) as LowValue,
-    randomDamage: chance.bool() ? getRandomFrom(dices) : null,
+    piercing: empty ? 0 : (randomNum(3) as LowValue),
+    bleed: empty ? 0 : (randomNum(3) as LowValue),
+    shock: empty ? 0 : (randomNum(3) as LowValue),
+    poison: empty ? 0 : (randomNum(3) as LowValue),
+    randomDamage: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
     capacity: randomNum(24, 2),
-    cyberware: chance.bool() ? getRandomFrom(bodyParts) : null,
+    cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
   };
   return { ...item, price: calculateMagazinePrice(item) };
 }

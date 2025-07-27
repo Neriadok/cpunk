@@ -70,7 +70,8 @@
     "part": "Implante",
     "cyberware": "Implante",
     "ice": "Hielo",
-    "cooldown": "Cooldown"
+    "cooldown": "Cooldown",
+    "name": "Nombre"
   },
   "bodyparts": {
     "head": "Cabeza",

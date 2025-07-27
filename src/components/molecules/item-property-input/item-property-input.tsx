@@ -161,7 +161,7 @@ function ItemPropertyInput({
           max={max}
           marks
         />
-        <Typography variant="body2" color="secondary">
+        <Typography variant="body1" color="primary">
           {value}
         </Typography>
       </Stack>

@@ -5,6 +5,9 @@ import ItemProperty from '../item-property/item-property';
 function ItemAmmunitionInfo({ item, onChange }: ItemAmmunitionInfoProps) {
   return (
     <Grid container rowSpacing={1} columnSpacing={2}>
+      <Grid size={12}>
+        <ItemProperty item={item} property="name" onChange={onChange} />
+      </Grid>
       <Grid size={onChange ? 12 : 'auto'}>
         <ItemProperty item={item} property="capacity" onChange={onChange} />
       </Grid>

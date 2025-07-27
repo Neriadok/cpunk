@@ -1,12 +1,13 @@
-import { Avatar, Card, Stack, Typography } from '@mui/material';
+import { Card, Fab, IconButton, Stack, Typography } from '@mui/material';
 import { ItemInfoProps } from './item-info.interface';
 import {
   faBitcoinSign,
   faBoxOpen,
-  faBullseye,
+  faCrosshairs,
   faGavel,
   faGun,
   faMicrochip,
+  faRotate,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ItemFirearmInfo from '../../molecules/item-firearm-info/item-firearm-info';
@@ -24,6 +25,13 @@ import ItemAmmunitionInfo from '../../molecules/item-ammunition-info/item-ammuni
 import { useState } from 'react';
 import { calculateItemPrice } from '../../../lib/item.price';
 import ItemCyberwareInfo from '../../molecules/item-cyberware-info /item-cyberware-info';
+import {
+  getRandomAmmunition,
+  getRandomComplement,
+  getRandomCyberware,
+  getRandomFirearm,
+  getRandomMeleeWeapon,
+} from '../../../lib/item.generator';
 
 function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
   const [itemValue, setItemValue] = useState<Item>(item);
@@ -38,9 +46,24 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
         }}
         spacing={1}
       >
-        <Avatar sx={{ width: 40, height: 40, bgcolor: getShopColor() }}>
-          <FontAwesomeIcon size="lg" icon={getShopIcon()} />
-        </Avatar>
+        <Stack direction={'row'} spacing={1}>
+          <Fab
+            color={getShopColor()}
+            sx={{ width: 40, height: 40 }}
+            onClick={() => changeShop()}
+          >
+            <FontAwesomeIcon size="2xl" icon={getShopIcon()} />
+          </Fab>
+          {editable && (
+            <IconButton
+              color="inherit"
+              sx={{ width: 40, height: 40, opacity: 0.4 }}
+              onClick={() => changeShop()}
+            >
+              <FontAwesomeIcon icon={faRotate} />
+            </IconButton>
+          )}
+        </Stack>
         <Typography
           gutterBottom
           variant="subtitle1"
@@ -60,21 +83,6 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
           />
         </Typography>
       </Stack>
-      <Typography
-        gutterBottom
-        variant="h6"
-        component="div"
-        color="primary"
-        sx={{
-          textAlign: 'left',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-          width: '100%',
-        }}
-      >
-        {itemValue.name}
-      </Typography>
       <Card sx={{ flex: 1, display: 'block', p: 2 }}>
         {itemValue.shop === 'firearms' && (
           <ItemFirearmInfo
@@ -110,24 +118,42 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
     </Stack>
   );
 
+  function changeShop() {
+    if (!editable) return;
+    const nextInputValue = {
+      firearms: getRandomMeleeWeapon,
+      'melee-weapons': getRandomComplement,
+      complements: getRandomAmmunition,
+      ammunition: getRandomCyberware,
+      cyberware: getRandomFirearm,
+    }[itemValue.shop];
+
+    changeInputValue(nextInputValue(true));
+  }
+
   function getShopIcon() {
     return {
       firearms: faGun,
       'melee-weapons': faGavel,
       complements: faBoxOpen,
-      ammunition: faBullseye,
+      ammunition: faCrosshairs,
       cyberware: faMicrochip,
-    }[item.shop];
+    }[itemValue.shop];
   }
 
-  function getShopColor() {
+  function getShopColor():
+    | 'error'
+    | 'warning'
+    | 'primary'
+    | 'success'
+    | 'secondary' {
     return {
-      firearms: 'error.main',
-      'melee-weapons': 'secondary.main',
-      complements: 'primary.main',
-      ammunition: 'warning.main',
-      cyberware: 'success.main',
-    }[item.shop];
+      firearms: 'error',
+      'melee-weapons': 'secondary',
+      complements: 'primary',
+      ammunition: 'warning',
+      cyberware: 'success',
+    }[itemValue.shop] as any;
   }
 
   function changeInputValue(nextValue: Item) {

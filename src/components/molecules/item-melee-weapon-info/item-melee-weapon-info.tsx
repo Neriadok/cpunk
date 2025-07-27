@@ -5,6 +5,9 @@ import ItemProperty from '../item-property/item-property';
 function ItemMeleeWeaponInfo({ item, onChange }: ItemMeleeWeaponInfoProps) {
   return (
     <Grid container rowSpacing={1} columnSpacing={2}>
+      <Grid size={12}>
+        <ItemProperty item={item} property="name" onChange={onChange} />
+      </Grid>
       <Grid size={onChange ? 6 : 'auto'}>
         <ItemProperty item={item} property="cyberware" onChange={onChange} />
       </Grid>

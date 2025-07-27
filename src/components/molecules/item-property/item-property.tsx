@@ -24,7 +24,7 @@ function ItemProperty({ item, property, onChange }: ItemPropertyProps) {
           onChange={onChange}
         />
       ) : (
-        <Typography variant="body2" color="secondary">
+        <Typography variant="body2" color="primary">
           {getValue()}
         </Typography>
       )}

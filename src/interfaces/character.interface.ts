@@ -1,5 +1,6 @@
 import { Role } from './role.interface';
 import { LifePath } from './lifepath.interface';
+import { Item } from './item.interface';
 
 export interface Character extends LifePath {
   uid: string;
@@ -16,6 +17,7 @@ export interface Character extends LifePath {
   poison?: number;
   stats: { [property: string]: number };
   skills: { [property: string]: number };
+  inventory?: Item[];
   [property: string]: any;
 }
 
