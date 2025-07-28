@@ -8,12 +8,7 @@ import {
 } from './game.interface';
 import { AnyStat } from './stats.interface';
 
-export type Shop =
-  | 'firearms'
-  | 'melee-weapons'
-  | 'complements'
-  | 'ammunition'
-  | 'cyberware';
+export type Shop = 'firearms' | 'melee-weapons' | 'complements' | 'cyberware';
 
 /**
  * Base interface containing common properties for all items.
@@ -26,24 +21,25 @@ interface ItemBase {
   description: string;
 }
 
-export interface Firearms extends ItemBase {
-  shop: 'firearms';
-  precision: number;
-  burst: Dice | null;
-}
-
 export interface Weapon extends ItemBase {
   piercing: LowValue;
-  randomDamage: Dice | null;
   bleed: LowValue;
   shock: LowValue;
   poison: LowValue;
   cyberware: BodyPart | null;
 }
 
+export interface Firearms extends Weapon {
+  shop: 'firearms';
+  precision: number;
+  burst: Dice | null;
+  capacity: number;
+}
+
 export interface MeleeWeapon extends Weapon {
   shop: 'melee-weapons';
   damage: MidValue;
+  randomDamage: Dice | null;
 }
 
 export interface Complement extends ItemBase {
@@ -68,9 +64,4 @@ export interface Cyberware extends ItemBase {
   extraEffects: string;
 }
 
-export interface Ammunition extends Weapon {
-  shop: 'ammunition';
-  capacity: number;
-}
-
-export type Item = Firearms | Weapon | Complement | Ammunition | Cyberware;
+export type Item = Firearms | Weapon | Complement | Cyberware;

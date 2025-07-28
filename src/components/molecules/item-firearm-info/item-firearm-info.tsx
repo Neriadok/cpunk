@@ -8,11 +8,29 @@ function ItemFirearmInfo({ item, onChange }: ItemFirearmInfoProps) {
       <Grid size={12}>
         <ItemProperty item={item} property="name" onChange={onChange} />
       </Grid>
-      <Grid size={onChange ? 12 : 'auto'}>
+      <Grid size={onChange ? 6 : 'auto'}>
+        <ItemProperty item={item} property="capacity" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 6 : 'auto'}>
         <ItemProperty item={item} property="precision" onChange={onChange} />
       </Grid>
-      <Grid size={onChange ? 12 : 'auto'}>
+      <Grid size={onChange ? 6 : 'auto'}>
+        <ItemProperty item={item} property="cyberware" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 6 : 'auto'}>
         <ItemProperty item={item} property="burst" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="piercing" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="bleed" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="shock" onChange={onChange} />
+      </Grid>
+      <Grid size={onChange ? 12 : 'auto'}>
+        <ItemProperty item={item} property="poison" onChange={onChange} />
       </Grid>
     </Grid>
   );

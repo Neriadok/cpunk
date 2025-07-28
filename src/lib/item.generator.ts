@@ -11,7 +11,6 @@ import {
   Complement,
   Firearms,
   Item,
-  Ammunition,
   MeleeWeapon,
   Cyberware,
 } from '../interfaces/item.interface';
@@ -20,7 +19,6 @@ import {
   calculateComplementPrice,
   calculateCyberwarePrice,
   calculateFirearmPrice,
-  calculateMagazinePrice,
   calculateMeleeWeaponPrice,
 } from './item.price';
 import { getRandomFrom, randomNum } from './utils';
@@ -32,9 +30,8 @@ export function getRandomItem(empty?: boolean): Item {
     getRandomFirearm,
     getRandomMeleeWeapon,
     getRandomComplement,
-    getRandomAmmunition,
     getRandomCyberware,
-  ][Math.floor(Math.random() * 5)](empty);
+  ][Math.floor(Math.random() * 4)](empty);
 }
 
 export function getRandomFirearm(empty?: boolean): Firearms {
@@ -45,6 +42,12 @@ export function getRandomFirearm(empty?: boolean): Firearms {
     description: '',
     precision: empty ? 0 : randomNum(10) * 5,
     burst: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
+    piercing: empty ? 0 : (randomNum(3) as LowValue),
+    bleed: empty ? 0 : (randomNum(3) as LowValue),
+    shock: empty ? 0 : (randomNum(3) as LowValue),
+    poison: empty ? 0 : (randomNum(3) as LowValue),
+    capacity: randomNum(24, 2),
+    cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
   };
   return { ...item, price: calculateFirearmPrice(item) };
 }
@@ -116,21 +119,4 @@ export function getRandomCyberware(empty?: boolean): Cyberware {
     part: getRandomFrom(cyberwareParts),
   };
   return { ...item, price: calculateCyberwarePrice(item) };
-}
-
-export function getRandomAmmunition(empty?: boolean): Ammunition {
-  const item: Omit<Ammunition, 'price'> = {
-    uid: v4(),
-    shop: 'ammunition',
-    name: '',
-    description: '',
-    piercing: empty ? 0 : (randomNum(3) as LowValue),
-    bleed: empty ? 0 : (randomNum(3) as LowValue),
-    shock: empty ? 0 : (randomNum(3) as LowValue),
-    poison: empty ? 0 : (randomNum(3) as LowValue),
-    randomDamage: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
-    capacity: randomNum(24, 2),
-    cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
-  };
-  return { ...item, price: calculateMagazinePrice(item) };
 }

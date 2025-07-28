@@ -12,7 +12,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ItemFirearmInfo from '../../molecules/item-firearm-info/item-firearm-info';
 import {
-  Ammunition,
   Complement,
   Cyberware,
   Firearms,
@@ -21,12 +20,10 @@ import {
 } from '../../../interfaces/item.interface';
 import ItemMeleeWeaponInfo from '../../molecules/item-melee-weapon-info/item-melee-weapon-info';
 import ItemComplementInfo from '../../molecules/item-complement-info/item-complement-info';
-import ItemAmmunitionInfo from '../../molecules/item-ammunition-info/item-ammunition-info';
 import { useState } from 'react';
 import { calculateItemPrice } from '../../../lib/item.price';
 import ItemCyberwareInfo from '../../molecules/item-cyberware-info /item-cyberware-info';
 import {
-  getRandomAmmunition,
   getRandomComplement,
   getRandomCyberware,
   getRandomFirearm,
@@ -102,12 +99,6 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
             onChange={editable ? (i) => changeInputValue(i) : undefined}
           />
         )}
-        {itemValue.shop === 'ammunition' && (
-          <ItemAmmunitionInfo
-            item={itemValue as Ammunition}
-            onChange={editable ? (i) => changeInputValue(i) : undefined}
-          />
-        )}
         {itemValue.shop === 'cyberware' && (
           <ItemCyberwareInfo
             item={itemValue as Cyberware}
@@ -123,8 +114,7 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
     const nextInputValue = {
       firearms: getRandomMeleeWeapon,
       'melee-weapons': getRandomComplement,
-      complements: getRandomAmmunition,
-      ammunition: getRandomCyberware,
+      complements: getRandomCyberware,
       cyberware: getRandomFirearm,
     }[itemValue.shop];
 
@@ -149,9 +139,8 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
     | 'secondary' {
     return {
       firearms: 'error',
-      'melee-weapons': 'secondary',
-      complements: 'primary',
-      ammunition: 'warning',
+      'melee-weapons': 'warning',
+      complements: 'secondary',
       cyberware: 'success',
     }[itemValue.shop] as any;
   }

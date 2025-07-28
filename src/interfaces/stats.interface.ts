@@ -18,6 +18,7 @@ export type AnyStat =
   | 'precision'
   | 'armor'
   | 'CPU'
+  | 'health'
   | 'movement';
 
 export const stats: Stat[] = [
@@ -41,5 +42,6 @@ export const anyStats: AnyStat[] = [
   'precision',
   'armor',
   'CPU',
+  'health',
   'movement',
 ];

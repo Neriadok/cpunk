@@ -3,7 +3,6 @@ import ItemInfo from './item-info';
 import {
   getRandomItem,
   getRandomMeleeWeapon,
-  getRandomAmmunition,
   getRandomComplement,
   getRandomFirearm,
   getRandomCyberware,
@@ -74,25 +73,6 @@ export const FirearmsEditable: Story = {
   args: {
     item: {
       ...getRandomFirearm(),
-      name: chance.sentence({ words: 3 }),
-      description: chance.paragraph({ sentences: 3 }),
-    },
-    editable: true,
-  },
-};
-export const Ammunition: Story = {
-  args: {
-    item: {
-      ...getRandomAmmunition(),
-      name: chance.sentence({ words: 3 }),
-      description: chance.paragraph({ sentences: 3 }),
-    },
-  },
-};
-export const AmmunitionEditable: Story = {
-  args: {
-    item: {
-      ...getRandomAmmunition(),
       name: chance.sentence({ words: 3 }),
       description: chance.paragraph({ sentences: 3 }),
     },
