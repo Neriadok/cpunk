@@ -80,7 +80,7 @@ function getAllStatMultiplier({
 
 export function getStatMultiplier(stat: AnyStat): number {
   return stats.includes(stat as any)
-    ? 5
+    ? 25
     : states.includes(stat as any)
       ? 10
       : stat === 'actions'
