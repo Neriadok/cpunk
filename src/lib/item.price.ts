@@ -25,7 +25,7 @@ export function calculateCyberwarePrice(
   item: Omit<Cyberware, 'price'>
 ): number {
   const operationPrice = getOperationPrice(item.part);
-  const statMultiplier = item.stats.reduce(intoAllStatMultiplier, 1);
+  const statMultiplier = getAllStatMultiplier(item);
   const icePrice = getIcePrice(item);
   const ACTIVABLE_MULTIPLIER = (item.cooldown + 1) * 0.5;
   const price = Math.ceil(
@@ -61,18 +61,21 @@ export function calculateFirearmPrice(item: Omit<Firearms, 'price'>): number {
 export function calculateComplementPrice(
   item: Omit<Complement, 'price'>
 ): number {
-  const statMultiplier = item.stats.reduce(intoAllStatMultiplier, 1);
-  const STAT_BASE_PRICE = 10;
+  const statMultiplier = getAllStatMultiplier(item);
   const ACTIVABLE_MULTIPLIER = item.numberOfUses
     ? 0.5 - 0.4 / item.numberOfUses
     : 0.5;
   const price = Math.ceil(
-    STAT_BASE_PRICE *
-      statMultiplier *
-      item.bonus *
-      (item.activable ? ACTIVABLE_MULTIPLIER : 1)
+    statMultiplier * item.bonus * (item.activable ? ACTIVABLE_MULTIPLIER : 1)
   );
   return price + item.extraPrice;
+}
+
+function getAllStatMultiplier({
+  stats,
+}: Omit<Complement | Cyberware, 'price'>) {
+  const STAT_BASE_PRICE = 10;
+  return stats.reduce(intoAllStatMultiplier, STAT_BASE_PRICE);
 }
 
 export function getStatMultiplier(stat: AnyStat): number {
