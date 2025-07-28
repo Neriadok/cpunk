@@ -26,12 +26,21 @@ export function getBonifiedSkills({ events }: Partial<Character>): string[] {
 }
 
 export function getSkillValue(character: Character, skill: string): number {
-  const stat = skillFamilies.find((s) => s.skill === skill)?.stat;
-  const statValue = stat ? character.stats[stat] : 0;
+  const stat = getSkillStat(skill);
+  const statValue = getStatValue(character, skill);
   const bonusValue =
     stat && stat !== 'special' ? getBonus(character, stat, 'stats') : 0;
   const skillValue = character.skills[skill] || 0;
   return skillValue + statValue + bonusValue;
+}
+
+export function getStatValue(character: Character, skill: string): number {
+  const stat = skillFamilies.find((s) => s.skill === skill)?.stat;
+  return stat ? character.stats[stat] : 0;
+}
+
+export function getSkillStat(skill: string): Stat | 'special' | undefined {
+  return skillFamilies.find((s) => s.skill === skill)?.stat;
 }
 
 export function getRunValue(character: Character): number {

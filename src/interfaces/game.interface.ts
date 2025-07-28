@@ -28,3 +28,11 @@ export const cyberwareParts: CyberwarePart[] = [
   'eyes',
   'fullBody',
 ];
+
+export enum DifficultyValue {
+  instant = 0,
+  easy = 10,
+  complex = 15,
+  hard = 20,
+  'very-hard' = 30,
+}

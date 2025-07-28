@@ -83,13 +83,22 @@
     "eyes": "Ojos",
     "fullBody": "Cuerpo entero"
   },
+  "difficulty": {
+    "easy": "Fácil (10+)",
+    "complex": "Compleja (15+)",
+    "hard": "Difícil (20+)",
+    "very-hard": "Muy difícil (30+)",
+    "instant": "Inmediata"
+  },
   "sheet": {
     "skill": "Habilidad",
     "money": "Dinero",
-    "value": "Valor",
+    "value": "Puntos Base",
     "state": "Estado",
     "notes": "Notas",
-    "bodystate": "Salud y Armadura"
+    "bodystate": "Salud y Armadura",
+    "difficulty": "Dificultad",
+    "bonus": "Bonus"
   },
   "character": {
     "stats": "Atributos",

@@ -20,6 +20,11 @@ import { Skill, SkillFamily } from '../../../interfaces/skills.interface';
 import { useState } from 'react';
 import { ActionTriggerProps } from './action-trigger.interface';
 import { getSkillValue } from '../../../lib/bonifications';
+import {
+  difficulties,
+  Difficulty,
+  DifficultyValue,
+} from '../../../interfaces/game.interface';
 
 function ActionTrigger({ character }: ActionTriggerProps) {
   const skills: SkillFamily[] = character
@@ -29,9 +34,10 @@ function ActionTrigger({ character }: ActionTriggerProps) {
       )
     : [];
   const [activeSkill, setActiveSkill] = useState<Skill>(skills[0].skill);
-  const [actionPoints, setActionPoints] = useState<number | undefined>(
-    undefined
-  );
+  const [actionPoints, setActionPoints] = useState<number | null>(null);
+  const [difficulty, setDifficulty] = useState<Difficulty>(difficulties[0]);
+  const [bonus, setBonus] = useState<number>(0);
+
   return (
     <Card sx={{ p: 2 }}>
       <CharacterStats character={character} readonly={true}></CharacterStats>
@@ -44,26 +50,42 @@ function ActionTrigger({ character }: ActionTriggerProps) {
             label="skill"
             onChange={(e: any) => changeSkill(e)}
           >
-            {skills.sort(alphabetically).map(({ skill }) => (
-              <MenuItem
-                key={skill}
-                sx={{
-                  color: character.skills[skill]
-                    ? theme.palette.primary.main
-                    : 'text.secondary',
-                }}
-                value={skill}
-              >
-                {t('character.skill.' + skill)} ({character.skills[skill] || 0})
-              </MenuItem>
-            ))}
+            {skills.sort(alphabetically).map(({ skill }) => toSkill(skill))}
           </Select>
         </FormControl>
         <FormControl>
           <TextField
             aria-readonly
+            disabled
             label={t('sheet.value')}
             value={getSkillValue(character, activeSkill)}
+          />
+        </FormControl>
+      </Stack>
+      <Stack sx={{ mt: 2 }} direction="row" spacing={1}>
+        <FormControl fullWidth>
+          <InputLabel id="difficulty-label">{t('sheet.difficulty')}</InputLabel>
+          <Select
+            labelId="difficulty-label"
+            value={difficulty}
+            label={t('sheet.difficulty')}
+            onChange={(e: any) => setDifficulty(e?.target?.value)}
+          >
+            {difficulties.map(toDifficulty)}
+          </Select>
+        </FormControl>
+        <FormControl>
+          <TextField
+            label={t('sheet.bonus')}
+            slotProps={{
+              htmlInput: {
+                min: 0,
+                step: 1,
+              },
+            }}
+            value={bonus}
+            type="number"
+            onChange={(e) => setBonus(parseInt(e?.target?.value || '0'))}
           />
         </FormControl>
       </Stack>
@@ -71,38 +93,61 @@ function ActionTrigger({ character }: ActionTriggerProps) {
         <Fab
           variant="extended"
           onClick={() => rollDice()}
-          color={
-            actionPoints === 1
-              ? 'error'
-              : character.skills[activeSkill]
-                ? 'primary'
-                : 'secondary'
-          }
+          color={getDiceColor()}
           disabled={!activeSkill}
         >
           <FontAwesomeIcon size="2xl" icon={faDiceD20} />
-          {actionPoints ? (
+          {actionPoints && (
             <Typography variant="h5" sx={{ ml: 2 }}>
               {actionPoints}
             </Typography>
-          ) : (
-            ''
           )}
         </Fab>
       </Box>
     </Card>
   );
 
+  function getDiceColor() {
+    return actionPoints === 1 ||
+      (actionPoints && actionPoints < DifficultyValue[difficulty])
+      ? 'error'
+      : actionPoints
+        ? 'primary'
+        : 'secondary';
+  }
+
   function rollDice() {
     const dice = Math.floor(Math.random() * 10) + 1;
-    setActionPoints(
-      dice > 1 ? getSkillValue(character, activeSkill) + dice : dice
-    );
+    const value = getSkillValue(character, activeSkill) + dice + bonus;
+    setActionPoints(dice > 1 ? value : 1);
   }
 
   function changeSkill(e: any) {
     setActiveSkill(e.target?.value);
-    setActionPoints(undefined);
+    setActionPoints(null);
+  }
+
+  function toSkill(skill: Skill) {
+    const skillValue = getSkillValue(character, skill);
+    const color =
+      skillValue > 9
+        ? theme.palette.success.main
+        : skillValue > 5
+          ? theme.palette.warning.main
+          : 'text.secondary';
+    return (
+      <MenuItem key={skill} sx={{ color }} value={skill}>
+        {t('character.skill.' + skill)} ({character.skills[skill] || 0})
+      </MenuItem>
+    );
+  }
+
+  function toDifficulty(diff: Difficulty) {
+    return (
+      <MenuItem key={diff} value={diff}>
+        {t('difficulty.' + diff)}
+      </MenuItem>
+    );
   }
 
   function alphabetically(a: SkillFamily, b: SkillFamily) {
