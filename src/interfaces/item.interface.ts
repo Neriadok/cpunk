@@ -16,7 +16,6 @@ export type Shop = 'firearms' | 'melee-weapons' | 'complements' | 'cyberware';
 interface ItemBase {
   uid: string;
   shop: Shop;
-  price: number;
   name: string;
   description: string;
 }

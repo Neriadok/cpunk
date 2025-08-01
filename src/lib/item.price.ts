@@ -9,7 +9,7 @@ import {
 } from '../interfaces/item.interface';
 import { AnyStat, states, stats } from '../interfaces/stats.interface';
 
-export function calculateItemPrice(item: Omit<Item, 'price'>) {
+export function calculateItemPrice(item: Item) {
   const calculateFunctions = {
     firearms: calculateFirearmPrice,
     'melee-weapons': calculateMeleeWeaponPrice,
@@ -21,22 +21,19 @@ export function calculateItemPrice(item: Omit<Item, 'price'>) {
   );
 }
 
-export function calculateCyberwarePrice(
-  item: Omit<Cyberware, 'price'>
-): number {
+export function calculateCyberwarePrice(item: Cyberware): number {
   const operationPrice = getOperationPrice(item.part);
   const statMultiplier = getAllStatMultiplier(item);
   const icePrice = getIcePrice(item);
-  const ACTIVABLE_MULTIPLIER = (item.cooldown + 1) * 0.5;
+  const ACTIVABLE_MULTIPLIER =
+    (item.activable ? 0.25 : 1) / (item.cooldown + 1);
   const price = Math.ceil(
-    statMultiplier * item.bonus * (item.activable ? ACTIVABLE_MULTIPLIER : 1)
+    (statMultiplier * item.bonus * ACTIVABLE_MULTIPLIER * operationPrice) / 500
   );
-  return price + icePrice + operationPrice + item.extraPrice;
+  return price + icePrice + item.extraPrice;
 }
 
-export function calculateMeleeWeaponPrice(
-  item: Omit<MeleeWeapon, 'price'>
-): number {
+export function calculateMeleeWeaponPrice(item: MeleeWeapon): number {
   const MELEE_MULTIPLIER = 5;
   const operationPrice = getOperationPrice(item.cyberware);
   return (
@@ -46,7 +43,7 @@ export function calculateMeleeWeaponPrice(
   );
 }
 
-export function calculateFirearmPrice(item: Omit<Firearms, 'price'>): number {
+export function calculateFirearmPrice(item: Firearms): number {
   const operationPrice = getOperationPrice(item.cyberware);
   const BASE_DAMAGE = 1;
   const BASE_PRECISION = 5;
@@ -58,9 +55,7 @@ export function calculateFirearmPrice(item: Omit<Firearms, 'price'>): number {
   );
 }
 
-export function calculateComplementPrice(
-  item: Omit<Complement, 'price'>
-): number {
+export function calculateComplementPrice(item: Complement): number {
   const statMultiplier = getAllStatMultiplier(item);
   const ACTIVABLE_MULTIPLIER = item.numberOfUses
     ? 0.5 - 0.4 / item.numberOfUses
@@ -71,9 +66,7 @@ export function calculateComplementPrice(
   return price + item.extraPrice;
 }
 
-function getAllStatMultiplier({
-  stats,
-}: Omit<Complement | Cyberware, 'price'>) {
+function getAllStatMultiplier({ stats }: Complement | Cyberware) {
   const STAT_BASE_PRICE = 10;
   return stats.reduce(intoAllStatMultiplier, STAT_BASE_PRICE);
 }
@@ -82,12 +75,12 @@ export function getStatMultiplier(stat: AnyStat): number {
   return stats.includes(stat as any)
     ? 25
     : states.includes(stat as any)
-      ? 10
+      ? 15
       : stat === 'actions'
         ? 50
         : stat === 'health'
-          ? 25
-          : 5;
+          ? 30
+          : 10;
 }
 
 export function intoAllStatMultiplier(
@@ -97,12 +90,12 @@ export function intoAllStatMultiplier(
   return multiplier * getStatMultiplier(stat as AnyStat);
 }
 
-function getEffectMultiplier(item: Omit<Weapon, 'price'>): number {
+function getEffectMultiplier(item: Weapon): number {
   return (item.bleed + 1) * (item.shock + 1) * (item.poison + 1);
 }
 
 function getDamageMultiplier(
-  item: Omit<Firearms | MeleeWeapon, 'price'>,
+  item: Firearms | MeleeWeapon,
   damage: number = 1,
   randomDamage: 'burst' | 'randomDamage'
 ): number {
@@ -142,7 +135,7 @@ function getOperationPrice(part: CyberwarePart | null): number {
     : 0;
 }
 
-function getIcePrice({ ice, bonus }: Omit<Cyberware, 'price'>): number {
+function getIcePrice({ ice, bonus }: Cyberware): number {
   return ice
     ? {
         instant: 0,

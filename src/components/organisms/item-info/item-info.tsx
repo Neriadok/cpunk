@@ -32,6 +32,8 @@ import {
 
 function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
   const [itemValue, setItemValue] = useState<Item>(item);
+  const price = calculateItemPrice(itemValue);
+
   return (
     <Stack>
       <Stack
@@ -73,7 +75,7 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
             fontWeight: 'bold',
           }}
         >
-          {itemValue.price}{' '}
+          {price}{' '}
           <FontAwesomeIcon
             style={{ display: 'inline-block', marginLeft: '5px' }}
             icon={faBitcoinSign}
@@ -146,8 +148,7 @@ function ItemInfo({ item, editable, onChange }: ItemInfoProps) {
   }
 
   function changeInputValue(nextValue: Item) {
-    const price = calculateItemPrice(nextValue);
-    setItemValue({ ...nextValue, price });
+    setItemValue({ ...nextValue });
     if (onChange) {
       onChange(nextValue);
     }
