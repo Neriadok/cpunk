@@ -7,7 +7,6 @@ import {
   faShield,
 } from '@fortawesome/free-solid-svg-icons';
 import { CharacterHealthPartProps } from './character-health-part.interface';
-import { useState } from 'react';
 import { getHealth } from '../../../lib/bonifications';
 
 function CharacterHealthPart({
@@ -16,12 +15,8 @@ function CharacterHealthPart({
   setArmor,
   setHealth,
 }: CharacterHealthPartProps) {
-  const [partHealth, setPartHealth] = useState<number>(
-    character?.health?.[part] || 0
-  );
-  const [partArmor, setPartArmor] = useState<number>(
-    character?.armor?.[part] || 0
-  );
+  const partHealth = character?.health?.[part] || 0;
+  const partArmor = character?.armor?.[part] || 0;
 
   return (
     <Stack
@@ -80,12 +75,10 @@ function CharacterHealthPart({
 
   function changePartArmor(add: boolean) {
     const value = getValue(add, partArmor);
-    setPartArmor(value);
     setArmor(part, value);
   }
   function changePartHealth(add: boolean) {
     const value = Math.min(getHealth(character), getValue(add, partHealth));
-    setPartHealth(value);
     setHealth(part, value);
   }
 }

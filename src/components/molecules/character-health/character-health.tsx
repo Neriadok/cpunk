@@ -14,6 +14,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
     character?.health
   );
   const [armor, setArmor] = useState<BodyParts | undefined>(character?.armor);
+  const chatacterStatus = { ...character, health, armor };
 
   return (
     <Box>
@@ -45,7 +46,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={12}>
           <CharacterHealthPart
             part="head"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -53,7 +54,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={4}>
           <CharacterHealthPart
             part="armL"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -61,7 +62,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={4}>
           <CharacterHealthPart
             part="trunk"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -69,7 +70,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={4}>
           <CharacterHealthPart
             part="armR"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -77,7 +78,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={6}>
           <CharacterHealthPart
             part="legL"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -85,7 +86,7 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
         <Grid size={6}>
           <CharacterHealthPart
             part="legR"
-            character={character}
+            character={chatacterStatus}
             setArmor={(part, add) => changeArmor(part, add)}
             setHealth={(part, add) => changeHealth(part, add)}
           />
@@ -108,7 +109,10 @@ function CharacterHealth({ character, onChange }: CharacterHealthProps) {
   }
 
   async function resetBodyState() {
+    console.log('reset');
     const next = getDefaultBodystate(character);
+    setHealth({ ...next.health });
+    setArmor({ ...next.armor });
     onChange({ ...character, ...next });
   }
 }
