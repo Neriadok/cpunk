@@ -53,6 +53,7 @@
   },
   "item": {
     "precision": "Precisión",
+    "range": "Alcance (M)",
     "burst": "Ráfaga",
     "damage": "Daño",
     "piercing": "Perforación",
@@ -98,7 +99,8 @@
     "notes": "Notas",
     "bodystate": "Salud y Armadura",
     "difficulty": "Dificultad",
-    "bonus": "Bonus"
+    "bonus": "Bonus",
+    "no-skill": "Sin Habilidad"
   },
   "character": {
     "stats": "Atributos",

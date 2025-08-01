@@ -8,6 +8,7 @@ import {
   Weapon,
 } from '../interfaces/item.interface';
 import { AnyStat, states, stats } from '../interfaces/stats.interface';
+import { getDiceAverageValue } from './dice';
 
 export function calculateItemPrice(item: Item) {
   const calculateFunctions = {
@@ -46,12 +47,17 @@ export function calculateMeleeWeaponPrice(item: MeleeWeapon): number {
 export function calculateFirearmPrice(item: Firearms): number {
   const operationPrice = getOperationPrice(item.cyberware);
   const BASE_DAMAGE = 1;
-  const BASE_PRECISION = 5;
-  const precisionValue = (item.precision + BASE_PRECISION) / 10;
-  const damageMultiplier = getDamageMultiplier(item, BASE_DAMAGE, 'burst');
-  return (
-    Math.ceil(damageMultiplier * precisionValue) * item.capacity +
-    operationPrice
+  const precisionMultiplier = (item.precision + 1) / 2;
+  const rangeMultiplier = (item.range || 0) + 1 / 10;
+  const damageMultiplier =
+    getDamageMultiplier(item, BASE_DAMAGE, 'burst') *
+    getDamageMultiplier(item, BASE_DAMAGE, 'randomDamage') *
+    5;
+  return Math.ceil(
+    damageMultiplier +
+      rangeMultiplier +
+      item.capacity * precisionMultiplier +
+      operationPrice
   );
 }
 
@@ -105,19 +111,6 @@ function getDamageMultiplier(
       item.piercing / 2) *
     getEffectMultiplier(item)
   );
-}
-
-function getDiceAverageValue(dice: Dice | null): number {
-  return dice
-    ? {
-        '1D4': 2,
-        '1D6': 3,
-        '1D8': 4,
-        '1D10': 5,
-        '1D12': 6,
-        '1D20': 10,
-      }[dice]
-    : 0;
 }
 
 function getOperationPrice(part: CyberwarePart | null): number {

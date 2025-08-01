@@ -15,12 +15,6 @@ import {
   Cyberware,
 } from '../interfaces/item.interface';
 import { anyStats } from '../interfaces/stats.interface';
-import {
-  calculateComplementPrice,
-  calculateCyberwarePrice,
-  calculateFirearmPrice,
-  calculateMeleeWeaponPrice,
-} from './item.price';
 import { getRandomFrom, randomNum } from './utils';
 import Chance from 'chance';
 const chance = new Chance();
@@ -35,12 +29,13 @@ export function getRandomItem(empty?: boolean): Item {
 }
 
 export function getRandomFirearm(empty?: boolean): Firearms {
-  const item: Omit<Firearms, 'price'> = {
+  return {
     uid: v4(),
     shop: 'firearms',
     name: '',
     description: '',
-    precision: empty ? 0 : randomNum(10) * 5,
+    precision: empty ? 0 : (randomNum(5) as MidValue),
+    range: empty ? 0 : randomNum(100),
     burst: empty ? null : chance.bool() ? getRandomFrom(dices) : null,
     piercing: empty ? 0 : (randomNum(3) as LowValue),
     bleed: empty ? 0 : (randomNum(3) as LowValue),
@@ -49,11 +44,10 @@ export function getRandomFirearm(empty?: boolean): Firearms {
     capacity: randomNum(24, 2),
     cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
   };
-  return { ...item, price: calculateFirearmPrice(item) };
 }
 
 export function getRandomMeleeWeapon(empty?: boolean): MeleeWeapon {
-  const meleeWeapon: Omit<MeleeWeapon, 'price'> = {
+  return {
     uid: v4(),
     shop: 'melee-weapons',
     name: '',
@@ -66,12 +60,11 @@ export function getRandomMeleeWeapon(empty?: boolean): MeleeWeapon {
     poison: empty ? 0 : (randomNum(3) as LowValue),
     cyberware: empty ? null : chance.bool() ? getRandomFrom(bodyParts) : null,
   };
-  return { ...meleeWeapon, price: calculateMeleeWeaponPrice(meleeWeapon) };
 }
 
 export function getRandomComplement(empty?: boolean): Complement {
   const activable = chance.bool();
-  const item: Omit<Complement, 'price'> = {
+  return {
     uid: v4(),
     shop: 'complements',
     name: '',
@@ -91,12 +84,11 @@ export function getRandomComplement(empty?: boolean): Complement {
     extraEffects: '',
     numberOfUses: empty ? 0 : activable ? randomNum(20) : 0,
   };
-  return { ...item, price: calculateComplementPrice(item) };
 }
 
 export function getRandomCyberware(empty?: boolean): Cyberware {
   const activable = chance.bool();
-  const item: Omit<Cyberware, 'price'> = {
+  return {
     uid: v4(),
     shop: 'cyberware',
     name: '',
@@ -118,5 +110,4 @@ export function getRandomCyberware(empty?: boolean): Cyberware {
     cooldown: activable ? (randomNum(3) as LowValue) : 0,
     part: getRandomFrom(cyberwareParts),
   };
-  return { ...item, price: calculateCyberwarePrice(item) };
 }

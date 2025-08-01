@@ -26,19 +26,20 @@ export interface Weapon extends ItemBase {
   shock: LowValue;
   poison: LowValue;
   cyberware: BodyPart | null;
+  randomDamage?: Dice | null;
 }
 
 export interface Firearms extends Weapon {
   shop: 'firearms';
-  precision: number;
+  precision: MidValue;
   burst: Dice | null;
+  range: number;
   capacity: number;
 }
 
 export interface MeleeWeapon extends Weapon {
   shop: 'melee-weapons';
   damage: MidValue;
-  randomDamage: Dice | null;
 }
 
 export interface Complement extends ItemBase {

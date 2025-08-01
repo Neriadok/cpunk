@@ -15,7 +15,7 @@ function ItemProperty({ item, property, onChange }: ItemPropertyProps) {
       }}
     >
       <Typography variant="body2" color="text.secondary" sx={{ pr: 1 }}>
-        {t(`item.${property}`)}
+        {t(`item.${property as string}`)}
       </Typography>
       {onChange ? (
         <ItemPropertyInput

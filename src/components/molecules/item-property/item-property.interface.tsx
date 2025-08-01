@@ -1,5 +1,4 @@
 import {
-  Ammunition,
   Complement,
   Cyberware,
   Firearms,
@@ -13,7 +12,6 @@ export interface ItemPropertyProps {
     | keyof Firearms
     | keyof MeleeWeapon
     | keyof Complement
-    | keyof Ammunition
     | keyof Cyberware;
   onChange?: (item: Item) => void;
 }

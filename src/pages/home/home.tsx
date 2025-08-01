@@ -3,7 +3,7 @@ import logo from '../../images/logo.png';
 import './home.css';
 import { Box, Card, Container, Fab, Stack } from '@mui/material';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCirclePlus, faGun } from '@fortawesome/free-solid-svg-icons';
+import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Subject, takeUntil } from 'rxjs';
@@ -48,18 +48,10 @@ function Home() {
           width: '100%',
           height: '75px',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'center',
           alignItems: 'baseline',
         }}
       >
-        <Fab
-          color="primary"
-          sx={{ m: 2 }}
-          size="small"
-          onClick={() => navigate('/new-character')}
-        >
-          <FontAwesomeIcon size="xl" icon={faGun} />
-        </Fab>
         <Fab
           color="primary"
           sx={{ m: 2 }}

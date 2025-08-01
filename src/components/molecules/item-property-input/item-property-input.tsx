@@ -182,9 +182,10 @@ function ItemPropertyInput({
 
   function getPropertyType(): ItemPropertyInputTypes {
     const propertyTypes = {
-      precision: 'highValue',
+      precision: 'midValue',
       burst: 'dice',
       ice: 'ice',
+      range: 'highValue',
       damage: 'midValue',
       piercing: 'lowValue',
       randomDamage: 'dice',
